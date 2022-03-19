@@ -1,0 +1,103 @@
+/* Header Component */
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-lightWhite);
+  height: 12vh;
+  padding: 2.4rem 4.8rem;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  /* box-shadow: 0 4px 12px 0 rgba(0 , 0 ,0 , .8); */
+  z-index: 1;
+  position: relative;
+}
+
+.brand-name {
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-Dark);
+  font-family: "Nunito Sans", sans-serif;
+  cursor: pointer;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  width: 30%;
+  border: 1px solid var(--text-grey);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: var(--bg-darkWhite);
+}
+
+.searchbar .icon {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 1.6rem;
+}
+
+.searchbar input {
+  font-size: 1.4rem;
+  padding: 0 1.2rem;
+  border: none;
+  width: 100%;
+  outline: none;
+  color: var(--text-Dark);
+  font-weight: 500;
+  font-size: 1.2rem;
+  background-color: var(--bg-darkWhite);
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-login {
+  position: absolute;
+  right: 12%;
+  padding: 0.8rem 1.6rem;
+  margin: 0 1.2rem;
+  margin-right: 2.4rem;
+  background-color: var(--primary);
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  font-size: 1.4rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  transform: scale(1.01);
+  border: 1px solid var(--text-Dark);
+}
+
+.action-container .icon a {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1.2rem;
+  font-size: 1.2rem;
+}
+
+.icon label {
+  font-family: "Nunito sans", sans-serif;
+  font-weight: 700;
+}
+
+.action-container .icon ion-icon {
+  font-size: 2.4rem;
+}
+
+.action-container .icon ion-icon:hover {
+  color: var(--primary);
+}
