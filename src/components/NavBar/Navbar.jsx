@@ -7,17 +7,16 @@ import { useLocation, Link } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
-  const { pathname } = location;
   return (
     <>
-      <header>
+      <header className="Nav-header">
         <div className="brand-name">
           <Link to="/">ClothNest</Link>
         </div>
 
         <div className="searchbar">
           <label for="search" className="icon">
-            <SearchOutlinedIcon fontSize="large" />
+            <SearchOutlinedIcon className="mui-icon" />
           </label>
           <input
             type="text"
@@ -32,14 +31,14 @@ const Navbar = () => {
 
           <span className="icon">
             <a>
-              <FavoriteBorderOutlinedIcon fontSize="large" />
+              <FavoriteBorderOutlinedIcon className="mui-icon" />
               <label for="wishlist">Wishlist</label>
             </a>
           </span>
 
           <span className="icon">
             <a>
-              <ShoppingCartOutlinedIcon fontSize="large" />
+              <ShoppingCartOutlinedIcon className="mui-icon" />
               <label for="cart">Cart</label>
             </a>
           </span>

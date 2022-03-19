@@ -1,0 +1,73 @@
+/* filter-menu styles */
+
+.filter-menu {
+  font-family: "Nunito sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-height: 100vh;
+  flex: 1 0 20%;
+  padding: 1.2rem 3.6rem;
+  font-size: 1.2rem;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.filter-header {
+  margin: 2.4rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-heading {
+  font-size: 1.6rem;
+}
+
+.filter-clear{
+    cursor: pointer;
+}
+
+.submenu-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+input[type="range"] {
+  padding: 1.2rem 0;
+  width: 100%;
+}
+
+.submenu-content {
+  padding: 8px;
+}
+
+.price-range {
+  position: relative;
+  padding-bottom: 0;
+}
+
+.min-price {
+  position: absolute;
+  margin-top: 3px;
+  top: -1%;
+}
+
+.mid-price {
+  position: absolute;
+  top: -3%;
+  margin-top: 3px;
+  left: 60%;
+}
+
+.max-price {
+  position: absolute;
+  top: -3%;
+  margin-top: 3px;
+  right: -2%;
+}
+
+.submenu-content .field {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
