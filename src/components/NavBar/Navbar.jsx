@@ -37,10 +37,10 @@ const Navbar = () => {
           </span>
 
           <span className="icon">
-            <a>
+            <Link to="/cart">
               <ShoppingCartOutlinedIcon className="mui-icon" />
               <label for="cart">Cart</label>
-            </a>
+            </Link>
           </span>
         </div>
       </header>

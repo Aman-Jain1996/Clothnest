@@ -3,6 +3,7 @@ import Home from "./pages/Home/Home";
 import Products from "./pages/Product/Products";
 import ProductDetails from "./pages/Product-Details/Product-details";
 import Wishlist from "./pages/Wishlist/Wishlist";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="products/:id" element={<ProductDetails />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   );
