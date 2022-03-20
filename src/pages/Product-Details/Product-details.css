@@ -1,0 +1,86 @@
+.product-details-main {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 88vh;
+}
+
+.product-details {
+  min-height: 70vh;
+  width: 80%;
+  display: flex;
+  padding: 1.2rem;
+}
+
+.product-details div:first-child {
+  flex: 0 1 50%;
+  background-color: var(--bg-darkWhite);
+  padding: 2.4rem 4.8rem;
+  position: relative;
+}
+
+.product-details div:first-child img {
+  border-radius: 8px;
+}
+
+.product-details .content {
+  flex: 0 0 50%;
+  padding: 0 4.8rem;
+}
+
+.product-name {
+  color: #000;
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.product-reviews {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.product-price {
+  color: #000;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.description span {
+  display: inline-block;
+  color: #000;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  margin-top: 3.6rem;
+}
+
+.button-container > *:hover {
+  border: 1px solid black;
+  transform: scale(1.05);
+}
+
+.cart {
+  width: 45%;
+  background-color: var(--primary);
+  text-align: center;
+  font-size: 1.4rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.wishlist {
+  width: 45%;
+  text-align: center;
+  font-size: 1.4rem;
+  transition: all 0.3s ease-in-out;
+}
