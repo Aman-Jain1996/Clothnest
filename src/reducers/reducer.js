@@ -11,7 +11,6 @@ export const initialState = {
   products: [],
   wishlist: [],
   cart: [],
-  categories: [],
 };
 
 export const DataReducer = (state, action) => {
@@ -19,25 +18,41 @@ export const DataReducer = (state, action) => {
     case actionTypes.SET_PRODUCTS:
       return {
         ...state,
-        products: [...action.payload.products],
+        products: action.payload.products.map((prod) => ({
+          ...prod,
+          wished: false,
+          carted: false,
+        })),
       };
 
     case actionTypes.SET_CATEGORIES:
       return {
         ...state,
-        categories: [...action.payload.categories],
+        categories: action.payload.categories.reduce(
+          (acc, curr) => ({ ...acc, [curr.categoryName]: false }),
+          {}
+        ),
       };
 
     case actionTypes.SET_CART:
       return {
         ...state,
         cart: [...action.payload.cart],
+        products: state.products.map((prod) => ({
+          ...prod,
+          carted: action.payload.cart.some((item) => item.id === prod.id),
+        })),
       };
 
     case actionTypes.SET_WISHLIST:
+      console.log(action.payload);
       return {
         ...state,
         wishlist: [...action.payload.wishlist],
+        products: state.products.map((prod) => ({
+          ...prod,
+          wished: action.payload.wishlist.some((wish) => wish.id === prod.id),
+        })),
       };
 
     default:

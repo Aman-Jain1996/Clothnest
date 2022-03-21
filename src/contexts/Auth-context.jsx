@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
         data: { foundUser, encodedToken },
         status,
       } = await LoginService({ email, password });
-      // console.log(data, status);
       if (status === 200 || status === 201) {
         localStorage.setItem(
           "userToken",
@@ -26,7 +25,6 @@ const AuthProvider = ({ children }) => {
         setActiveUser(foundUser);
         setToken(encodedToken);
         navigate("/products");
-        console.log("finished");
       }
     } catch (err) {
       console.log(err);

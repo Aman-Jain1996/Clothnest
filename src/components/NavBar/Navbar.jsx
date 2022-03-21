@@ -4,9 +4,13 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useLocation, Link } from "react-router-dom";
+import { useData } from "../../contexts/Data-context";
+import { useAuth } from "../../contexts/Auth-context";
 
 const Navbar = () => {
   const location = useLocation();
+  const { state } = useData();
+  const { token } = useAuth();
   return (
     <>
       <header className="Nav-header">
@@ -27,20 +31,30 @@ const Navbar = () => {
         </div>
 
         <div className="action-container">
-          <Link to="/login" className="btn-login">
-            Login
-          </Link>
+          {!token ? (
+            <Link to="/login" className="btn-login">
+              Login
+            </Link>
+          ) : (
+            <button class="btn-logout">Logout</button>
+          )}
 
           <span className="icon">
             <Link to="/wishlist">
-              <FavoriteBorderOutlinedIcon className="mui-icon" />
+              <div className="nav-label">
+                <FavoriteBorderOutlinedIcon className="mui-icon" />
+                <span className="nav-count">{state.wishlist.length}</span>
+              </div>
               <label htmlFor="wishlist">Wishlist</label>
             </Link>
           </span>
 
           <span className="icon">
             <Link to="/cart">
-              <ShoppingCartOutlinedIcon className="mui-icon" />
+              <div className="nav-label">
+                <ShoppingCartOutlinedIcon className="mui-icon" />
+                <span className="nav-count">{state.cart.length}</span>
+              </div>
               <label htmlFor="cart">Cart</label>
             </Link>
           </span>
