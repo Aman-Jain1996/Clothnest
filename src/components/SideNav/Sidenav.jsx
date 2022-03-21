@@ -25,7 +25,7 @@ const Sidenav = () => {
 
         <article className="filter-submenu">
           <h3 className="submenu-heading">
-            <label for="range">Price Range</label>
+            <label htmlFor="range">Price Range</label>
           </h3>
           <div className="submenu-content price-range">
             <span className="min-price">50</span>
@@ -47,17 +47,17 @@ const Sidenav = () => {
           <div className="submenu-content">
             <div className="field">
               <input type="checkbox" name="Mens" id="mens" />
-              <label for="mens">Mens</label>
+              <label htmlFor="mens">Mens</label>
             </div>
 
             <div className="field">
               <input type="checkbox" name="Womens" id="womens" />
-              <label for="womens">Womens</label>
+              <label htmlFor="womens">Womens</label>
             </div>
 
             <div className="field">
               <input type="checkbox" name="kids" id="kids" />
-              <label for="kids">Kids</label>
+              <label htmlFor="kids">Kids</label>
             </div>
           </div>
         </article>
@@ -68,22 +68,22 @@ const Sidenav = () => {
             <div className="submenu-content">
               <div className="field">
                 <input type="radio" name="Rating" id="4+" />
-                <label for="4+">4+ Stars</label>
+                <label htmlFor="4+">4+ Stars</label>
               </div>
 
               <div className="field">
                 <input type="radio" name="Rating" id="3+" />
-                <label for="3+">3+ Stars</label>
+                <label htmlFor="3+">3+ Stars</label>
               </div>
 
               <div className="field">
                 <input type="radio" name="Rating" id="2+" />
-                <label for="2+">2+ Stars</label>
+                <label htmlFor="2+">2+ Stars</label>
               </div>
 
               <div className="field">
                 <input type="radio" name="Rating" id="1+" />
-                <label for="1+">1+ Stars</label>
+                <label htmlFor="1+">1+ Stars</label>
               </div>
             </div>
           </div>

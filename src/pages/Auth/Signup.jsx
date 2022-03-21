@@ -14,7 +14,7 @@ const Signup = () => {
           <form className="login signup-form">
             <h2 className="page-heading">SignUp</h2>
             <div className="field">
-              <label for="name">Name</label>
+              <label htmlFor="name">Name</label>
               <input
                 required
                 type="text"
@@ -24,7 +24,7 @@ const Signup = () => {
               />
             </div>
             <div className="field">
-              <label for="email">Email Address</label>
+              <label htmlFor="email">Email Address</label>
               <input
                 required
                 type="email"
@@ -35,7 +35,7 @@ const Signup = () => {
             </div>
 
             <div className="field">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <div className="password-field">
                 <input
                   required
@@ -45,11 +45,11 @@ const Signup = () => {
                   id="password"
                 />
                 <VisibilityOutlinedIcon className="on" />
-                <VisibilityOffOutlinedIcon className="off" />
+                {/* <VisibilityOffOutlinedIcon class="off" /> */}
               </div>
             </div>
 
-            <label for="remember">
+            <label htmlFor="remember">
               <input type="checkbox" name="remember" id="remember" />I accept
               all Terms &amp; Conditions
             </label>

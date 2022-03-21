@@ -69,15 +69,15 @@ const Cart = () => {
           <div className="horizontal-rule"></div>
           <div className="pricing-details">
             <div className="summary-items">
-              <label for="">Price (2 items)</label>
+              <label htmlFor="">Price (2 items)</label>
               <p>₹ 1798</p>
             </div>
             <div className="summary-items">
-              <label for="">Total Discount</label>
+              <label htmlFor="">Total Discount</label>
               <p>- ₹ 899</p>
             </div>
             <div className="summary-items">
-              <label for="">Delivery Charges</label>
+              <label htmlFor="">Delivery Charges</label>
               <p>+ ₹ 499</p>
             </div>
           </div>
@@ -86,7 +86,7 @@ const Cart = () => {
 
           <div className="final-amount">
             <div className="summary-items">
-              <label for="">Total Amount</label>
+              <label htmlFor="">Total Amount</label>
               <p>₹ 1398</p>
             </div>
 
