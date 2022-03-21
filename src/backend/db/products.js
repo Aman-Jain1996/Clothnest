@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 export const products = [
   {
-    _id: uuid(),
+    _id: "b481bf23-8de2-4126-8f95-9ba35ec1b8bc",
     title: "Women Ethnic Wear",
     desc: "If you love flaunting ethnic print kurtas, then this whole set is for you. It is a set of two, a straight kurta with trousers. Crafted with pure cotton and pastel colour makes it soft to touch and apt to wear in any season.",
     price: "500",
@@ -19,7 +19,7 @@ export const products = [
   },
 
   {
-    _id: uuid(),
+    _id: "dc77fe75-8a72-4e28-8cab-7e464665cd89",
     title: "Women's Jogger",
     desc: "Peach medium wash 5-pocket high-rise cropped jeans, clean look, light fade, has a button and zip closure, and waistband with belt loops",
     price: "900",
@@ -30,7 +30,7 @@ export const products = [
     trending: true,
   },
   {
-    _id: uuid(),
+    _id: "db8a4662-46e0-4a16-a502-fb81c8566d6a",
     title: "Men's Sweater",
     desc: "Navy Blue solid sweater, has a round neck, long sleeves, and ribbed hem",
     price: "1100",
@@ -40,7 +40,7 @@ export const products = [
     categoryName: "Winter",
   },
   {
-    _id: uuid(),
+    _id: "f64aae9a-4488-42c9-ba32-544ac2b51d13",
     title: "Women's Denim Jacket",
     desc: "Blue floral printed denim jacket, has a spread collar,2 flap pockets, has a button closure, long sleeves, straight hemline, without lining",
     price: "1000",
@@ -50,7 +50,7 @@ export const products = [
     categoryName: "Winter",
   },
   {
-    _id: uuid(),
+    _id: "cdf0addb-36d7-4fdd-b538-55c86cd01d3a",
     title: "Men's T-Shirt",
     desc: "White solid T-shirt, has a round neck, and short sleeves",
     price: "500",
@@ -61,7 +61,7 @@ export const products = [
     newArrival: true,
   },
   {
-    _id: uuid(),
+    _id: "43fce047-4836-4744-8999-0e357efcf637",
     title: "Women Straight Gown",
     desc: "Look feminine and chic by donning this alluring dress to your next outing. It is designed with a lovely V-neck and three-quarter regular sleeves for enhanced appeal.",
     price: "600",
@@ -71,7 +71,7 @@ export const products = [
     categoryName: "Women",
   },
   {
-    _id: uuid(),
+    _id: "878eaf1c-2ccd-4548-a929-89ba98a93f8e",
     title: "Kid's Shirt",
     desc: "Olive green and navy blue checked opaque Casual shirt ,has a spread collar, button placket, long regular sleeves, curved hem",
     price: "1200",
@@ -81,7 +81,7 @@ export const products = [
     categoryName: "Kids",
   },
   {
-    _id: uuid(),
+    _id: "5efe4a18-267c-4161-9f84-ef630d9316ea",
     title: "Women's T-Shirt",
     desc: "White and navy blue Tshirt for women,Floral printed , Regular length , Round neck , Short, regular sleeves , Knitted cotton fabric",
     price: "700",
@@ -92,7 +92,7 @@ export const products = [
     newArrival: true,
   },
   {
-    _id: uuid(),
+    _id: "e949fb90-0816-47e5-9ea1-a84cb8c4a3f8",
     title: "Mens Jacket",
     desc: "Brown solid bomber, has a mock collar, 3 pockets ,has a zip closure, long sleeves, straight hemline, polyester lining",
     price: "1200",
@@ -103,7 +103,7 @@ export const products = [
   },
 
   {
-    _id: uuid(),
+    _id: "ce1c660d-6792-4b20-9ecb-a305de8049cf",
     title: "Mens Shirt",
     desc: "Black and teal blue striped casual shirt, has a spread collar, long sleeves, button placket, curved hem, and 1 patch pocket",
     price: "900",
@@ -114,7 +114,7 @@ export const products = [
     newArrival: true,
   },
   {
-    _id: uuid(),
+    _id: "7414b2c0-a76e-4574-b1f6-4dcd38a14276",
     title: "Kid's Tracksuit",
     desc: "Active tracksuit , Rapid Dry Technology wicks sweat & makes the fabric dry fast , Anti-microbial technology prevents the growth of odor-causing microbes keeping you fresh & hygienic all day Contrast piping detail on sleeves",
     price: "2000",
@@ -124,7 +124,7 @@ export const products = [
     categoryName: "Kids",
   },
   {
-    _id: uuid(),
+    _id: "a7b082d5-b02d-494e-bf3d-105ac159ede5",
     title: "Kid's Top",
     desc: "Cropped, boxy-style top in soft cotton jersey with a print motif. Narrow trim around the neckline, dropped shoulders and short, wide sleeves.",
     price: "1200",
@@ -136,7 +136,7 @@ export const products = [
   },
 
   {
-    _id: uuid(),
+    _id: "4849104a-7f40-4436-82a5-3c73ccdeb1cf",
     title: "Mens Shirt",
     desc: "White and teal blue striped casual shirt, has a spread collar, long sleeves, button placket, curved hem, and 1 patch pocket",
     price: "800",

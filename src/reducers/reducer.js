@@ -45,7 +45,6 @@ export const DataReducer = (state, action) => {
       };
 
     case actionTypes.SET_WISHLIST:
-      console.log(action.payload);
       return {
         ...state,
         wishlist: [...action.payload.wishlist],

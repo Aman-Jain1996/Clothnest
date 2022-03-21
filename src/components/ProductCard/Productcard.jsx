@@ -8,55 +8,14 @@ import { useData } from "../../contexts/Data-context";
 import { actionTypes } from "../../reducers/actionTypes";
 import { useAuth } from "../../contexts/Auth-context";
 import {
-  AddToCartService,
-  AddToWishlistService,
-  DeleteFromWishlistService,
-} from "../../services/apiCall";
+  useCartHandler,
+  useWishlistHandler,
+} from "../../customHooks/Customhooks";
 
 const Productcard = ({ product }) => {
   const { token } = useAuth();
   const { state, dispatch, loader, setLoader } = useData();
   const navigate = useNavigate();
-
-  const wishlsitClickHandler = async () => {
-    try {
-      let res = null;
-      if (!product.wished) {
-        res = await AddToWishlistService(product, token);
-      } else {
-        res = await DeleteFromWishlistService(product._id, token);
-      }
-
-      if (res.status === 200 || res.status === 201) {
-        dispatch({
-          type: actionTypes.SET_WISHLIST,
-          payload: { wishlist: res.data.wishlist },
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const cartClickHandler = async () => {
-    try {
-      if (product.carted) {
-        navigate("/cart");
-        return;
-      }
-
-      let res = await AddToCartService({ ...product, qty: 1 }, token);
-
-      if (res.status === 200 || res.status === 201) {
-        dispatch({
-          type: actionTypes.SET_CART,
-          payload: { cart: res.data.cart },
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   return (
     <div className="product-card ecom-card">
@@ -70,7 +29,10 @@ const Productcard = ({ product }) => {
 
       {product.trending && <p className="badge-item">Trending</p>}
 
-      <span className="heart-icon-container" onClick={wishlsitClickHandler}>
+      <span
+        className="heart-icon-container"
+        onClick={() => useWishlistHandler(product, dispatch, token)}
+      >
         {!product.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
         ) : (
@@ -102,11 +64,17 @@ const Productcard = ({ product }) => {
 
       <div className="btn-action-container">
         {!product.carted ? (
-          <button className="btn btn-primary" onClick={cartClickHandler}>
+          <button
+            className="btn btn-primary"
+            onClick={() => useCartHandler(product, dispatch, token, navigate)}
+          >
             Add to Cart
           </button>
         ) : (
-          <button className="btn btn-secondary" onClick={cartClickHandler}>
+          <button
+            className="btn btn-secondary"
+            onClick={() => useCartHandler(product, dispatch, token, navigate)}
+          >
             Go to Cart
           </button>
         )}
