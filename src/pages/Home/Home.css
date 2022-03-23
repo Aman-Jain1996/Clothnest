@@ -1,5 +1,5 @@
 .home-hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
     url("../../assets/images/bg-image.webp");
   background-position: center;
   object-fit: contain;
@@ -170,6 +170,7 @@
 /* Arrivals */
 
 .arrivals {
+  cursor: pointer;
   margin: 4.8rem auto;
   width: 80%;
   display: flex;

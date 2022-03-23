@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import "./Cart.css";
 import emptyCart from "../../assets/images/empty-cart.svg";
 import { useData } from "../../contexts/Data-context";
 import { useAuth } from "../../contexts/Auth-context";
 import Cartcard from "../../components/CartCard/Cartcard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { state, dispatch } = useData();
   const { token } = useAuth();
   const CartList = [...state.cart];
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login", { replace: true });
+      return null;
+    }
+  }, [token]);
 
   const totalQuantity = state.cart.reduce((acc, cur) => acc + cur.qty, 0);
 

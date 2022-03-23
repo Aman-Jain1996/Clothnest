@@ -1,16 +1,71 @@
 import "./Navbar.css";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { useLocation, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useData } from "../../contexts/Data-context";
 import { useAuth } from "../../contexts/Auth-context";
+import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
 const Navbar = () => {
-  const location = useLocation();
-  const { state } = useData();
-  const { token } = useAuth();
+  const { state, dispatch } = useData();
+  const { token, setToken } = useAuth();
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
+  const searchRef = useRef("");
+
+  useEffect(() => {
+    setSearchInput("");
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.SEARCH,
+        filterValue: "",
+      },
+    });
+  }, [navigate]);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("userToken");
+    setToken(null);
+    navigate("/");
+  };
+
+  const changeHandler = (e) => {
+    setSearchInput(e.target.value);
+    if (e.target.value === "") {
+      dispatch({
+        type: actionTypes.FILTER_CHANGE,
+        payload: {
+          filterType: filterActionType.SEARCH,
+          filterValue: e.target.value,
+        },
+      });
+    }
+  };
+
+  const searchHandler = (e) => {
+    if (e.key === "Enter") {
+      dispatch({
+        type: actionTypes.FILTER_CHANGE,
+        payload: {
+          filterType: filterActionType.SEARCH,
+          filterValue: e.target.value,
+        },
+      });
+      navigate("/products");
+    } else if (e.type === "click") {
+      dispatch({
+        type: actionTypes.FILTER_CHANGE,
+        payload: {
+          filterType: filterActionType.SEARCH,
+          filterValue: searchRef.current.value,
+        },
+      });
+    }
+  };
+
   return (
     <>
       <header className="Nav-header">
@@ -20,13 +75,20 @@ const Navbar = () => {
 
         <div className="searchbar">
           <label htmlFor="search" className="icon">
-            <SearchOutlinedIcon className="mui-icon" />
+            <SearchOutlinedIcon
+              className="mui-icon"
+              onClick={(e) => searchHandler(e)}
+            />
           </label>
           <input
+            value={searchInput}
+            ref={searchRef}
             type="text"
             name="search"
             id="search"
             placeholder="Search for Products, brands and more...."
+            onChange={(e) => changeHandler(e)}
+            onKeyDown={(e) => searchHandler(e)}
           />
         </div>
 
@@ -36,7 +98,9 @@ const Navbar = () => {
               Login
             </Link>
           ) : (
-            <button class="btn-logout">Logout</button>
+            <button className="btn-logout" onClick={logoutHandler}>
+              Logout
+            </button>
           )}
 
           <span className="icon">

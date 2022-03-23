@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth-context";
 import { useData } from "../../contexts/Data-context";
 import { useWishlistHandler } from "../../customHooks/Customhooks";
@@ -13,6 +13,7 @@ import "./Cartcard.css";
 const Cartcard = ({ cartItem }) => {
   const { token } = useAuth();
   const { state, dispatch } = useData();
+  const navigate = useNavigate();
 
   const [{ wished }] = state.products.filter(
     (wish) => wish._id === cartItem._id
@@ -118,7 +119,9 @@ const Cartcard = ({ cartItem }) => {
           ) : (
             <button
               className="btn btn-tertiary"
-              onClick={() => useWishlistHandler(cartItem, dispatch, token)}
+              onClick={() =>
+                useWishlistHandler(cartItem, dispatch, token, navigate)
+              }
             >
               Move to Wishlist
             </button>

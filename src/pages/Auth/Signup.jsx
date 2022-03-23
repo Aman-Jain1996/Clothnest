@@ -45,7 +45,7 @@ const Signup = () => {
                   id="password"
                 />
                 <VisibilityOutlinedIcon className="on" />
-                {/* <VisibilityOffOutlinedIcon class="off" /> */}
+                {/* <VisibilityOffOutlinedIcon className="off" /> */}
               </div>
             </div>
 

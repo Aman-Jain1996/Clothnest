@@ -5,8 +5,18 @@ import {
   DeleteFromWishlistService,
 } from "../services/apiCall.js";
 
-export const useWishlistHandler = async (product, dispatch, token) => {
+export const useWishlistHandler = async (
+  product,
+  dispatch,
+  token,
+  navigate
+) => {
   try {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     let res = null;
     if (!product.wished) {
       res = await AddToWishlistService(product, token);
@@ -27,6 +37,11 @@ export const useWishlistHandler = async (product, dispatch, token) => {
 
 export const useCartHandler = async (product, dispatch, token, navigate) => {
   try {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
     if (product.carted) {
       navigate("/cart");
       return;

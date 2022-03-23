@@ -29,7 +29,7 @@ const ProductDetails = () => {
             <span
               className="heart-icon-container"
               onClick={() =>
-                useWishlistHandler(currentProduct, dispatch, token)
+                useWishlistHandler(currentProduct, dispatch, token, navigate)
               }
             >
               {!currentProduct.wished ? (
@@ -71,7 +71,7 @@ const ProductDetails = () => {
               <button
                 className="btn wishlist"
                 onClick={() =>
-                  useWishlistHandler(currentProduct, dispatch, token)
+                  useWishlistHandler(currentProduct, dispatch, token, navigate)
                 }
               >
                 {currentProduct.wished

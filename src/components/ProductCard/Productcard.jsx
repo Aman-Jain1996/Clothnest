@@ -30,7 +30,7 @@ const Productcard = ({ product }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() => useWishlistHandler(product, dispatch, token)}
+        onClick={() => useWishlistHandler(product, dispatch, token, navigate)}
       >
         {!product.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
