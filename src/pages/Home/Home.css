@@ -1,4 +1,4 @@
-.main {
+.home-hero {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)),
     url("../../assets/images/bg-image.webp");
   background-position: center;
@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-.text-overlay {
+.home-hero-text-overlay {
   position: absolute;
   font-family: "Ubuntu", sans-serif;
   line-height: 1.5em;
@@ -39,14 +39,14 @@
 
 /* Shop now Button styling  */
 
-.shop-btn {
+.home-hero-shop-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 3.6rem;
 }
 
-.button {
+.home-hero-button {
   width: 30rem;
   height: 6rem;
   display: flex;
@@ -55,11 +55,11 @@
   align-items: center;
 }
 
-.button:hover .btn-bg {
+.home-hero-button:hover .btn-bg {
   width: 30rem;
 }
 
-.button:hover .arrow {
+.home-hero-button:hover .arrow {
   transform: translateX(3rem);
 }
 
@@ -77,6 +77,10 @@
   font-size: 3rem;
   color: #2d97c6;
   z-index: 10;
+}
+
+.shopNow {
+  color: #2d97c6;
 }
 
 .arrow {
@@ -111,7 +115,8 @@
 
 /* Sections */
 
-section {
+.home-section-category,
+.home-section-arrival {
   margin: 5.6rem auto;
   margin-bottom: 9.6rem;
 }

@@ -15,78 +15,78 @@ const Home = () => {
     <div>
       <Navbar />
       <main>
-        <div class="main">
-          <div class="text-overlay">
+        <div className="home-hero">
+          <div className="home-hero-text-overlay">
             A door towards your next Outfit.
-            <div class="shop-btn">
-              <a href="./components/products/products.html" class="button">
-                <div class="btn-bg"></div>
-                <div class="arrow">
-                  <div class="arrowline arrowline-1"></div>
-                  <div class="arrowline arrowline-2"></div>
-                  <div class="arrowline arrowline-3"></div>
+            <div className="home-hero-shop-btn">
+              <Link to="/products" className="home-hero-button">
+                <div className="btn-bg"></div>
+                <div className="arrow">
+                  <div className="arrowline arrowline-1"></div>
+                  <div className="arrowline arrowline-2"></div>
+                  <div className="arrowline arrowline-3"></div>
                 </div>
-                <span class="btn-text">Shop Now</span>
-              </a>
+                <span className="btn-text">Shop Now</span>
+              </Link>
             </div>
           </div>
         </div>
 
-        <section>
-          <h2 class="section-heading">Shop by Category</h2>
+        <section className="home-section-category">
+          <h2 className="section-heading">Shop by Category</h2>
 
-          <div class="categories">
-            <article class="category-article">
-              <div class="category-overlay">Men</div>
+          <div className="categories">
+            <article className="category-article">
+              <div className="category-overlay">Men</div>
               <img src={men} alt="Men's Fashion" />
             </article>
-            <article class="category-article">
-              <div class="category-overlay">Women</div>
+            <article className="category-article">
+              <div className="category-overlay">Women</div>
               <img src={women} alt="Women's Fashion" />
             </article>
-            <article class="category-article">
-              <div class="category-overlay">Kids</div>
+            <article className="category-article">
+              <div className="category-overlay">Kids</div>
               <img src={kids} alt="Kid's Fashion" />
             </article>
-            <article class="category-article">
-              <div class="category-overlay">Summer Collections</div>
+            <article className="category-article">
+              <div className="category-overlay">Summer Collections</div>
               <img src={summer} alt="Summer Fashion" />
             </article>
-            <article class="category-article">
-              <div class="category-overlay">Winter Collections</div>
+            <article className="category-article">
+              <div className="category-overlay">Winter Collections</div>
               <img src={winter} alt="Winter Fashion" />
             </article>
           </div>
         </section>
 
-        <section>
-          <h2 class="section-heading">Shop by New Arrivals / Trending</h2>
+        <section classNameName="home-section-arrival">
+          <h2 className="section-heading">Shop by New Arrivals / Trending</h2>
 
-          <div class="arrivals">
-            <article class="new-arrivals">
-              <div class="arrival-image">
+          <div className="arrivals">
+            <article className="new-arrivals">
+              <div className="arrival-image">
                 <img src={arrival} alt="New arrivals" />
               </div>
-              <div class="arrival-content">
-                <h2 class="content-subheading">New Arrivals</h2>
+              <div className="arrival-content">
+                <h2 className="content-subheading">New Arrivals</h2>
                 <div>
-                  <h3 class="content-heading">Fresh in Stocks</h3>
-                  <p class="content-para">
+                  <h3 className="content-heading">Fresh in Stocks</h3>
+                  <p className="content-para">
                     Stay updated with our latest arrivals in each caterory
                   </p>
                 </div>
               </div>
             </article>
 
-            <article class="new-stocks">
-              <div class="arrival-image">
+            <article className="new-stocks">
+              <div className="arrival-image">
                 <img src={trending} alt="Trending" />
               </div>
-              <div class="arrival-content">
-                <h2 class="content-subheading">Trending</h2>
+              <div className="arrival-content">
+                <h2 className="content-subheading">Trending</h2>
                 <div>
-                  <h3 class="content-heading">Trending Brands </h3>
-                  <p class="content-para">
+                  <h3 className="content-heading">Trending Brands </h3>
+                  <p className="content-para">
                     Follow the trend with the most bought products
                   </p>
                 </div>
