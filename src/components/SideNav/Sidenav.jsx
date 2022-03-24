@@ -1,12 +1,14 @@
 import "./Sidenav.css";
 import React from "react";
-import { useData } from "../../contexts/Data-context";
+import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 import { useSearchParams } from "react-router-dom";
+import { searchRef } from "../NavBar/Navbar";
 
-const Sidenav = () => {
+const Sidenav = ({ ref }) => {
   const { state, dispatch } = useData();
   const [searchParams, setSearchParams] = useSearchParams();
+  
 
   const maxValue = state.products.reduce(
     (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
@@ -143,6 +145,7 @@ const Sidenav = () => {
                   name="Rating"
                   id="4+"
                   value="4"
+                  checked={state.filters.rating === "4"}
                   onChange={(e) => ratingChangeHandler(e)}
                 />
                 <label htmlFor="4+">4 Stars &amp; above</label>
@@ -154,6 +157,7 @@ const Sidenav = () => {
                   name="Rating"
                   id="3+"
                   value="3"
+                  checked={state.filters.rating === "3"}
                   onChange={(e) => ratingChangeHandler(e)}
                 />
                 <label htmlFor="3+">3 Stars &amp; above</label>
@@ -165,6 +169,7 @@ const Sidenav = () => {
                   name="Rating"
                   id="2+"
                   value="2"
+                  checked={state.filters.rating === "2"}
                   onChange={(e) => ratingChangeHandler(e)}
                 />
                 <label htmlFor="2+">2 Stars &amp; above</label>
@@ -176,6 +181,7 @@ const Sidenav = () => {
                   name="Rating"
                   id="1+"
                   value="1"
+                  checked={state.filters.rating === "1"}
                   onChange={(e) => ratingChangeHandler(e)}
                 />
                 <label htmlFor="1+">1 Stars &amp; above</label>

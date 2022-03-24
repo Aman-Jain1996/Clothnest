@@ -7,10 +7,28 @@ import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import Mockman from "mockman-js";
+import { useData } from "./contexts";
+import Loading from "./components/Loading/Loading";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./components/NavBar/Navbar";
 
 function App() {
+  const { loader } = useData();
   return (
     <div>
+      {loader && <Loading />}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={false}
+        newestOnTop={false}
+        closeOnClick
+        theme="colored"
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+      />
+      <Navbar />
       <Routes>
         <Route path="/mock" element={<Mockman />} />
         <Route path="/" element={<Home />} />

@@ -3,9 +3,15 @@ import axios from "axios";
 export const LoginService = async ({ email, password }) =>
   axios.post("/api/auth/login", { email, password });
 
+export const SignUpService = async ({ fName, lName, email, password }) =>
+  axios.post("/api/auth/signup", { fName, lName, email, password });
+
 export const ProductService = async () => axios.get("/api/products");
 
 export const CategoryService = async () => axios.get("/api/categories");
+
+export const FetchProductDetailsService = async (id) =>
+  axios.get(`/api/products/${id}`);
 
 export const AddToWishlistService = async (product, encodedToken) =>
   axios.post(

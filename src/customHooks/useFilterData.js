@@ -1,5 +1,5 @@
 import React from "react";
-import { useData } from "../contexts/Data-context";
+import { useData } from "../contexts";
 import {
   filterByArrTrend,
   filterByCategories,
@@ -21,7 +21,6 @@ export default function useFilterData() {
   filteredData = filterBySort(filteredData, sortBy);
   filteredData = filterByRating(filteredData, rating);
   filteredData = filterByCategories(filteredData, categories);
-  filteredData = filterByPriceRange(filteredData, priceRange);
   filteredData = filterByPriceRange(filteredData, priceRange);
   filteredData = filterByArrTrend(filteredData, arrivalTrend);
   //   console.log("-", filteredData);

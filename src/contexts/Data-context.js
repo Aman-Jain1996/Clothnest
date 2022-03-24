@@ -16,7 +16,6 @@ const DataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(DataReducer, initialState);
   useEffect(() => {
     {
-      setLoader(true);
       (async () => {
         const { status: prodStatus, data: prodData } = await ProductService();
 
@@ -36,7 +35,6 @@ const DataProvider = ({ children }) => {
             payload: { categories: categoryData?.categories },
           });
         }
-        setLoader(false);
       })();
     }
   }, []);

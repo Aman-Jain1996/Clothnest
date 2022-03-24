@@ -1,6 +1,5 @@
 .main-heading {
   text-align: center;
-  margin-top: 2.4rem;
   font-size: 2rem;
   text-transform: uppercase;
 }
@@ -36,22 +35,4 @@
 .empty-content {
   margin: 2.4rem 0;
   font-size: 1.6rem;
-}
-
-.no-item .btn-logout {
-  position: static;
-  padding: 0.8rem 1.6rem;
-  margin: 0 1.2rem;
-  background: linear-gradient(rgba(96, 212, 228, 0.8), var(--primary-Light));
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  font-weight: 500;
-  font-size: 1.4rem;
-  transition: all 0.3s ease-in-out;
-}
-
-.no-item .btn-logout:hover {
-  opacity: 0.8;
-  border: 1px solid;
 }
