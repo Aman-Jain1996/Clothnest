@@ -30,10 +30,10 @@ const Navbar = () => {
           <a className="btn-login">Login</a>
 
           <span className="icon">
-            <a>
+            <Link to="/wishlist">
               <FavoriteBorderOutlinedIcon className="mui-icon" />
               <label for="wishlist">Wishlist</label>
-            </a>
+            </Link>
           </span>
 
           <span className="icon">
