@@ -27,7 +27,9 @@ const Navbar = () => {
         </div>
 
         <div className="action-container">
-          <a className="btn-login">Login</a>
+          <Link to="/login" className="btn-login">
+            Login
+          </Link>
 
           <span className="icon">
             <Link to="/wishlist">
