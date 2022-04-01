@@ -59,7 +59,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section classNameName="home-section-arrival">
+        <section className="home-section-arrival">
           <h2 className="section-heading">Shop by New Arrivals / Trending</h2>
 
           <div className="arrivals">

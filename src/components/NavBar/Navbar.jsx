@@ -15,7 +15,7 @@ const Navbar = () => {
         </div>
 
         <div className="searchbar">
-          <label for="search" className="icon">
+          <label htmlFor="search" className="icon">
             <SearchOutlinedIcon className="mui-icon" />
           </label>
           <input
@@ -34,14 +34,14 @@ const Navbar = () => {
           <span className="icon">
             <Link to="/wishlist">
               <FavoriteBorderOutlinedIcon className="mui-icon" />
-              <label for="wishlist">Wishlist</label>
+              <label htmlFor="wishlist">Wishlist</label>
             </Link>
           </span>
 
           <span className="icon">
             <Link to="/cart">
               <ShoppingCartOutlinedIcon className="mui-icon" />
-              <label for="cart">Cart</label>
+              <label htmlFor="cart">Cart</label>
             </Link>
           </span>
         </div>

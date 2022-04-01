@@ -36,22 +36,23 @@
   padding-bottom: 0;
 }
 
-.field {
+.auth-field {
   margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
 }
 
-.field label {
+.auth-field label {
   margin: 1.2rem 0;
   color: var(--text-greyDark);
   font-size: 1.2rem;
 }
 
-.field input {
+.auth-field input {
   height: 3.6rem;
   padding: 1.2rem;
   width: 100%;
+  cursor: default;
 }
 
 .btn-auth {
@@ -96,10 +97,17 @@ label[for="remember"] {
 
 .off {
   display: none;
+  position: absolute;
+  cursor: pointer;
+  right: 0%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
 }
 
 .on {
   position: absolute;
+  cursor: pointer;
   right: 0%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -110,4 +118,9 @@ label[for="remember"] {
 
 .signup-form .field label {
   margin: 0.6rem 0;
+}
+
+.guest-credentials {
+  display: inline-block;
+  margin-top: 2rem;
 }
