@@ -5,16 +5,26 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   return (
     <div>
       <Navbar />
       <main className="auth-main">
         <div className="auth-container">
-          <form className="login">
-            <h2 className="page-heading">Login</h2>
+          <form className="login signup-form">
+            <h2 className="page-heading">SignUp</h2>
             <div className="field">
-              <label for="email">Email</label>
+              <label for="name">Name</label>
+              <input
+                required
+                type="text"
+                placeholder="John Snow"
+                name="name"
+                id="name"
+              />
+            </div>
+            <div className="field">
+              <label for="email">Email Address</label>
               <input
                 required
                 type="email"
@@ -30,7 +40,7 @@ const Login = () => {
                 <input
                   required
                   type="password"
-                  placeholder="*************"
+                  placeholder="**************"
                   name="password"
                   id="password"
                 />
@@ -40,15 +50,15 @@ const Login = () => {
             </div>
 
             <label for="remember">
-              <input type="checkbox" name="remember" id="remember" />
-              Remember Me
+              <input type="checkbox" name="remember" id="remember" />I accept
+              all Terms &amp; Conditions
             </label>
-            <button className="btn-auth">Login</button>
+            <button className="btn-auth">SignUp</button>
           </form>
           <p className="redirection">
-            Don't have an account Yet?
-            <Link to="/signup" className="signUp">
-              SignUp!
+            Altready have an account
+            <Link to="/login" className="signUp">
+              Login!
             </Link>
           </p>
         </div>
@@ -57,4 +67,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

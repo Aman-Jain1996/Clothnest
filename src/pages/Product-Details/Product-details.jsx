@@ -9,7 +9,7 @@ const ProductDetails = () => {
     <div>
       <Navbar />
       <main className="product-details-main">
-        <section class="product-details">
+        <section className="product-details">
           <div>
             <img src={productImage} alt="product-image" />
             <p className="heart-icon-container">
@@ -17,21 +17,21 @@ const ProductDetails = () => {
             </p>
           </div>
 
-          <div class="content">
-            <p class="product-name">Product Name</p>
-            <p class="product-reviews">4 reviews</p>
-            <p class="product-price">₹ 500/-</p>
-            <p class="horizontal-rule"></p>
-            <div class="description">
-              <p class="brand">
+          <div className="content">
+            <p className="product-name">Product Name</p>
+            <p className="product-reviews">4 reviews</p>
+            <p className="product-price">₹ 500/-</p>
+            <p className="horizontal-rule"></p>
+            <div className="description">
+              <p className="brand">
                 <span>Brand :</span>
                 Lorem
               </p>
-              <p class="brand">
+              <p className="brand">
                 <span>Availability :</span>
                 In Stock
               </p>
-              <p class="brand">
+              <p className="brand">
                 <span>Description :</span>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -40,11 +40,11 @@ const ProductDetails = () => {
                 </p>
               </p>
             </div>
-            <div class="button-container">
-              <a class="btn cart" href="">
+            <div className="button-container">
+              <a className="btn cart" href="">
                 Add to Cart
               </a>
-              <a class="btn wishlist" href="">
+              <a className="btn wishlist" href="">
                 Add to Wishlist
               </a>
             </div>
