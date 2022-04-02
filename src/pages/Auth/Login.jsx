@@ -16,7 +16,6 @@ const Login = () => {
   const { dispatch } = useData();
 
   const eyeHandler = () => {
-    console.log("eye");
     setEye((eye) => !eye);
   };
 

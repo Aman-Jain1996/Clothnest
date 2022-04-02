@@ -11,10 +11,11 @@ export const products = [
     title: "Women Ethnic Wear",
     desc: "If you love flaunting ethnic print kurtas, then this whole set is for you. It is a set of two, a straight kurta with trousers. Crafted with pure cotton and pastel colour makes it soft to touch and apt to wear in any season.",
     price: "500",
-    sell_price: "200",
+    sell_price: "300",
     rating: "4",
     imageUrl: "https://i.ibb.co/qBNTfbw/Women-Ethnic-Wear.webp",
     categoryName: "Women",
+    newArrival: true,
   },
 
   {
@@ -26,6 +27,7 @@ export const products = [
     rating: "3",
     imageUrl: "https://i.ibb.co/BP021tV/Women-1.webp",
     categoryName: "Women",
+    trending: true,
   },
   {
     _id: uuid(),
@@ -56,6 +58,7 @@ export const products = [
     rating: "1",
     imageUrl: "https://i.ibb.co/ryTb9gy/Summer-2.webp",
     categoryName: "Summer",
+    newArrival: true,
   },
   {
     _id: uuid(),
@@ -86,6 +89,7 @@ export const products = [
     rating: "4",
     imageUrl: "https://i.ibb.co/cgkP1W9/Summer-1.webp",
     categoryName: "Summer",
+    newArrival: true,
   },
   {
     _id: uuid(),
@@ -107,6 +111,7 @@ export const products = [
     rating: "3",
     imageUrl: "https://i.ibb.co/5Rg5GXv/Mens-1.webp",
     categoryName: "Mens",
+    newArrival: true,
   },
   {
     _id: uuid(),
@@ -127,6 +132,7 @@ export const products = [
     rating: "4",
     imageUrl: "https://i.ibb.co/H7Qd5b4/Kids-1.webp",
     categoryName: "Kids",
+    trending: true,
   },
 
   {
