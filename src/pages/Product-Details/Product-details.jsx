@@ -1,26 +1,49 @@
 import React from "react";
 import "./Product-details.css";
 import Navbar from "../../components/NavBar/Navbar";
-import productImage from "../../assets/images/product.webp";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useNavigate, useParams } from "react-router-dom";
+import { useData } from "../../contexts/Data-context";
+import { useAuth } from "../../contexts/Auth-context";
+import {
+  useCartHandler,
+  useWishlistHandler,
+} from "../../customHooks/Customhooks";
 
 const ProductDetails = () => {
+  const { id } = useParams();
+  const { state, dispatch } = useData();
+  const { token } = useAuth();
+  const navigate = useNavigate();
+
+  const currentProduct = state.products.find((prod) => prod._id === id);
+
   return (
     <div>
       <Navbar />
       <main className="product-details-main">
         <section className="product-details">
-          <div>
-            <img src={productImage} alt="product-image" />
-            <p className="heart-icon-container">
-              <FavoriteBorderOutlinedIcon className="heart-icon" />
-            </p>
+          <div className="details-image-container">
+            <img src={currentProduct.imageUrl} alt="product-image" />
+            <span
+              className="heart-icon-container"
+              onClick={() =>
+                useWishlistHandler(currentProduct, dispatch, token)
+              }
+            >
+              {!currentProduct.wished ? (
+                <FavoriteBorderOutlinedIcon className="heart-icon" />
+              ) : (
+                <FavoriteIcon className="heart-icon favourite-icon" />
+              )}
+            </span>
           </div>
 
           <div className="content">
-            <p className="product-name">Product Name</p>
+            <p className="product-name">{currentProduct.title}</p>
             <p className="product-reviews">4 reviews</p>
-            <p className="product-price">₹ 500/-</p>
+            <p className="product-price">{`₹ ${currentProduct.sell_price}`} </p>
             <p className="horizontal-rule"></p>
             <div className="description">
               <p className="brand">
@@ -33,20 +56,28 @@ const ProductDetails = () => {
               </p>
               <p className="brand">
                 <span>Description :</span>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ducimus quae omnis saepe doloribus repudiandae velit
-                  explicabo, eos et itaque nisi
-                </p>
+                <p>{currentProduct.desc}</p>
               </p>
             </div>
             <div className="button-container">
-              <a className="btn cart" href="">
-                Add to Cart
-              </a>
-              <a className="btn wishlist" href="">
-                Add to Wishlist
-              </a>
+              <button
+                className="btn cart"
+                onClick={() =>
+                  useCartHandler(currentProduct, dispatch, token, navigate)
+                }
+              >
+                {currentProduct.carted ? "Go to Cart" : "Add to Cart"}
+              </button>
+              <button
+                className="btn wishlist"
+                onClick={() =>
+                  useWishlistHandler(currentProduct, dispatch, token)
+                }
+              >
+                {currentProduct.wished
+                  ? "Remove from wishlist"
+                  : "Add to Wishlist"}
+              </button>
             </div>
           </div>
         </section>
