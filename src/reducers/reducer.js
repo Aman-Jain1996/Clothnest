@@ -106,14 +106,15 @@ export const DataReducer = (state, action) => {
       return {
         ...state,
         filters: {
+          ...state.filters,
           sortBy: "",
           rating: "",
           categories: Object.keys(state.filters.categories).reduce(
             (acc, curr) => ({ ...acc, [curr]: false }),
             {}
           ),
-          search: "",
           priceRange: maxValue,
+          arrivalTrend: "",
         },
       };
 

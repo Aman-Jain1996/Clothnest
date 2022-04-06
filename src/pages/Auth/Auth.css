@@ -1,6 +1,6 @@
 .auth-main {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
-    url("../../assets/images/login-bg.webp");
+    url("https://res.cloudinary.com/ajain8479/image/upload/v1648041157/E-com%20Images/login-bg_buj8t5.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -91,6 +91,10 @@ label[for="remember"] {
   margin-left: 0.5rem;
 }
 
+.auth-container .signup-form {
+  padding: 0;
+}
+
 .password-field {
   position: relative;
 }
@@ -123,4 +127,15 @@ label[for="remember"] {
 .guest-credentials {
   display: inline-block;
   margin-top: 2rem;
+}
+
+.auth-field-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.auth-field-row > .auth-field {
+  flex: 0 0 48%;
+  margin-bottom: 0;
 }

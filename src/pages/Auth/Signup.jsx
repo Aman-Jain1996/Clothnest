@@ -1,69 +1,109 @@
-import React from "react";
-import Navbar from "../../components/NavBar/Navbar";
+import React, { useEffect, useState } from "react";
 import "./Auth.css";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts";
 
 const Signup = () => {
+  const [eye, setEye] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [secondName, setSecondName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { signUpHandler } = useAuth();
+
+  const eyeHandler = () => {
+    setEye((eye) => !eye);
+  };
+
   return (
-    <div>
-      <Navbar />
-      <main className="auth-main">
-        <div className="auth-container">
-          <form className="login signup-form">
-            <h2 className="page-heading">SignUp</h2>
-            <div className="field">
-              <label htmlFor="name">Name</label>
+    <main className="auth-main">
+      <div className="auth-container">
+        <form
+          onSubmit={(e) =>
+            signUpHandler(e, firstName, secondName, email, password)
+          }
+          className="login signup-form"
+          method="POST"
+        >
+          <h2 className="page-heading">SignUp</h2>
+          <div className="auth-field-row">
+            <div className="auth-field">
+              <label htmlFor="lName">First Name</label>
               <input
                 required
                 type="text"
                 placeholder="John Snow"
-                name="name"
-                id="name"
+                name="firstName"
+                value={firstName}
+                id="lName"
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
-            <div className="field">
-              <label htmlFor="email">Email Address</label>
+            <div className="auth-field">
+              <label htmlFor="fName">Last Name</label>
               <input
                 required
-                type="email"
-                placeholder="user@email.com"
-                name="email"
-                id="email"
+                type="text"
+                placeholder="John Snow"
+                name="secondName"
+                value={secondName}
+                id="fName"
+                onChange={(e) => setSecondName(e.target.value)}
               />
             </div>
+          </div>
+          <div className="auth-field">
+            <label htmlFor="email">Email Address</label>
+            <input
+              required
+              type="email"
+              placeholder="user@email.com"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-            <div className="field">
-              <label htmlFor="password">Password</label>
-              <div className="password-field">
-                <input
-                  required
-                  type="password"
-                  placeholder="**************"
-                  name="password"
-                  id="password"
+          <div className="auth-field">
+            <label htmlFor="password">Password</label>
+            <div className="password-field">
+              <input
+                required
+                type={!eye ? "text" : "password"}
+                placeholder="**************"
+                name="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {eye ? (
+                <VisibilityOutlinedIcon className="on" onClick={eyeHandler} />
+              ) : (
+                <VisibilityOffOutlinedIcon
+                  className="off"
+                  onClick={eyeHandler}
                 />
-                <VisibilityOutlinedIcon className="on" />
-                {/* <VisibilityOffOutlinedIcon className="off" /> */}
-              </div>
+              )}
             </div>
+          </div>
 
-            <label htmlFor="remember">
-              <input type="checkbox" name="remember" id="remember" />I accept
-              all Terms &amp; Conditions
-            </label>
-            <button className="btn-auth">SignUp</button>
-          </form>
-          <p className="redirection">
-            Altready have an account
-            <Link to="/login" className="signUp">
-              Login!
-            </Link>
-          </p>
-        </div>
-      </main>
-    </div>
+          <label htmlFor="remember">
+            <input type="checkbox" name="remember" required id="remember" />I
+            accept all Terms &amp; Conditions
+          </label>
+          <button className="btn-auth">SignUp</button>
+        </form>
+        <p className="redirection">
+          Altready have an account
+          <Link to="/login" className="signUp">
+            Login!
+          </Link>
+        </p>
+      </div>
+    </main>
   );
 };
 

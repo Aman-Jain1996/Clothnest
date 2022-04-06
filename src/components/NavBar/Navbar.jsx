@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { useData } from "../../contexts/Data-context";
-import { useAuth } from "../../contexts/Auth-context";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useData, useAuth } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
 const Navbar = () => {
   const { state, dispatch } = useData();
-  const { token, setToken } = useAuth();
+  const { token, activeUser, logoutHandler } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
   const searchRef = useRef("");
@@ -24,13 +24,7 @@ const Navbar = () => {
         filterValue: "",
       },
     });
-  }, [navigate]);
-
-  const logoutHandler = () => {
-    localStorage.removeItem("userToken");
-    setToken(null);
-    navigate("/");
-  };
+  }, [actionTypes.FILTER_CHANGE]);
 
   const changeHandler = (e) => {
     setSearchInput(e.target.value);
@@ -63,6 +57,7 @@ const Navbar = () => {
           filterValue: searchRef.current.value,
         },
       });
+      navigate("/products");
     }
   };
 
@@ -73,41 +68,62 @@ const Navbar = () => {
           <Link to="/">ClothNest</Link>
         </div>
 
-        <div className="searchbar">
-          <label htmlFor="search" className="icon">
-            <SearchOutlinedIcon
-              className="mui-icon"
-              onClick={(e) => searchHandler(e)}
+        {(location.pathname === "/" || location.pathname === "/products") && (
+          <div className="searchbar">
+            <label htmlFor="search" className="icon">
+              <SearchOutlinedIcon
+                className="mui-icon"
+                onClick={(e) => searchHandler(e)}
+              />
+            </label>
+            <input
+              value={searchInput}
+              ref={searchRef}
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search for Products, brands and more...."
+              onChange={(e) => changeHandler(e)}
+              onKeyDown={(e) => searchHandler(e)}
             />
-          </label>
-          <input
-            value={searchInput}
-            ref={searchRef}
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search for Products, brands and more...."
-            onChange={(e) => changeHandler(e)}
-            onKeyDown={(e) => searchHandler(e)}
-          />
-        </div>
+          </div>
+        )}
 
         <div className="action-container">
           {!token ? (
-            <Link to="/login" className="btn-login">
-              Login
-            </Link>
+            (location.pathname !== "/login" && (
+              <Link to="/login" className="btn-login">
+                Login
+              </Link>
+            )) ||
+            (location.pathname === "/login" && (
+              <Link to="/signUp" className="btn-login">
+                SignUp
+              </Link>
+            ))
           ) : (
-            <button className="btn-logout" onClick={logoutHandler}>
-              Logout
-            </button>
+            <div className="logout-container">
+              <button
+                className="btn-logout"
+                onClick={() => logoutHandler(dispatch)}
+              >
+                Logout
+              </button>
+              {activeUser && (
+                <p className="userDetails-popup">Hi {activeUser.firstName}</p>
+              )}
+            </div>
           )}
 
           <span className="icon">
             <Link to="/wishlist">
               <div className="nav-label">
                 <FavoriteBorderOutlinedIcon className="mui-icon" />
-                <span className="nav-count">{state.wishlist.length}</span>
+                {token ? (
+                  <span className="nav-count">{state.wishlist.length}</span>
+                ) : (
+                  <span className="nav-count">0</span>
+                )}
               </div>
               <label htmlFor="wishlist">Wishlist</label>
             </Link>
@@ -117,7 +133,11 @@ const Navbar = () => {
             <Link to="/cart">
               <div className="nav-label">
                 <ShoppingCartOutlinedIcon className="mui-icon" />
-                <span className="nav-count">{state.cart.length}</span>
+                {token ? (
+                  <span className="nav-count">{state.cart.length}</span>
+                ) : (
+                  <span className="nav-count">0</span>
+                )}
               </div>
               <label htmlFor="cart">Cart</label>
             </Link>
@@ -127,5 +147,4 @@ const Navbar = () => {
     </>
   );
 };
-
 export default Navbar;

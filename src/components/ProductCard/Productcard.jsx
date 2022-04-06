@@ -3,18 +3,16 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Productcard.css";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { useData } from "../../contexts/Data-context";
-import { useAuth } from "../../contexts/Auth-context";
+import { Link } from "react-router-dom";
+import { useData, useAuth } from "../../contexts";
 import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 
-const Productcard = ({ product }) => {
+const Productcard = ({ product, setShowAuthModal }) => {
   const { token } = useAuth();
   const { state, dispatch, loader, setLoader } = useData();
-  const navigate = useNavigate();
 
   return (
     <div className="product-card ecom-card">
@@ -30,7 +28,9 @@ const Productcard = ({ product }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() => useWishlistHandler(product, dispatch, token, navigate)}
+        onClick={() =>
+          useWishlistHandler(product, dispatch, token, setShowAuthModal)
+        }
       >
         {!product.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -65,14 +65,18 @@ const Productcard = ({ product }) => {
         {!product.carted ? (
           <button
             className="btn btn-primary"
-            onClick={() => useCartHandler(product, dispatch, token, navigate)}
+            onClick={() =>
+              useCartHandler(product, dispatch, token, setShowAuthModal)
+            }
           >
             Add to Cart
           </button>
         ) : (
           <button
             className="btn btn-secondary"
-            onClick={() => useCartHandler(product, dispatch, token, navigate)}
+            onClick={() =>
+              useCartHandler(product, dispatch, token, setShowAuthModal)
+            }
           >
             Go to Cart
           </button>

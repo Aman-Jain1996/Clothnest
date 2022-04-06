@@ -1,24 +1,32 @@
 import React, { useEffect } from "react";
-import Navbar from "../../components/NavBar/Navbar";
 import "./Cart.css";
-import emptyCart from "../../assets/images/empty-cart.svg";
-import { useData } from "../../contexts/Data-context";
-import { useAuth } from "../../contexts/Auth-context";
+import { useData, useAuth } from "../../contexts";
 import Cartcard from "../../components/CartCard/Cartcard";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import NoItem from "../../components/NoItem/NoItem";
+import Path from "../../components/Path/Path";
 
 const Cart = () => {
-  const { state, dispatch } = useData();
+  const { state, setLoader } = useData();
   const { token } = useAuth();
   const CartList = [...state.cart];
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!token) {
       navigate("/login", { replace: true });
       return null;
+    } else {
+      setLoader(true);
+      var id = setTimeout(() => {
+        setLoader(false);
+      }, 2000);
     }
-  }, [token]);
+    return () => {
+      clearTimeout(id);
+    };
+  }, []);
 
   const totalQuantity = state.cart.reduce((acc, cur) => acc + cur.qty, 0);
 
@@ -38,7 +46,9 @@ const Cart = () => {
 
   return (
     <div>
-      <Navbar />
+      <div className="cart-wish-path">
+        <Path path={location.pathname} />
+      </div>
       <h3 className="main-heading">My Cart ({totalQuantity} items)</h3>
       <main>
         {CartList.length !== 0 ? (
@@ -88,15 +98,14 @@ const Cart = () => {
             </aside>
           </div>
         ) : (
-          <div className="no-item">
-            <img className="empty-image" alt="empty wishlist" src={emptyCart} />
-            <span className="empty-content">
-              Have a look into our Product Collections{" "}
-            </span>
-            <Link to="/products" className="btn-logout">
-              Start Shopping
-            </Link>
-          </div>
+          <NoItem
+            imageUrl={
+              "https://res.cloudinary.com/ajain8479/image/upload/v1648041156/E-com%20Images/empty-cart_j45eue.svg"
+            }
+            textContent={"Have a look into our Product Collections"}
+            isButtonVisible={true}
+            buttonContent={"Start Shopping"}
+          />
         )}
 
         {/* <h4 className="cart-summary-heading">

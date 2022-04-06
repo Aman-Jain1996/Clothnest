@@ -6,8 +6,7 @@ import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
-import { useAuth } from "../../contexts/Auth-context";
-import { useData } from "../../contexts/Data-context";
+import { useData, useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
 const Wishlistcard = ({ wishItem }) => {

@@ -1,27 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Product-details.css";
-import Navbar from "../../components/NavBar/Navbar";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useNavigate, useParams } from "react-router-dom";
-import { useData } from "../../contexts/Data-context";
-import { useAuth } from "../../contexts/Auth-context";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useData, useAuth } from "../../contexts";
 import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
+import Path from "../../components/Path/Path";
+import Authmodal from "../../components/AuthModal/AuthModal";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { state, dispatch } = useData();
+  const { state, dispatch, setLoader } = useData();
   const { token } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const currentProduct = state.products.find((prod) => prod._id === id);
+  const currentProduct = state.products.find((prod) => prod._id === id) || {};
+
+  useEffect(() => {
+    setLoader(true);
+    const id = setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, []);
 
   return (
     <div>
-      <Navbar />
+      {showAuthModal && (
+        <Authmodal
+          location={location.pathname}
+          setShowAuthModal={setShowAuthModal}
+          navigate={navigate}
+        />
+      )}
+      <div className="cart-wish-path">
+        <Path path={`/Products/${currentProduct.title}`} />
+      </div>
       <main className="product-details-main">
         <section className="product-details">
           <div className="details-image-container">
@@ -29,7 +51,12 @@ const ProductDetails = () => {
             <span
               className="heart-icon-container"
               onClick={() =>
-                useWishlistHandler(currentProduct, dispatch, token, navigate)
+                useWishlistHandler(
+                  currentProduct,
+                  dispatch,
+                  token,
+                  setShowAuthModal
+                )
               }
             >
               {!currentProduct.wished ? (
@@ -56,14 +83,19 @@ const ProductDetails = () => {
               </p>
               <p className="brand">
                 <span>Description :</span>
-                <p>{currentProduct.desc}</p>
+                <span>{currentProduct.desc}</span>
               </p>
             </div>
             <div className="button-container">
               <button
                 className="btn cart"
                 onClick={() =>
-                  useCartHandler(currentProduct, dispatch, token, navigate)
+                  useCartHandler(
+                    currentProduct,
+                    dispatch,
+                    token,
+                    setShowAuthModal
+                  )
                 }
               >
                 {currentProduct.carted ? "Go to Cart" : "Add to Cart"}
@@ -71,7 +103,12 @@ const ProductDetails = () => {
               <button
                 className="btn wishlist"
                 onClick={() =>
-                  useWishlistHandler(currentProduct, dispatch, token, navigate)
+                  useWishlistHandler(
+                    currentProduct,
+                    dispatch,
+                    token,
+                    setShowAuthModal
+                  )
                 }
               >
                 {currentProduct.wished

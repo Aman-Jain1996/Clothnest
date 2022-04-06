@@ -1,13 +1,13 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/Auth-context";
-import { useData } from "../../contexts/Data-context";
+import { useData, useAuth } from "../../contexts";
 import { useWishlistHandler } from "../../customHooks/Customhooks";
 import { actionTypes, cartActionTypes } from "../../reducers/actionTypes";
 import {
   DeleteFromCartService,
   QuantityChangeService,
 } from "../../services/apiCall";
+import { ToastHandler } from "../../utilities/toastUtils";
 import "./Cartcard.css";
 
 const Cartcard = ({ cartItem }) => {
@@ -24,6 +24,7 @@ const Cartcard = ({ cartItem }) => {
   const deleteCartHandler = async () => {
     try {
       const { data, status } = await DeleteFromCartService(cartItem._id, token);
+      ToastHandler("success", "Item removed from Cart");
 
       if (status === 200 || status === 201) {
         dispatch({
@@ -32,7 +33,7 @@ const Cartcard = ({ cartItem }) => {
         });
       }
     } catch (err) {
-      console.log(err);
+      ToastHandler("error", "Some error occured");
     }
   };
 
@@ -47,13 +48,14 @@ const Cartcard = ({ cartItem }) => {
       );
 
       if (status === 200 || status === 201) {
+        ToastHandler("success", "Item quantity incremented");
         dispatch({
           type: actionTypes.SET_CART,
           payload: { cart: data.cart },
         });
       }
     } catch (err) {
-      console.log(err);
+      ToastHandler("error", "Some error occured");
     }
   };
 
@@ -72,13 +74,14 @@ const Cartcard = ({ cartItem }) => {
       );
 
       if (status === 200 || status === 201) {
+        ToastHandler("success", "Item quantity decremented");
         dispatch({
           type: actionTypes.SET_CART,
           payload: { cart: data.cart },
         });
       }
     } catch (err) {
-      console.log(err);
+      ToastHandler("error", "Some error occured");
     }
   };
 

@@ -68,3 +68,10 @@ input {
 .btn-tertiary:hover {
   border: 1px solid #000;
 }
+
+.Toastify__toast--success,
+.Toastify__toast--warning,
+.Toastify__toast--error,
+.Toastify__toast--info {
+  font-size: 1.4rem;
+}
