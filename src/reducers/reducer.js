@@ -40,7 +40,7 @@ export const DataReducer = (state, action) => {
         cart: [...action.payload.cart],
         products: state.products.map((prod) => ({
           ...prod,
-          carted: action.payload.cart.some((item) => item.id === prod.id),
+          carted: action.payload.cart.some((item) => item._id === prod._id),
         })),
       };
 
@@ -50,7 +50,7 @@ export const DataReducer = (state, action) => {
         wishlist: [...action.payload.wishlist],
         products: state.products.map((prod) => ({
           ...prod,
-          wished: action.payload.wishlist.some((wish) => wish.id === prod.id),
+          wished: action.payload.wishlist.some((wish) => wish._id === prod._id),
         })),
       };
 

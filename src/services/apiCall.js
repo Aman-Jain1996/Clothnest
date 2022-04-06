@@ -35,3 +35,21 @@ export const AddToCartService = async (product, encodedToken) =>
       },
     }
   );
+
+export const DeleteFromCartService = async (productId, encodedToken) =>
+  axios.delete(`/api/user/cart/${productId}`, {
+    headers: {
+      authorization: encodedToken,
+    },
+  });
+
+export const QuantityChangeService = async (productId, encodedToken, action) =>
+  axios.post(
+    `/api/user/cart/${productId}`,
+    { action },
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
