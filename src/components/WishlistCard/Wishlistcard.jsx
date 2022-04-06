@@ -23,7 +23,7 @@ const Wishlistcard = ({ wishItem }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() => useWishlistHandler(wishItem, dispatch, token)}
+        onClick={() => useWishlistHandler(wishItem, dispatch, token, navigate)}
       >
         {!wishItem.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -54,7 +54,9 @@ const Wishlistcard = ({ wishItem }) => {
 
         <button
           className="btn btn-tertiary"
-          onClick={() => useWishlistHandler(wishItem, dispatch, token)}
+          onClick={() =>
+            useWishlistHandler(wishItem, dispatch, token, navigate)
+          }
         >
           Remove from Wishlist
         </button>

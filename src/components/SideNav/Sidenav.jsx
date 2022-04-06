@@ -1,43 +1,111 @@
 import "./Sidenav.css";
 import React from "react";
+import { useData } from "../../contexts/Data-context";
+import { actionTypes, filterActionType } from "../../reducers/actionTypes";
+import { useSearchParams } from "react-router-dom";
 
 const Sidenav = () => {
+  const { state, dispatch } = useData();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const maxValue = state.products.reduce(
+    (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
+    0
+  );
+
+  const clearFilterHandler = () => {
+    setSearchParams({});
+    dispatch({
+      type: actionTypes.RESET_CHANGE,
+    });
+  };
+
+  const sortChangeHandler = (e) => {
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.SORT_BY,
+        filterValue: e.target.value,
+      },
+    });
+  };
+
+  const ratingChangeHandler = (e) => {
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.RATING,
+        filterValue: e.target.value,
+      },
+    });
+  };
+
+  const categoryChangeHandler = (e) => {
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.CATEGORY,
+        filterSubType: e.target.value,
+        filterValue: !state.filters.categories[e.target.value],
+      },
+    });
+  };
+
+  const priceRangeChangeHandler = (e) => {
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.PRICE_RANGE,
+        filterValue: e.target.value,
+      },
+    });
+  };
+
   return (
     <div className="Sidenav">
       <section className="filter-menu">
         <div className="filter-header">
           <h3 className="filter-heading">Filters</h3>
-          <span className="filter-clear">Clear</span>
+          <span className="filter-clear" onClick={clearFilterHandler}>
+            Clear
+          </span>
         </div>
 
         <article className="filter-submenu">
           <h3 className="submenu-heading">Sort by</h3>
           <div className="submenu-content">
-            <select>
+            <select
+              onChange={(e) => sortChangeHandler(e)}
+              value={state.filters.sortBy}
+            >
               <option value="">Select</option>
-              <option value="price-ascend">Price Low to High</option>
-              <option value="price-descend">Price High to Low</option>
-              <option value="rating-ascend">Rating Low to High</option>
-              <option value="rating-descend">Rating High to Low</option>
+              <option value="priceAscend">Price Low to High</option>
+              <option value="priceDescend">Price High to Low</option>
+              <option value="ratingAscend">Rating Low to High</option>
+              <option value="ratingDescend">Rating High to Low</option>
             </select>
           </div>
         </article>
 
         <article className="filter-submenu">
           <h3 className="submenu-heading">
-            <label htmlFor="range">Price Range</label>
+            <label className="price-label" htmlFor="range">
+              Price Range
+            </label>
           </h3>
           <div className="submenu-content price-range">
             <span className="min-price">50</span>
-            <span className="mid-price">150</span>
-            <span className="max-price">200</span>
+            <span className="mid-price">{maxValue / 2}</span>
+            <span className="max-price">{maxValue}</span>
             <input
               type="range"
               name="price"
               min="50"
-              max="200"
+              step="100"
+              max={maxValue}
               id="range"
-              value="150"
+              value={state.filters.priceRange}
+              onChange={priceRangeChangeHandler}
             />
           </div>
         </article>
@@ -45,20 +113,23 @@ const Sidenav = () => {
         <article className="filter-submenu">
           <h3 className="submenu-heading">Category</h3>
           <div className="submenu-content">
-            <div className="field">
-              <input type="checkbox" name="Mens" id="mens" />
-              <label htmlFor="mens">Mens</label>
-            </div>
-
-            <div className="field">
-              <input type="checkbox" name="Womens" id="womens" />
-              <label htmlFor="womens">Womens</label>
-            </div>
-
-            <div className="field">
-              <input type="checkbox" name="kids" id="kids" />
-              <label htmlFor="kids">Kids</label>
-            </div>
+            {Object.keys(state.filters.categories).map((cat) => {
+              return (
+                <div className="field" key={cat}>
+                  <input
+                    type="checkbox"
+                    name={cat}
+                    id={cat}
+                    checked={state.filters.categories[cat]}
+                    value={cat[0].toUpperCase() + cat.slice(1)}
+                    onChange={(e) => categoryChangeHandler(e)}
+                  />
+                  <label htmlFor={cat}>
+                    {cat[0].toUpperCase() + cat.slice(1)}
+                  </label>
+                </div>
+              );
+            })}
           </div>
         </article>
 
@@ -67,23 +138,47 @@ const Sidenav = () => {
           <div className="submenu-content">
             <div className="submenu-content">
               <div className="field">
-                <input type="radio" name="Rating" id="4+" />
-                <label htmlFor="4+">4+ Stars</label>
+                <input
+                  type="radio"
+                  name="Rating"
+                  id="4+"
+                  value="4"
+                  onChange={(e) => ratingChangeHandler(e)}
+                />
+                <label htmlFor="4+">4 Stars &amp; above</label>
               </div>
 
               <div className="field">
-                <input type="radio" name="Rating" id="3+" />
-                <label htmlFor="3+">3+ Stars</label>
+                <input
+                  type="radio"
+                  name="Rating"
+                  id="3+"
+                  value="3"
+                  onChange={(e) => ratingChangeHandler(e)}
+                />
+                <label htmlFor="3+">3 Stars &amp; above</label>
               </div>
 
               <div className="field">
-                <input type="radio" name="Rating" id="2+" />
-                <label htmlFor="2+">2+ Stars</label>
+                <input
+                  type="radio"
+                  name="Rating"
+                  id="2+"
+                  value="2"
+                  onChange={(e) => ratingChangeHandler(e)}
+                />
+                <label htmlFor="2+">2 Stars &amp; above</label>
               </div>
 
               <div className="field">
-                <input type="radio" name="Rating" id="1+" />
-                <label htmlFor="1+">1+ Stars</label>
+                <input
+                  type="radio"
+                  name="Rating"
+                  id="1+"
+                  value="1"
+                  onChange={(e) => ratingChangeHandler(e)}
+                />
+                <label htmlFor="1+">1 Stars &amp; above</label>
               </div>
             </div>
           </div>

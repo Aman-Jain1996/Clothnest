@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../components/NavBar/Navbar";
 import "./Wishlist.css";
 import emptyImage from "../../assets/images/empty-wish.svg";
 import { useData } from "../../contexts/Data-context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Wishlistcard from "../../components/WishlistCard/Wishlistcard";
+import { useAuth } from "../../contexts/Auth-context";
 
 const Wishlist = () => {
   const { state, dispatch } = useData();
+  const { token } = useAuth();
+  const navigate = useNavigate();
   const wishList = state.products.filter((wish) => wish.wished);
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login", { replace: true });
+      return null;
+    }
+  }, [token]);
 
   return (
     <div>
