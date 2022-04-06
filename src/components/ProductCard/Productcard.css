@@ -9,6 +9,7 @@
   width: 90%;
   border: none;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .product-card:hover {
@@ -75,8 +76,8 @@
   fill: red;
 }
 
-.item-name{
-    margin-top:.5rem;
+.item-name {
+  margin-top: 0.5rem;
 }
 
 .badge-item {

@@ -20,44 +20,20 @@
   justify-content: center;
 }
 
-.wishlist-icon ion-icon[name="heart"] {
-  color: red;
-}
-
-.card {
-  width: 90%;
-  height: max-content;
-  border: none;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.card .manufacturer {
-  text-align: center;
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-}
-
-.card .action-container {
+.no-item {
   display: flex;
   flex-direction: column;
-  padding: 0.6rem 1.2rem;
-  gap: 1.2rem;
-  margin-bottom: 1.2rem;
+  height: 60vh;
+  align-items: center;
+  justify-content: center;
 }
 
-.card .action-container .btn {
-  padding: 0.5rem 1rem;
-  width: 100%;
-  margin: 0;
+.empty-image {
+  width: 200px;
+  height: 200px;
 }
 
-.btn {
-  border-radius: 5px;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-  opacity: 0.8;
+.empty-content {
+  margin: 2.4rem 0;
+  font-size: 1.6rem;
 }

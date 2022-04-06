@@ -5,7 +5,6 @@ import "./Productcard.css";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { useData } from "../../contexts/Data-context";
-import { actionTypes } from "../../reducers/actionTypes";
 import { useAuth } from "../../contexts/Auth-context";
 import {
   useCartHandler,
