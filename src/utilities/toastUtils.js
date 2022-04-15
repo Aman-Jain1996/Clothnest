@@ -7,6 +7,7 @@ const properties = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
+  pauseOnFocusLoss: false,
 };
 
 export const ToastHandler = (type, message) => {

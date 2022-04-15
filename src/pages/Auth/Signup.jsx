@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
@@ -8,7 +8,7 @@ import { useAuth } from "../../contexts";
 const Signup = () => {
   const [eye, setEye] = useState(true);
   const [firstName, setFirstName] = useState("");
-  const [secondName, setSecondName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signUpHandler } = useAuth();
@@ -22,7 +22,7 @@ const Signup = () => {
       <div className="auth-container">
         <form
           onSubmit={(e) =>
-            signUpHandler(e, firstName, secondName, email, password)
+            signUpHandler(e, firstName, lastName, email, password)
           }
           className="login signup-form"
           method="POST"
@@ -48,9 +48,9 @@ const Signup = () => {
                 type="text"
                 placeholder="John Snow"
                 name="secondName"
-                value={secondName}
+                value={lastName}
                 id="fName"
-                onChange={(e) => setSecondName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>

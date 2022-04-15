@@ -52,20 +52,20 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const signUpHandler = async (e, fName, lName, email, password) => {
+  const signUpHandler = async (e, firstName, lastName, email, password) => {
     e.preventDefault();
     try {
       const {
-        data: { foundUser, encodedToken },
+        data: { createdUser, encodedToken },
         status,
-      } = await SignUpService({ fName, lName, email, password });
+      } = await SignUpService({ firstName, lastName, email, password });
       if (status === 200 || status === 201) {
         ToastHandler("success", "Signed up Successfully....");
         localStorage.setItem(
           "userToken",
           JSON.stringify({ token: encodedToken })
         );
-        setActiveUser(foundUser);
+        setActiveUser(createdUser);
         setToken(encodedToken);
         navigate("/products");
       }

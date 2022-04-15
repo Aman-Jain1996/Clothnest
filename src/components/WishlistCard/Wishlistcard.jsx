@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const Wishlistcard = ({ wishItem }) => {
   const { token } = useAuth();
-  const { state, dispatch, loader, setLoader } = useData();
+  const { dispatch } = useData();
   const navigate = useNavigate();
 
   return (
@@ -46,7 +46,9 @@ const Wishlistcard = ({ wishItem }) => {
       <div className="action-container">
         <button
           className="btn"
-          onClick={() => useCartHandler(wishItem, dispatch, token, navigate)}
+          onClick={() =>
+            useCartHandler(wishItem, dispatch, token, null, navigate)
+          }
         >
           {!wishItem.carted ? "Move to Cart" : "Go to Cart"}
         </button>

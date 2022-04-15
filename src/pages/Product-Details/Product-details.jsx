@@ -94,7 +94,8 @@ const ProductDetails = () => {
                     currentProduct,
                     dispatch,
                     token,
-                    setShowAuthModal
+                    setShowAuthModal,
+                    navigate
                   )
                 }
               >

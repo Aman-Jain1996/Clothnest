@@ -3,8 +3,8 @@ import axios from "axios";
 export const LoginService = async ({ email, password }) =>
   axios.post("/api/auth/login", { email, password });
 
-export const SignUpService = async ({ fName, lName, email, password }) =>
-  axios.post("/api/auth/signup", { fName, lName, email, password });
+export const SignUpService = async ({ firstName, lastName, email, password }) =>
+  axios.post("/api/auth/signup", { firstName, lastName, email, password });
 
 export const ProductService = async () => axios.get("/api/products");
 

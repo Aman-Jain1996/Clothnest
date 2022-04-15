@@ -42,7 +42,8 @@ export const useCartHandler = async (
   product,
   dispatch,
   token,
-  setShowAuthModal
+  setShowAuthModal,
+  navigate
 ) => {
   try {
     if (!token) {
