@@ -99,8 +99,8 @@ const Login = () => {
             onClick={(e) =>
               loginHandler(
                 e,
-                "adarshbalika@gmail.com",
-                "adarshbalika",
+                "amanjain@gmail.com",
+                "amanjain1234",
                 redirectionPath
               )
             }

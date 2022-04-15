@@ -3,7 +3,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Productcard.css";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import {
   useCartHandler,
@@ -11,8 +11,9 @@ import {
 } from "../../customHooks/Customhooks";
 
 const Productcard = ({ product, setShowAuthModal }) => {
+  const navigate = useNavigate();
   const { token } = useAuth();
-  const { state, dispatch, loader, setLoader } = useData();
+  const { dispatch } = useData();
 
   return (
     <div className="product-card ecom-card">
@@ -66,7 +67,13 @@ const Productcard = ({ product, setShowAuthModal }) => {
           <button
             className="btn btn-primary"
             onClick={() =>
-              useCartHandler(product, dispatch, token, setShowAuthModal)
+              useCartHandler(
+                product,
+                dispatch,
+                token,
+                setShowAuthModal,
+                navigate
+              )
             }
           >
             Add to Cart
@@ -75,7 +82,13 @@ const Productcard = ({ product, setShowAuthModal }) => {
           <button
             className="btn btn-secondary"
             onClick={() =>
-              useCartHandler(product, dispatch, token, setShowAuthModal)
+              useCartHandler(
+                product,
+                dispatch,
+                token,
+                setShowAuthModal,
+                navigate
+              )
             }
           >
             Go to Cart

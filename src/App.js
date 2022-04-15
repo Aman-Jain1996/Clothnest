@@ -6,7 +6,7 @@ import Wishlist from "./pages/Wishlist/Wishlist";
 import Cart from "./pages/Cart/Cart";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
-import Mockman from "mockman-js";
+// import Mockman from "mockman-js";
 import { useData } from "./contexts";
 import Loading from "./components/Loading/Loading";
 import { ToastContainer } from "react-toastify";
@@ -30,7 +30,7 @@ function App() {
       />
       <Navbar />
       <Routes>
-        <Route path="/mock" element={<Mockman />} />
+        {/* <Route path="/mock" element={<Mockman />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="products/:id" element={<ProductDetails />} />

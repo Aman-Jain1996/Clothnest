@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,6 +11,10 @@ const Home = () => {
   const arrTrendClickHandler = (filter) => {
     navigate("/products", { state: { arrTrend: filter } });
   };
+
+  useEffect(() => {
+    scrollTo(0, 0);
+  });
 
   return (
     <main>
