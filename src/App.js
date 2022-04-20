@@ -1,17 +1,20 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import Products from "./pages/Product/Products";
-import ProductDetails from "./pages/Product-Details/Product-details";
-import Wishlist from "./pages/Wishlist/Wishlist";
-import Cart from "./pages/Cart/Cart";
-import Login from "./pages/Auth/Login";
-import Signup from "./pages/Auth/Signup";
+import { Routes, Route } from "react-router-dom";
 // import Mockman from "mockman-js";
+import {
+  Cart,
+  ErrorPage,
+  Home,
+  Login,
+  ProductDetails,
+  Products,
+  Profile,
+  Signup,
+  Wishlist,
+} from "./pages";
 import { useData } from "./contexts";
-import Loading from "./components/Loading/Loading";
+import { Loading, Navbar, PrivateRoute, ProfileDetails } from "./components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "./components/NavBar/Navbar";
 
 function App() {
   const { loader } = useData();
@@ -31,13 +34,43 @@ function App() {
       <Navbar />
       <Routes>
         {/* <Route path="/mock" element={<Mockman />} /> */}
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="" element={<Home />} />
+        <Route path="products" element={<Products />} />
         <Route path="products/:id" element={<ProductDetails />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+        <Route
+          path="wishlist"
+          element={
+            <PrivateRoute>
+              <Wishlist />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<ProfileDetails />} />
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="address" element={<Profile />} />
+          <Route path="orders" element={<Profile />} />
+        </Route>
+
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );

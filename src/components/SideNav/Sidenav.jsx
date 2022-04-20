@@ -3,12 +3,10 @@ import React from "react";
 import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 import { useSearchParams } from "react-router-dom";
-import { searchRef } from "../NavBar/Navbar";
 
-const Sidenav = ({ ref }) => {
+export const Sidenav = ({ ref }) => {
   const { state, dispatch } = useData();
-  const [searchParams, setSearchParams] = useSearchParams();
-  
+  const [setSearchParams] = useSearchParams();
 
   const maxValue = state.products.reduce(
     (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
@@ -193,5 +191,3 @@ const Sidenav = ({ ref }) => {
     </div>
   );
 };
-
-export default Sidenav;

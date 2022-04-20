@@ -1,28 +1,19 @@
 import React, { useEffect } from "react";
 import "./Wishlist.css";
-import { useData, useAuth } from "../../contexts";
-import { useLocation, useNavigate } from "react-router-dom";
-import Wishlistcard from "../../components/WishlistCard/Wishlistcard";
-import NoItem from "../../components/NoItem/NoItem";
-import Path from "../../components/Path/Path";
+import { useData } from "../../contexts";
+import { useLocation } from "react-router-dom";
+import { NoItem, Path, Wishlistcard } from "../../components";
 
-const Wishlist = () => {
+export const Wishlist = () => {
   const { state, setLoader } = useData();
-  const { token } = useAuth();
-  const navigate = useNavigate();
   const location = useLocation();
   const wishList = state.products.filter((wish) => wish.wished);
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login", { replace: true });
-      return null;
-    } else {
-      setLoader(true);
-      var id = setTimeout(() => {
-        setLoader(false);
-      }, 2000);
-    }
+    setLoader(true);
+    var id = setTimeout(() => {
+      setLoader(false);
+    }, 2000);
     return () => {
       clearTimeout(id);
     };
@@ -58,5 +49,3 @@ const Wishlist = () => {
     </div>
   );
 };
-
-export default Wishlist;

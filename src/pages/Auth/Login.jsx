@@ -3,10 +3,10 @@ import "./Auth.css";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Link, useLocation } from "react-router-dom";
-import { useData, useAuth } from "../../contexts";
+import { useAuth, useData } from "../../contexts";
 import { actionTypes } from "../../reducers/actionTypes";
 
-const Login = () => {
+export const Login = () => {
   const { token, loginHandler, activeUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +21,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (token) {
+    if (activeUser) {
       dispatch({
         type: actionTypes.SET_CART,
         payload: { cart: activeUser?.cart },
@@ -38,7 +38,10 @@ const Login = () => {
     <main className="auth-main">
       <div className="auth-container">
         <form
-          onSubmit={(e) => loginHandler(e, email, password, redirectionPath)}
+          onSubmit={(e) => {
+            e.preventDefault();
+            loginHandler(email, password, redirectionPath);
+          }}
           className="login"
           method="POST"
         >
@@ -96,14 +99,14 @@ const Login = () => {
         <p className="redirection">
           <Link
             to="/login"
-            onClick={(e) =>
+            onClick={(e) => {
+              e.preventDefault();
               loginHandler(
-                e,
                 "amanjain@gmail.com",
                 "amanjain1234",
                 redirectionPath
-              )
-            }
+              );
+            }}
             className="signUp guest-credentials"
           >
             Use guest credentials
@@ -113,5 +116,3 @@ const Login = () => {
     </main>
   );
 };
-
-export default Login;

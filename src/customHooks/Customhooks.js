@@ -9,11 +9,11 @@ import { ToastHandler } from "../utilities/toastUtils";
 export const useWishlistHandler = async (
   product,
   dispatch,
-  token,
+  activeUser,
   setShowAuthModal
 ) => {
   try {
-    if (!token) {
+    if (!activeUser) {
       setShowAuthModal(true);
       return;
     }
@@ -34,19 +34,19 @@ export const useWishlistHandler = async (
     }
   } catch (err) {
     ToastHandler("error", err);
-    console.log(err);
+    console.error(err);
   }
 };
 
 export const useCartHandler = async (
   product,
   dispatch,
-  token,
+  activeUser,
   setShowAuthModal,
   navigate
 ) => {
   try {
-    if (!token) {
+    if (!activeUser) {
       setShowAuthModal(true);
       return;
     }
@@ -67,6 +67,6 @@ export const useCartHandler = async (
     }
   } catch (err) {
     ToastHandler("error", err);
-    console.log(err);
+    console.error(err);
   }
 };

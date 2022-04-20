@@ -1,4 +1,3 @@
-import { fetchMaxValue } from "../utilities/filterUtils";
 import { actionTypes } from "./actionTypes";
 
 let maxValue;

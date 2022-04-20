@@ -3,7 +3,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import "./Path.css";
 import { Link } from "react-router-dom";
 
-const Path = ({ path }) => {
+export const Path = ({ path }) => {
   return (
     <div className="page-path">
       <HomeIcon />
@@ -40,5 +40,3 @@ const Path = ({ path }) => {
     </div>
   );
 };
-
-export default Path;

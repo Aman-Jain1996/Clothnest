@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Productcard.css";
@@ -10,9 +10,9 @@ import {
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 
-const Productcard = ({ product, setShowAuthModal }) => {
+export const Productcard = ({ product, setShowAuthModal }) => {
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { token, activeUser } = useAuth();
   const { dispatch } = useData();
 
   return (
@@ -30,7 +30,7 @@ const Productcard = ({ product, setShowAuthModal }) => {
       <span
         className="heart-icon-container"
         onClick={() =>
-          useWishlistHandler(product, dispatch, token, setShowAuthModal)
+          useWishlistHandler(product, dispatch, activeUser, setShowAuthModal)
         }
       >
         {!product.wished ? (
@@ -70,7 +70,7 @@ const Productcard = ({ product, setShowAuthModal }) => {
               useCartHandler(
                 product,
                 dispatch,
-                token,
+                activeUser,
                 setShowAuthModal,
                 navigate
               )
@@ -85,7 +85,7 @@ const Productcard = ({ product, setShowAuthModal }) => {
               useCartHandler(
                 product,
                 dispatch,
-                token,
+                activeUser,
                 setShowAuthModal,
                 navigate
               )
@@ -98,5 +98,3 @@ const Productcard = ({ product, setShowAuthModal }) => {
     </div>
   );
 };
-
-export default Productcard;
