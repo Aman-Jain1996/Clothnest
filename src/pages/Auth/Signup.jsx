@@ -5,7 +5,7 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts";
 
-const Signup = () => {
+export const Signup = () => {
   const [eye, setEye] = useState(true);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,9 +21,10 @@ const Signup = () => {
     <main className="auth-main">
       <div className="auth-container">
         <form
-          onSubmit={(e) =>
-            signUpHandler(e, firstName, lastName, email, password)
-          }
+          onSubmit={(e) => {
+            e.preventDefault();
+            signUpHandler(firstName, lastName, email, password);
+          }}
           className="login signup-form"
           method="POST"
         >
@@ -106,5 +107,3 @@ const Signup = () => {
     </main>
   );
 };
-
-export default Signup;

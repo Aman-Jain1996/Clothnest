@@ -7,7 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
-const Navbar = () => {
+export const Navbar = () => {
   const { state, dispatch } = useData();
   const { token, activeUser, logoutHandler } = useAuth();
   const location = useLocation();
@@ -90,7 +90,7 @@ const Navbar = () => {
         )}
 
         <div className="action-container">
-          {!token ? (
+          {!activeUser ? (
             (location.pathname !== "/login" && (
               <Link to="/login" className="btn-login">
                 Login
@@ -147,4 +147,3 @@ const Navbar = () => {
     </>
   );
 };
-export default Navbar;

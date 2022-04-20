@@ -8,13 +8,12 @@ import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
-import Path from "../../components/Path/Path";
-import Authmodal from "../../components/AuthModal/AuthModal";
+import { Authmodal, Path } from "../../components";
 
-const ProductDetails = () => {
+export const ProductDetails = () => {
   const { id } = useParams();
   const { state, dispatch, setLoader } = useData();
-  const { token } = useAuth();
+  const { token, activeUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -36,7 +35,7 @@ const ProductDetails = () => {
     <div>
       {showAuthModal && (
         <Authmodal
-          location={location.pathname}
+          path={location.pathname}
           setShowAuthModal={setShowAuthModal}
           navigate={navigate}
         />
@@ -54,7 +53,7 @@ const ProductDetails = () => {
                 useWishlistHandler(
                   currentProduct,
                   dispatch,
-                  token,
+                  activeUser,
                   setShowAuthModal
                 )
               }
@@ -93,7 +92,7 @@ const ProductDetails = () => {
                   useCartHandler(
                     currentProduct,
                     dispatch,
-                    token,
+                    activeUser,
                     setShowAuthModal,
                     navigate
                   )
@@ -107,7 +106,7 @@ const ProductDetails = () => {
                   useWishlistHandler(
                     currentProduct,
                     dispatch,
-                    token,
+                    activeUser,
                     setShowAuthModal
                   )
                 }
@@ -123,5 +122,3 @@ const ProductDetails = () => {
     </div>
   );
 };
-
-export default ProductDetails;

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./Products.css";
-import Sidenav from "../../components/SideNav/Sidenav";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useData } from "../../contexts";
-import Productcard from "../../components/ProductCard/Productcard";
 import useFilterData from "../../customHooks/useFilterData";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
-import NoItem from "../../components/NoItem/NoItem";
-import Path from "../../components/Path/Path";
-import Authmodal from "../../components/AuthModal/AuthModal";
+import {
+  Authmodal,
+  NoItem,
+  Path,
+  Productcard,
+  Sidenav,
+} from "../../components";
 
-const Products = ({ ref }) => {
+export const Products = ({ ref }) => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { state, dispatch, setLoader } = useData();
   let location = useLocation();
@@ -76,7 +78,7 @@ const Products = ({ ref }) => {
         <Authmodal
           navigate={navigate}
           setShowAuthModal={setShowAuthModal}
-          location={location.pathname}
+          path={location.pathname}
         />
       )}
       <Sidenav ref={ref} />
@@ -107,5 +109,3 @@ const Products = ({ ref }) => {
     </div>
   );
 };
-
-export default Products;

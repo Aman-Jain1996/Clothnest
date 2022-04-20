@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Home.css";
 import { Link, useNavigate } from "react-router-dom";
 
-const Home = () => {
+export const Home = () => {
   const navigate = useNavigate();
   const categoryClickHandler = (category) => {
     navigate("/products", { state: { category } });
@@ -142,5 +142,3 @@ const Home = () => {
     </main>
   );
 };
-
-export default Home;

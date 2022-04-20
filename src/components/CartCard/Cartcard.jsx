@@ -10,8 +10,8 @@ import {
 import { ToastHandler } from "../../utilities/toastUtils";
 import "./Cartcard.css";
 
-const Cartcard = ({ cartItem }) => {
-  const { token } = useAuth();
+export const Cartcard = ({ cartItem }) => {
+  const { token, activeUser } = useAuth();
   const { state, dispatch } = useData();
   const navigate = useNavigate();
 
@@ -87,7 +87,10 @@ const Cartcard = ({ cartItem }) => {
 
   return (
     <div className="product">
-      <div className="product-img">
+      <div
+        className="product-img"
+        onClick={() => navigate(`/products/${cartItem._id}`)}
+      >
         <img src={cartItem.imageUrl} alt="product image" />
       </div>
       <div className="product-content">
@@ -123,7 +126,7 @@ const Cartcard = ({ cartItem }) => {
             <button
               className="btn btn-tertiary"
               onClick={() =>
-                useWishlistHandler(cartItem, dispatch, token, navigate)
+                useWishlistHandler(cartItem, dispatch, activeUser, navigate)
               }
             >
               Move to Wishlist
@@ -134,5 +137,3 @@ const Cartcard = ({ cartItem }) => {
     </div>
   );
 };
-
-export default Cartcard;

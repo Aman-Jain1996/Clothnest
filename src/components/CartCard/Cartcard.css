@@ -9,6 +9,7 @@
 .product-img {
   flex: 0 1 40%;
   border-right: 1px solid;
+  cursor: pointer;
 }
 
 .product-content {
@@ -18,7 +19,7 @@
   flex-direction: column;
 }
 
-.product-name {
+.product-content .product-name {
   font-size: 1.8rem;
   color: #000;
   font-weight: 500;

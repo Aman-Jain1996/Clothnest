@@ -9,6 +9,7 @@
 
 .wishlist-card .card-image-container {
   height: 55%;
+  cursor: pointer;
 }
 
 .wishlist-card .product-content-container {

@@ -1,17 +1,28 @@
 import axios from "axios";
 
+// Auth Service
+
 export const LoginService = async ({ email, password }) =>
   axios.post("/api/auth/login", { email, password });
 
 export const SignUpService = async ({ firstName, lastName, email, password }) =>
   axios.post("/api/auth/signup", { firstName, lastName, email, password });
 
-export const ProductService = async () => axios.get("/api/products");
+
+// Category Service
 
 export const CategoryService = async () => axios.get("/api/categories");
 
+
+// Products Service
+
+export const ProductService = async () => axios.get("/api/products");
+
 export const FetchProductDetailsService = async (id) =>
   axios.get(`/api/products/${id}`);
+
+
+// Wishlist Service
 
 export const AddToWishlistService = async (product, encodedToken) =>
   axios.post(
@@ -30,6 +41,9 @@ export const DeleteFromWishlistService = async (productId, encodedToken) =>
       authorization: encodedToken,
     },
   });
+
+
+// Cart Services
 
 export const AddToCartService = async (product, encodedToken) =>
   axios.post(

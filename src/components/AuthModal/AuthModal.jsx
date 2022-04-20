@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./AuthModal.css";
 
-const Authmodal = ({ setShowAuthModal, location, navigate }) => {
-  console.log(location);
+export const Authmodal = ({ setShowAuthModal, path, navigate }) => {
   return (
     <div
       className="auth-modal-container"
@@ -16,7 +14,9 @@ const Authmodal = ({ setShowAuthModal, location, navigate }) => {
         <div className="auth-modal-action-container">
           <div
             className="auth-redirection-link"
-            onClick={() => navigate("/login", { state: { path: location } })}
+            onClick={() =>
+              navigate("/login", { replace: true, state: { path: path } })
+            }
           >
             Log In
           </div>
@@ -31,5 +31,3 @@ const Authmodal = ({ setShowAuthModal, location, navigate }) => {
     </div>
   );
 };
-
-export default Authmodal;

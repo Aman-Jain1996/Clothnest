@@ -1,28 +1,20 @@
 import React, { useEffect } from "react";
 import "./Cart.css";
-import { useData, useAuth } from "../../contexts";
-import Cartcard from "../../components/CartCard/Cartcard";
-import { useLocation, useNavigate } from "react-router-dom";
-import NoItem from "../../components/NoItem/NoItem";
-import Path from "../../components/Path/Path";
+import { useData } from "../../contexts";
+import { useLocation } from "react-router-dom";
+import { Cartcard, NoItem, Path } from "../../components";
 
-const Cart = () => {
+export const Cart = () => {
   const { state, setLoader } = useData();
-  const { token } = useAuth();
   const CartList = [...state.cart];
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login", { replace: true });
-      return null;
-    } else {
-      setLoader(true);
-      var id = setTimeout(() => {
-        setLoader(false);
-      }, 2000);
-    }
+    setLoader(true);
+    var id = setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+
     return () => {
       clearTimeout(id);
     };
@@ -116,5 +108,3 @@ const Cart = () => {
     </div>
   );
 };
-
-export default Cart;

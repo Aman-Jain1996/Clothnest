@@ -9,20 +9,25 @@ import {
 import { useData, useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
-const Wishlistcard = ({ wishItem }) => {
-  const { token } = useAuth();
+export const Wishlistcard = ({ wishItem }) => {
+  const { token, activeUser } = useAuth();
   const { dispatch } = useData();
   const navigate = useNavigate();
 
   return (
     <div className="product-card wishlist-card ecom-card">
-      <div className="card-image-container">
+      <div
+        className="card-image-container"
+        onClick={() => navigate(`/products/${wishItem._id}`)}
+      >
         <img src={wishItem.imageUrl} alt="Product Image" />
       </div>
 
       <span
         className="heart-icon-container"
-        onClick={() => useWishlistHandler(wishItem, dispatch, token, navigate)}
+        onClick={() =>
+          useWishlistHandler(wishItem, dispatch, activeUser, navigate)
+        }
       >
         {!wishItem.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -47,7 +52,7 @@ const Wishlistcard = ({ wishItem }) => {
         <button
           className="btn"
           onClick={() =>
-            useCartHandler(wishItem, dispatch, token, null, navigate)
+            useCartHandler(wishItem, dispatch, activeUser, null, navigate)
           }
         >
           {!wishItem.carted ? "Move to Cart" : "Go to Cart"}
@@ -56,7 +61,7 @@ const Wishlistcard = ({ wishItem }) => {
         <button
           className="btn btn-tertiary"
           onClick={() =>
-            useWishlistHandler(wishItem, dispatch, token, navigate)
+            useWishlistHandler(wishItem, dispatch, activeUser, navigate)
           }
         >
           Remove from Wishlist
@@ -65,5 +70,3 @@ const Wishlistcard = ({ wishItem }) => {
     </div>
   );
 };
-
-export default Wishlistcard;

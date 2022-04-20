@@ -6,14 +6,13 @@ import { ToastHandler } from "../utilities/toastUtils";
 
 const AuthContext = createContext(null);
 
-const AuthProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const browserStoredToken = JSON.parse(localStorage.getItem("userToken"));
   const [activeUser, setActiveUser] = useState();
   const [token, setToken] = useState(browserStoredToken?.token);
   const navigate = useNavigate();
 
-  const loginHandler = async (e, email, password, redirectionPath) => {
-    e.preventDefault();
+  const loginHandler = async (email, password, redirectionPath) => {
     try {
       const {
         data: { foundUser, encodedToken },
@@ -27,7 +26,7 @@ const AuthProvider = ({ children }) => {
         );
         setActiveUser(foundUser);
         setToken(encodedToken);
-        navigate(redirectionPath);
+        navigate(redirectionPath, { replace: true });
       }
     } catch (err) {
       ToastHandler("error", "Some error occured");
@@ -52,8 +51,7 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  const signUpHandler = async (e, firstName, lastName, email, password) => {
-    e.preventDefault();
+  const signUpHandler = async (firstName, lastName, email, password) => {
     try {
       const {
         data: { createdUser, encodedToken },
@@ -90,6 +88,4 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const useAuth = () => useContext(AuthContext);
-
-export { useAuth, AuthProvider };
+export const useAuth = () => useContext(AuthContext);

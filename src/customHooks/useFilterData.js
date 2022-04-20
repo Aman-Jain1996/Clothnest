@@ -23,6 +23,5 @@ export default function useFilterData() {
   filteredData = filterByCategories(filteredData, categories);
   filteredData = filterByPriceRange(filteredData, priceRange);
   filteredData = filterByArrTrend(filteredData, arrivalTrend);
-  //   console.log("-", filteredData);
   return filteredData;
 }

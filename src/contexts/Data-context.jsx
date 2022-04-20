@@ -11,7 +11,7 @@ import { CategoryService, ProductService } from "../services/apiCall";
 
 const DataContext = createContext(null);
 
-const DataProvider = ({ children }) => {
+export const DataProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [state, dispatch] = useReducer(DataReducer, initialState);
   useEffect(() => {
@@ -46,6 +46,4 @@ const DataProvider = ({ children }) => {
   );
 };
 
-const useData = () => useContext(DataContext);
-
-export { useData, DataProvider };
+export const useData = () => useContext(DataContext);
