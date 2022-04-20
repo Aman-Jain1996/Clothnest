@@ -6,3 +6,4 @@ export { Products } from "./Product/Products";
 export { ProductDetails } from "./Product-Details/Product-details";
 export { Profile } from "./Profile/Profile";
 export { Wishlist } from "./Wishlist/Wishlist";
+export { ErrorPage } from "./404Page/ErrorPage";

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
@@ -90,31 +91,6 @@ export const Navbar = () => {
         )}
 
         <div className="action-container">
-          {!activeUser ? (
-            (location.pathname !== "/login" && (
-              <Link to="/login" className="btn-login">
-                Login
-              </Link>
-            )) ||
-            (location.pathname === "/login" && (
-              <Link to="/signUp" className="btn-login">
-                SignUp
-              </Link>
-            ))
-          ) : (
-            <div className="logout-container">
-              <button
-                className="btn-logout"
-                onClick={() => logoutHandler(dispatch)}
-              >
-                Logout
-              </button>
-              {activeUser && (
-                <p className="userDetails-popup">Hi {activeUser.firstName}</p>
-              )}
-            </div>
-          )}
-
           <span className="icon">
             <Link to="/wishlist">
               <div className="nav-label">
@@ -142,6 +118,27 @@ export const Navbar = () => {
               <label htmlFor="cart">Cart</label>
             </Link>
           </span>
+
+          {!activeUser ? (
+            (location.pathname !== "/login" && (
+              <Link to="/login" className="btn-login">
+                Login
+              </Link>
+            )) ||
+            (location.pathname === "/login" && (
+              <Link to="/signUp" className="btn-login">
+                SignUp
+              </Link>
+            ))
+          ) : (
+            <div
+              className="profile-container"
+              title="My Profile"
+              onClick={() => navigate("/profile/details")}
+            >
+              <AccountCircleIcon className="icon" />
+            </div>
+          )}
         </div>
       </header>
     </>

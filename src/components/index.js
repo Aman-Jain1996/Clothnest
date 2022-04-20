@@ -8,3 +8,4 @@ export { PrivateRoute } from "./PrivateRoute/PrivateRoute";
 export { Productcard } from "./ProductCard/Productcard";
 export { Sidenav } from "./SideNav/Sidenav";
 export { Wishlistcard } from "./WishlistCard/Wishlistcard";
+export { ProfileDetails } from "./ProfileDetails/ProfileDetails";
