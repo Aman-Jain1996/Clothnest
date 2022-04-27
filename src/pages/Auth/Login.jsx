@@ -31,6 +31,11 @@ export const Login = () => {
         type: actionTypes.SET_WISHLIST,
         payload: { wishlist: activeUser?.wishlist },
       });
+
+      dispatch({
+        type: actionTypes.SET_ADDRESS,
+        payload: { address: activeUser?.address },
+      });
     }
   }, [token]);
 

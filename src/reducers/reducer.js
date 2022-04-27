@@ -14,6 +14,7 @@ export const initialState = {
   products: [],
   wishlist: [],
   cart: [],
+  address: [],
 };
 
 export const DataReducer = (state, action) => {
@@ -68,6 +69,12 @@ export const DataReducer = (state, action) => {
           ...prod,
           wished: action.payload.wishlist.some((wish) => wish._id === prod._id),
         })),
+      };
+
+    case actionTypes.SET_ADDRESS:
+      return {
+        ...state,
+        address: [...action.payload.address],
       };
 
     case actionTypes.FILTER_CHANGE:

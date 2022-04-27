@@ -9,3 +9,6 @@ export { Productcard } from "./ProductCard/Productcard";
 export { Sidenav } from "./SideNav/Sidenav";
 export { Wishlistcard } from "./WishlistCard/Wishlistcard";
 export { ProfileDetails } from "./ProfileDetails/ProfileDetails";
+export { Address } from "./Address/Address";
+export { AddressModal } from "./Address/AddressModal";
+export { AddressCard } from "./Address/AddressCard";

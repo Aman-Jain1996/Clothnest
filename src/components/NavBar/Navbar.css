@@ -98,11 +98,16 @@
   font-size: 1.4rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  color: var(--primary-Light);
 }
 
 .profile-container .icon {
   font-size: 4rem;
+}
+
+.profile-container label {
+  color: initial;
+  font-size: 1.2rem;
+  font-weight: 400;
 }
 
 .profile-container:hover {

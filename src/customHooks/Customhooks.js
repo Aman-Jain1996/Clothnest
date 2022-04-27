@@ -1,9 +1,13 @@
 import { actionTypes } from "../reducers/actionTypes";
 import {
+  AddAddressServive,
   AddToCartService,
   AddToWishlistService,
+  DeleteAddressServive,
   DeleteFromWishlistService,
+  UpdateAddressServive,
 } from "../services/apiCall.js";
+import { useAuth, useData } from "../contexts";
 import { ToastHandler } from "../utilities/toastUtils";
 
 export const useWishlistHandler = async (
@@ -69,4 +73,68 @@ export const useCartHandler = async (
     ToastHandler("error", err);
     console.error(err);
   }
+};
+
+export const useAddressHandler = () => {
+  const { token } = useAuth();
+  const { dispatch } = useData();
+
+  const addAddress = async (address) => {
+    try {
+      const { status: addressStatus, data: addressData } =
+        await AddAddressServive(address, token);
+
+      if (addressStatus === 200 || addressStatus === 201)
+        dispatch({
+          type: actionTypes.SET_ADDRESS,
+          payload: { address: addressData.address },
+        });
+      ToastHandler("success", "New Address added Successfully");
+    } catch (err) {
+      console.error(err);
+      ToastHandler("error", "Add Address : Error occured");
+    }
+  };
+
+  const removeAddress = async (addressId) => {
+    try {
+      const { status: addressStatus, data: addressData } =
+        await DeleteAddressServive(addressId, token);
+
+      if (addressStatus === 200 || addressStatus === 201)
+        dispatch({
+          type: actionTypes.SET_ADDRESS,
+          payload: { address: addressData.address },
+        });
+      ToastHandler("warn", "Address removed Successfully");
+    } catch (err) {
+      console.error(err);
+      ToastHandler("error", "Remove Address : Error occured");
+    }
+  };
+
+  const updateAddress = async (addressId, address) => {
+    try {
+      const { status: addressStatus, data: addressData } =
+        await UpdateAddressServive(addressId, address, token);
+
+      if (addressStatus === 200 || addressStatus === 201)
+        dispatch({
+          type: actionTypes.SET_ADDRESS,
+          payload: { address: addressData.address },
+        });
+
+      if (addressStatus === 200 || addressStatus === 201)
+        dispatch({
+          type: actionTypes.SET_ADDRESS,
+          payload: { address: addressData.address },
+        });
+      ToastHandler("success", "Address updated Successfully");
+    } catch (err) {
+      console.error(err);
+      ToastHandler("error", "Update Address : Error occured");
+    }
+  };
+
+  return { addAddress, removeAddress, updateAddress };
 };

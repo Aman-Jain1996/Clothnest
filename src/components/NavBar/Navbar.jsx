@@ -131,13 +131,17 @@ export const Navbar = () => {
               </Link>
             ))
           ) : (
-            <div
-              className="profile-container"
-              title="My Profile"
-              onClick={() => navigate("/profile/details")}
-            >
-              <AccountCircleIcon className="icon" />
-            </div>
+            <>
+              <div
+                className="profile-container"
+                id="profile"
+                title="My Profile"
+                onClick={() => navigate("/profile/details")}
+              >
+                <AccountCircleIcon className="icon" />
+                <label htmlFor="profile">My Profile</label>
+              </div>
+            </>
           )}
         </div>
       </header>

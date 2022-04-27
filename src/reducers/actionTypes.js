@@ -5,6 +5,7 @@ export const actionTypes = {
   SET_CATEGORIES: "Set Categories",
   FILTER_CHANGE: "Change Filter",
   RESET_CHANGE: "Reset Filter",
+  SET_ADDRESS: "Set Address",
 };
 
 export const cartActionTypes = {
