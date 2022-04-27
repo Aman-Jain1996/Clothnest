@@ -14,6 +14,8 @@ const DataContext = createContext(null);
 export const DataProvider = ({ children }) => {
   const [loader, setLoader] = useState(false);
   const [state, dispatch] = useReducer(DataReducer, initialState);
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [editAddress, setEditAddress] = useState({});
   useEffect(() => {
     {
       (async () => {
@@ -40,7 +42,18 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ state, dispatch, loader, setLoader }}>
+    <DataContext.Provider
+      value={{
+        state,
+        dispatch,
+        loader,
+        setLoader,
+        showAddressModal,
+        setShowAddressModal,
+        editAddress,
+        setEditAddress,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );

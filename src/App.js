@@ -12,7 +12,13 @@ import {
   Wishlist,
 } from "./pages";
 import { useData } from "./contexts";
-import { Loading, Navbar, PrivateRoute, ProfileDetails } from "./components";
+import {
+  Address,
+  Loading,
+  Navbar,
+  PrivateRoute,
+  ProfileDetails,
+} from "./components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -66,7 +72,7 @@ function App() {
         >
           <Route index element={<ProfileDetails />} />
           <Route path="details" element={<ProfileDetails />} />
-          <Route path="address" element={<Profile />} />
+          <Route path="address" element={<Address />} />
           <Route path="orders" element={<Profile />} />
         </Route>
 

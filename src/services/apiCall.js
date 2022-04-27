@@ -8,11 +8,9 @@ export const LoginService = async ({ email, password }) =>
 export const SignUpService = async ({ firstName, lastName, email, password }) =>
   axios.post("/api/auth/signup", { firstName, lastName, email, password });
 
-
 // Category Service
 
 export const CategoryService = async () => axios.get("/api/categories");
-
 
 // Products Service
 
@@ -20,7 +18,6 @@ export const ProductService = async () => axios.get("/api/products");
 
 export const FetchProductDetailsService = async (id) =>
   axios.get(`/api/products/${id}`);
-
 
 // Wishlist Service
 
@@ -41,7 +38,6 @@ export const DeleteFromWishlistService = async (productId, encodedToken) =>
       authorization: encodedToken,
     },
   });
-
 
 // Cart Services
 
@@ -67,6 +63,37 @@ export const QuantityChangeService = async (productId, encodedToken, action) =>
   axios.post(
     `/api/user/cart/${productId}`,
     { action },
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+// Address Services
+
+export const AddAddressServive = async (address, encodedToken) =>
+  axios.post(
+    "/api/user/address",
+    { address },
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+export const DeleteAddressServive = async (addressId, encodedToken) =>
+  axios.delete(`/api/user/address/${addressId}`, {
+    headers: {
+      authorization: encodedToken,
+    },
+  });
+
+export const UpdateAddressServive = async (addressId, address, encodedToken) =>
+  axios.post(
+    `/api/user/address/${addressId}`,
+    { address },
     {
       headers: {
         authorization: encodedToken,
