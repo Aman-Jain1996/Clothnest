@@ -10,6 +10,7 @@ export const Login = () => {
   const { token, loginHandler, activeUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [eye, setEye] = useState(true);
   const { dispatch } = useData();
   const location = useLocation();
@@ -45,7 +46,7 @@ export const Login = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            loginHandler(email, password, redirectionPath);
+            loginHandler(email, password, rememberMe, redirectionPath);
           }}
           className="login"
           method="POST"
@@ -73,6 +74,7 @@ export const Login = () => {
                 placeholder="*************"
                 name="password"
                 id="password"
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -87,10 +89,20 @@ export const Login = () => {
             </div>
           </div>
 
-          <label htmlFor="remember">
-            <input type="checkbox" name="remember" id="remember" />
-            Remember Me
-          </label>
+          <div className="remember-container">
+            <label htmlFor="remember">
+              <input
+                type="checkbox"
+                name="remember"
+                id="remember"
+                onChange={() => setRememberMe((checked) => !checked)}
+              />
+              Remember Me
+            </label>
+            <Link className="resetLink signUp" to="/reset">
+              Forgot Password ?
+            </Link>
+          </div>
           <button className="btn-auth" type="submit">
             Login
           </button>
@@ -109,6 +121,7 @@ export const Login = () => {
               loginHandler(
                 "amanjain@gmail.com",
                 "amanjain1234",
+                true,
                 redirectionPath
               );
             }}

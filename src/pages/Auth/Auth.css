@@ -27,6 +27,10 @@
   font-weight: 600;
 }
 
+.forgot-page-heading {
+  font-size: 2.4rem;
+}
+
 .auth-container .login {
   display: flex;
   flex-direction: column;
@@ -73,8 +77,18 @@
   opacity: 0.8;
 }
 
-label[for="remember"] {
+.remember-container {
   margin-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resetLink {
+  text-decoration: underline;
+}
+
+label[for="remember"] {
   display: flex;
   align-items: center;
   gap: 1rem;

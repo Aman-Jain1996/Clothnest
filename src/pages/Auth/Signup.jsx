@@ -77,6 +77,7 @@ export const Signup = () => {
                 placeholder="**************"
                 name="password"
                 id="password"
+                minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

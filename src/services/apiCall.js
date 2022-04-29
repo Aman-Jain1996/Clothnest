@@ -8,6 +8,9 @@ export const LoginService = async ({ email, password }) =>
 export const SignUpService = async ({ firstName, lastName, email, password }) =>
   axios.post("/api/auth/signup", { firstName, lastName, email, password });
 
+export const ResetPasswordService = async ({ email, password }) =>
+  axios.post("/api/auth/reset", { email, password });
+
 // Category Service
 
 export const CategoryService = async () => axios.get("/api/categories");

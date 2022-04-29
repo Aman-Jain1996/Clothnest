@@ -14,6 +14,8 @@ export const Productcard = ({ product, setShowAuthModal }) => {
   const navigate = useNavigate();
   const { token, activeUser } = useAuth();
   const { dispatch } = useData();
+  const { toggleWishlist } = useWishlistHandler();
+  const { addToCart } = useCartHandler();
 
   return (
     <div className="product-card ecom-card">
@@ -29,9 +31,7 @@ export const Productcard = ({ product, setShowAuthModal }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() =>
-          useWishlistHandler(product, dispatch, activeUser, setShowAuthModal)
-        }
+        onClick={() => toggleWishlist(product, setShowAuthModal)}
       >
         {!product.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -66,30 +66,14 @@ export const Productcard = ({ product, setShowAuthModal }) => {
         {!product.carted ? (
           <button
             className="btn btn-primary"
-            onClick={() =>
-              useCartHandler(
-                product,
-                dispatch,
-                activeUser,
-                setShowAuthModal,
-                navigate
-              )
-            }
+            onClick={() => addToCart(product, setShowAuthModal)}
           >
             Add to Cart
           </button>
         ) : (
           <button
             className="btn btn-secondary"
-            onClick={() =>
-              useCartHandler(
-                product,
-                dispatch,
-                activeUser,
-                setShowAuthModal,
-                navigate
-              )
-            }
+            onClick={() => addToCart(product, setShowAuthModal)}
           >
             Go to Cart
           </button>

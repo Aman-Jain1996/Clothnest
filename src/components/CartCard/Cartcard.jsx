@@ -13,6 +13,7 @@ import "./Cartcard.css";
 export const Cartcard = ({ cartItem }) => {
   const { token, activeUser } = useAuth();
   const { state, dispatch } = useData();
+  const { toggleWishlist } = useWishlistHandler();
   const navigate = useNavigate();
 
   const [{ wished }] = state.products.filter(
@@ -33,7 +34,7 @@ export const Cartcard = ({ cartItem }) => {
         });
       }
     } catch (err) {
-      ToastHandler("error", "Some error occured");
+      ToastHandler("error", "Error while updating Cart");
     }
   };
 
@@ -55,7 +56,7 @@ export const Cartcard = ({ cartItem }) => {
         });
       }
     } catch (err) {
-      ToastHandler("error", "Some error occured");
+      ToastHandler("error", "Error while updating Cart");
     }
   };
 
@@ -81,7 +82,7 @@ export const Cartcard = ({ cartItem }) => {
         });
       }
     } catch (err) {
-      ToastHandler("error", "Some error occured");
+      ToastHandler("error", "Error while updating Cart");
     }
   };
 
@@ -125,9 +126,7 @@ export const Cartcard = ({ cartItem }) => {
           ) : (
             <button
               className="btn btn-tertiary"
-              onClick={() =>
-                useWishlistHandler(cartItem, dispatch, activeUser, navigate)
-              }
+              onClick={() => toggleWishlist(cartItem)}
             >
               Move to Wishlist
             </button>
