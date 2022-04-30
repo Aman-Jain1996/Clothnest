@@ -6,7 +6,6 @@ export function NoItem({
   textContent,
   isButtonVisible,
   buttonContent,
-  redirectionUrl,
 }) {
   return (
     <div className="no-item">

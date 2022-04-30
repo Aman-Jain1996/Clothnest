@@ -12,8 +12,7 @@ import { Authmodal, Path } from "../../components";
 
 export const ProductDetails = () => {
   const { id } = useParams();
-  const { state, dispatch, setLoader } = useData();
-  const { token, activeUser } = useAuth();
+  const { state, setLoader } = useData();
   const { toggleWishlist } = useWishlistHandler();
   const { addToCart } = useCartHandler();
   const location = useLocation();

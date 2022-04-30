@@ -5,7 +5,7 @@ import { useData } from "../../contexts";
 
 export const AddressModal = ({ setShowAddressModal }) => {
   const { addAddress, updateAddress } = useAddressHandler();
-  const { editAddress, setEditAddress } = useData();
+  const { editAddress } = useData();
 
   const initialDataState = {
     name: editAddress.name || "",
