@@ -10,7 +10,9 @@ export const ProfileDetails = () => {
       <div className="profile-details">
         <div className="profile-row">
           <span className="profile-content-field">Name : </span>
-          <span className="profile-content-value">{activeUser?.firstName}</span>
+          <span className="profile-content-value">
+            {activeUser?.firstName + " " + activeUser?.lastName}
+          </span>
         </div>
 
         <div className="profile-row">

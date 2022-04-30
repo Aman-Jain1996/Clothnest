@@ -14,6 +14,8 @@ export const ProductDetails = () => {
   const { id } = useParams();
   const { state, dispatch, setLoader } = useData();
   const { token, activeUser } = useAuth();
+  const { toggleWishlist } = useWishlistHandler();
+  const { addToCart } = useCartHandler();
   const location = useLocation();
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -49,14 +51,7 @@ export const ProductDetails = () => {
             <img src={currentProduct.imageUrl} alt="product-image" />
             <span
               className="heart-icon-container"
-              onClick={() =>
-                useWishlistHandler(
-                  currentProduct,
-                  dispatch,
-                  activeUser,
-                  setShowAuthModal
-                )
-              }
+              onClick={() => toggleWishlist(currentProduct)}
             >
               {!currentProduct.wished ? (
                 <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -88,28 +83,13 @@ export const ProductDetails = () => {
             <div className="button-container">
               <button
                 className="btn cart"
-                onClick={() =>
-                  useCartHandler(
-                    currentProduct,
-                    dispatch,
-                    activeUser,
-                    setShowAuthModal,
-                    navigate
-                  )
-                }
+                onClick={() => addToCart(currentProduct)}
               >
                 {currentProduct.carted ? "Go to Cart" : "Add to Cart"}
               </button>
               <button
                 className="btn wishlist"
-                onClick={() =>
-                  useWishlistHandler(
-                    currentProduct,
-                    dispatch,
-                    activeUser,
-                    setShowAuthModal
-                  )
-                }
+                onClick={() => toggleWishlist(currentProduct)}
               >
                 {currentProduct.wished
                   ? "Remove from wishlist"

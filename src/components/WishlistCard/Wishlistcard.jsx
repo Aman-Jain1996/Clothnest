@@ -13,6 +13,8 @@ export const Wishlistcard = ({ wishItem }) => {
   const { token, activeUser } = useAuth();
   const { dispatch } = useData();
   const navigate = useNavigate();
+  const { toggleWishlist } = useWishlistHandler();
+  const { addToCart } = useCartHandler();
 
   return (
     <div className="product-card wishlist-card ecom-card">
@@ -25,9 +27,7 @@ export const Wishlistcard = ({ wishItem }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() =>
-          useWishlistHandler(wishItem, dispatch, activeUser, navigate)
-        }
+        onClick={() => toggleWishlist(wishItem)}
       >
         {!wishItem.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -49,20 +49,13 @@ export const Wishlistcard = ({ wishItem }) => {
       </div>
 
       <div className="action-container">
-        <button
-          className="btn"
-          onClick={() =>
-            useCartHandler(wishItem, dispatch, activeUser, null, navigate)
-          }
-        >
+        <button className="btn" onClick={() => addToCart(wishItem)}>
           {!wishItem.carted ? "Move to Cart" : "Go to Cart"}
         </button>
 
         <button
           className="btn btn-tertiary"
-          onClick={() =>
-            useWishlistHandler(wishItem, dispatch, activeUser, navigate)
-          }
+          onClick={() => toggleWishlist(wishItem)}
         >
           Remove from Wishlist
         </button>

@@ -65,7 +65,7 @@ export const AddressModal = ({ setShowAddressModal }) => {
     <div className="address-modal-container">
       <div className="newAddress-container">
         <h2 className="newAddress-container-heading">New Address</h2>
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} method="POST">
           <div className="field-container">
             <div className="field">
               <input
