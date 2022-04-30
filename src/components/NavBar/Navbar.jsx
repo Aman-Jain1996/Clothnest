@@ -10,7 +10,7 @@ import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
 export const Navbar = () => {
   const { state, dispatch } = useData();
-  const { token, activeUser, logoutHandler } = useAuth();
+  const { token } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
@@ -119,7 +119,7 @@ export const Navbar = () => {
             </Link>
           </span>
 
-          {!activeUser ? (
+          {!token ? (
             (location.pathname !== "/login" && (
               <Link to="/login" className="btn-login">
                 Login

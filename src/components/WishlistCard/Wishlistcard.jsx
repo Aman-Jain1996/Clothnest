@@ -10,8 +10,6 @@ import { useData, useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
 export const Wishlistcard = ({ wishItem }) => {
-  const { token, activeUser } = useAuth();
-  const { dispatch } = useData();
   const navigate = useNavigate();
   const { toggleWishlist } = useWishlistHandler();
   const { addToCart } = useCartHandler();

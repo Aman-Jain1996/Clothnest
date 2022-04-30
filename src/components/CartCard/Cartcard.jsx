@@ -11,7 +11,7 @@ import { ToastHandler } from "../../utilities/toastUtils";
 import "./Cartcard.css";
 
 export const Cartcard = ({ cartItem }) => {
-  const { token, activeUser } = useAuth();
+  const { token } = useAuth();
   const { state, dispatch } = useData();
   const { toggleWishlist } = useWishlistHandler();
   const navigate = useNavigate();

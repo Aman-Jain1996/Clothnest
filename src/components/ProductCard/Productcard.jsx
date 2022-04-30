@@ -3,17 +3,13 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Productcard.css";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { useData, useAuth } from "../../contexts";
+import { Link } from "react-router-dom";
 import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 
 export const Productcard = ({ product, setShowAuthModal }) => {
-  const navigate = useNavigate();
-  const { token, activeUser } = useAuth();
-  const { dispatch } = useData();
   const { toggleWishlist } = useWishlistHandler();
   const { addToCart } = useCartHandler();
 

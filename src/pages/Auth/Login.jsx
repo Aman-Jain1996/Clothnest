@@ -22,7 +22,7 @@ export const Login = () => {
   };
 
   useEffect(() => {
-    if (activeUser) {
+    if (token) {
       dispatch({
         type: actionTypes.SET_CART,
         payload: { cart: activeUser?.cart },
