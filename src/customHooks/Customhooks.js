@@ -9,70 +9,75 @@ import {
 } from "../services/apiCall.js";
 import { useAuth, useData } from "../contexts";
 import { ToastHandler } from "../utilities/toastUtils";
+import { useNavigate } from "react-router-dom";
 
-export const useWishlistHandler = async (
-  product,
-  dispatch,
-  activeUser,
-  setShowAuthModal
-) => {
-  try {
-    if (!activeUser) {
-      setShowAuthModal(true);
-      return;
-    }
-    let res = null;
-    if (!product.wished) {
-      res = await AddToWishlistService(product, token);
-      ToastHandler("success", "Added to Wishlist");
-    } else {
-      res = await DeleteFromWishlistService(product._id, token);
-      ToastHandler("warn", "Item Removed from Wishlist");
-    }
+export const useWishlistHandler = () => {
+  const { token } = useAuth();
+  const { dispatch } = useData();
 
-    if (res.status === 200 || res.status === 201) {
-      dispatch({
-        type: actionTypes.SET_WISHLIST,
-        payload: { wishlist: res.data.wishlist },
-      });
+  const toggleWishlist = async (product, setShowAuthModal) => {
+    try {
+      if (!token) {
+        setShowAuthModal(true);
+        return;
+      }
+      let res = null;
+      if (!product.wished) {
+        res = await AddToWishlistService(product, token);
+        ToastHandler("success", "Added to Wishlist");
+      } else {
+        res = await DeleteFromWishlistService(product._id, token);
+        ToastHandler("warn", "Item Removed from Wishlist");
+      }
+
+      if (res.status === 200 || res.status === 201) {
+        dispatch({
+          type: actionTypes.SET_WISHLIST,
+          payload: { wishlist: res.data.wishlist },
+        });
+      }
+    } catch (err) {
+      ToastHandler("error", "Error while updating Wishlist");
+      console.error(err);
     }
-  } catch (err) {
-    ToastHandler("error", err);
-    console.error(err);
-  }
+  };
+
+  return { toggleWishlist };
 };
 
-export const useCartHandler = async (
-  product,
-  dispatch,
-  activeUser,
-  setShowAuthModal,
-  navigate
-) => {
-  try {
-    if (!activeUser) {
-      setShowAuthModal(true);
-      return;
-    }
+export const useCartHandler = () => {
+  const { token } = useAuth();
+  const { dispatch } = useData();
+  const navigate = useNavigate();
 
-    if (product.carted) {
-      navigate("/cart");
-      return;
-    }
+  const addToCart = async (product, setShowAuthModal) => {
+    try {
+      if (!token) {
+        setShowAuthModal(true);
+        return;
+      }
 
-    let res = await AddToCartService({ ...product, qty: 1 }, token);
+      if (product.carted) {
+        navigate("/cart");
+        return;
+      }
 
-    if (res.status === 200 || res.status === 201) {
-      ToastHandler("success", "Item added to Cart");
-      dispatch({
-        type: actionTypes.SET_CART,
-        payload: { cart: res.data.cart },
-      });
+      let res = await AddToCartService({ ...product, qty: 1 }, token);
+
+      if (res.status === 200 || res.status === 201) {
+        ToastHandler("success", "Item added to Cart");
+        dispatch({
+          type: actionTypes.SET_CART,
+          payload: { cart: res.data.cart },
+        });
+      }
+    } catch (err) {
+      ToastHandler("error", `Error while updating Cart`);
+      console.error(err);
     }
-  } catch (err) {
-    ToastHandler("error", err);
-    console.error(err);
-  }
+  };
+
+  return { addToCart };
 };
 
 export const useAddressHandler = () => {
@@ -92,7 +97,7 @@ export const useAddressHandler = () => {
       ToastHandler("success", "New Address added Successfully");
     } catch (err) {
       console.error(err);
-      ToastHandler("error", "Add Address : Error occured");
+      ToastHandler("error", "Error while adding Address");
     }
   };
 
@@ -109,7 +114,7 @@ export const useAddressHandler = () => {
       ToastHandler("warn", "Address removed Successfully");
     } catch (err) {
       console.error(err);
-      ToastHandler("error", "Remove Address : Error occured");
+      ToastHandler("error", "Error while removing Address");
     }
   };
 
@@ -132,7 +137,7 @@ export const useAddressHandler = () => {
       ToastHandler("success", "Address updated Successfully");
     } catch (err) {
       console.error(err);
-      ToastHandler("error", "Update Address : Error occured");
+      ToastHandler("error", "Error while updating Address");
     }
   };
 

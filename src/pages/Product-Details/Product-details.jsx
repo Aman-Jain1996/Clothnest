@@ -9,27 +9,40 @@ import {
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 import { Authmodal, Path } from "../../components";
+import { FetchProductDetailsService } from "../../services/apiCall";
+import { ToastHandler } from "../../utilities/toastUtils";
 
 export const ProductDetails = () => {
   const { id } = useParams();
-  const { state, dispatch, setLoader } = useData();
-  const { token, activeUser } = useAuth();
+  const { state, setLoader } = useData();
+  const { toggleWishlist } = useWishlistHandler();
+  const { addToCart } = useCartHandler();
   const location = useLocation();
   const navigate = useNavigate();
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-  const currentProduct = state.products.find((prod) => prod._id === id) || {};
+  const [showData, setShowData] = useState();
 
   useEffect(() => {
     setLoader(true);
-    const id = setTimeout(() => {
+    (async () => {
+      try {
+        const { status, data } = await FetchProductDetailsService(id);
+        if (status === 200 || status === 201) {
+          setShowData(data.product);
+        }
+      } catch (err) {
+        ToastHandler("error", "Error in Fetching Product");
+        console.error(err);
+      }
+    })();
+    const timerId = setTimeout(() => {
       setLoader(false);
     }, 2000);
 
     return () => {
-      clearTimeout(id);
+      clearTimeout(timerId);
     };
-  }, []);
+  }, [id]);
 
   return (
     <div>
@@ -40,85 +53,67 @@ export const ProductDetails = () => {
           navigate={navigate}
         />
       )}
-      <div className="cart-wish-path">
-        <Path path={`/Products/${currentProduct.title}`} />
-      </div>
-      <main className="product-details-main">
-        <section className="product-details">
-          <div className="details-image-container">
-            <img src={currentProduct.imageUrl} alt="product-image" />
-            <span
-              className="heart-icon-container"
-              onClick={() =>
-                useWishlistHandler(
-                  currentProduct,
-                  dispatch,
-                  activeUser,
-                  setShowAuthModal
-                )
-              }
-            >
-              {!currentProduct.wished ? (
-                <FavoriteBorderOutlinedIcon className="heart-icon" />
-              ) : (
-                <FavoriteIcon className="heart-icon favourite-icon" />
-              )}
-            </span>
+      {showData && (
+        <>
+          <div className="cart-wish-path">
+            <Path path={`/Products/${showData.title}`} />
           </div>
+          <main className="product-details-main">
+            <section className="product-details">
+              <div className="details-image-container">
+                <img src={showData.imageUrl} alt="product-image" />
+                <span
+                  className="heart-icon-container"
+                  onClick={() => toggleWishlist(showData)}
+                >
+                  {!showData.wished ? (
+                    <FavoriteBorderOutlinedIcon className="heart-icon" />
+                  ) : (
+                    <FavoriteIcon className="heart-icon favourite-icon" />
+                  )}
+                </span>
+              </div>
 
-          <div className="content">
-            <p className="product-name">{currentProduct.title}</p>
-            <p className="product-reviews">4 reviews</p>
-            <p className="product-price">{`₹ ${currentProduct.sell_price}`} </p>
-            <p className="horizontal-rule"></p>
-            <div className="description">
-              <p className="brand">
-                <span>Brand :</span>
-                Lorem
-              </p>
-              <p className="brand">
-                <span>Availability :</span>
-                In Stock
-              </p>
-              <p className="brand">
-                <span>Description :</span>
-                <span>{currentProduct.desc}</span>
-              </p>
-            </div>
-            <div className="button-container">
-              <button
-                className="btn cart"
-                onClick={() =>
-                  useCartHandler(
-                    currentProduct,
-                    dispatch,
-                    activeUser,
-                    setShowAuthModal,
-                    navigate
-                  )
-                }
-              >
-                {currentProduct.carted ? "Go to Cart" : "Add to Cart"}
-              </button>
-              <button
-                className="btn wishlist"
-                onClick={() =>
-                  useWishlistHandler(
-                    currentProduct,
-                    dispatch,
-                    activeUser,
-                    setShowAuthModal
-                  )
-                }
-              >
-                {currentProduct.wished
-                  ? "Remove from wishlist"
-                  : "Add to Wishlist"}
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
+              <div className="content">
+                <p className="product-name">{showData.title}</p>
+                <p className="product-reviews">4 reviews</p>
+                <p className="product-price">{`₹ ${showData.sell_price}`} </p>
+                <p className="horizontal-rule"></p>
+                <div className="description">
+                  <p className="brand">
+                    <span>Brand :</span>
+                    Lorem
+                  </p>
+                  <p className="brand">
+                    <span>Availability :</span>
+                    In Stock
+                  </p>
+                  <p className="brand">
+                    <span>Description :</span>
+                    <span>{showData.desc}</span>
+                  </p>
+                </div>
+                <div className="button-container">
+                  <button
+                    className="btn cart"
+                    onClick={() => addToCart(showData)}
+                  >
+                    {showData.carted ? "Go to Cart" : "Add to Cart"}
+                  </button>
+                  <button
+                    className="btn wishlist"
+                    onClick={() => toggleWishlist(showData)}
+                  >
+                    {showData.wished
+                      ? "Remove from wishlist"
+                      : "Add to Wishlist"}
+                  </button>
+                </div>
+              </div>
+            </section>
+          </main>
+        </>
+      )}
     </div>
   );
 };

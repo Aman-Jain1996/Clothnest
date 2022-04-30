@@ -8,6 +8,7 @@ import {
   ProductDetails,
   Products,
   Profile,
+  ResetPassword,
   Signup,
   Wishlist,
 } from "./pages";
@@ -45,6 +46,7 @@ function App() {
         <Route path="products/:id" element={<ProductDetails />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="reset" element={<ResetPassword />} />
         <Route
           path="wishlist"
           element={
