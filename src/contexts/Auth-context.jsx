@@ -11,7 +11,8 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const browserStoredToken = JSON.parse(localStorage.getItem("userToken"));
-  const [activeUser, setActiveUser] = useState();
+  const browserStoredUser = JSON.parse(localStorage.getItem("userData"));
+  const [activeUser, setActiveUser] = useState(browserStoredUser?.foundUser);
   const [token, setToken] = useState(browserStoredToken?.token);
   const navigate = useNavigate();
 
@@ -23,11 +24,13 @@ export const AuthProvider = ({ children }) => {
       } = await LoginService({ email, password });
       if (status === 200 || status === 201) {
         ToastHandler("success", "Logged in Successfully....");
-        rememberMe &&
+        if (rememberMe) {
           localStorage.setItem(
             "userToken",
             JSON.stringify({ token: encodedToken })
           );
+          localStorage.setItem("userData", JSON.stringify({ foundUser }));
+        }
         setActiveUser(foundUser);
         setToken(encodedToken);
         navigate(redirectionPath, { replace: true });
@@ -49,6 +52,7 @@ export const AuthProvider = ({ children }) => {
 
   const logoutHandler = () => {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("userData");
     ToastHandler("success", "Logged out successfully....");
     setToken();
     setActiveUser();

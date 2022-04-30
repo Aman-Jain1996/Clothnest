@@ -1,5 +1,6 @@
 .products-outer-container {
   display: flex;
+  position: relative;
 }
 
 .product-menu {
@@ -26,4 +27,50 @@
 
 .product-menu .no-item {
   grid-column: 1 / -1;
+}
+
+.pagination-container {
+  grid-column: 1 / -1;
+  height: max-content;
+}
+
+.paginateClass {
+  display: flex;
+  width: max-content;
+  margin: auto;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  list-style: none;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.previousLink,
+.nextLink {
+  padding: 2px 5px;
+  margin: 0 10px;
+  color: var(--text-Dark);
+  border-radius: 5px;
+  border: 2px solid var(--secondary);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.paginateClass a:not(.activeLink, .previousLink, .nextLink) {
+  border: transparent;
+  padding: 5px;
+  color: var(--unnamed-color-303f60);
+  font-size: 1.4rem;
+}
+
+.activeLink {
+  border: none;
+  width: 5rem;
+  height: 5rem;
+  padding: 5px 1rem;
+  border-radius: 50%;
+  color: var(--text-Dark);
+  background-color: var(--primary-Light);
+  font-weight: bold;
+  font-size: 1.8rem;
 }

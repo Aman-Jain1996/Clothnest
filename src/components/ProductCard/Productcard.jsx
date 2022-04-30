@@ -53,7 +53,7 @@ export const Productcard = ({ product, setShowAuthModal }) => {
           {`₹ ${product.sell_price}`}
           <span className="mrp">{`₹ ${product.price}`}</span>
           <span className="discount">{`(${Math.ceil(
-            ((product.price - product.sell_price) * 100) / product.sell_price
+            ((product.price - product.sell_price) * 100) / product.price
           )}% Off)`}</span>
         </p>
       </div>

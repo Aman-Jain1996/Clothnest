@@ -145,4 +145,38 @@ export const products = [
     imageUrl: "https://i.ibb.co/sVVmjZG/Mens-2.webp",
     categoryName: "Mens",
   },
+  {
+    _id: uuid(),
+    title: "Men Green Casual Shirt",
+    desc: "Green and Beige printed casual shirt, has a spread collar, short sleeves, button placket, curved hem, and 1 patch pocket",
+    price: "1049",
+    sell_price: "545",
+    rating: "4.3",
+    imageUrl:
+      "https://res.cloudinary.com/ajain8479/image/upload/v1651295361/3313adaf-2ad8-4783-b64f-56c4b26a09421585905062080HIGHLANDERMenGreenBeigeSlimFitPrintedCasualShirt1_o7atbs.webp",
+    categoryName: "Mens",
+  },
+  {
+    _id: uuid(),
+    title: "Women Blue & White T-Shirt",
+    desc: "Blue and white Tshirt for women , Short, drop-shoulder sleeves , Knitted polyester fabric",
+    price: "1799",
+    sell_price: "1259",
+    rating: "3.3",
+    imageUrl:
+      "https://res.cloudinary.com/ajain8479/image/upload/v1651296432/4ee64118-9588-4037-be19-4f1b5a2aac691644487766283-Puma-Women-Blue--White-Brand-Logo-Printed-Drop-Shoulder-Slee-1_i37vmu.webp",
+    categoryName: "Women",
+  },
+  {
+    _id: uuid(),
+    title: "Girls Peach-Coloured Top",
+    desc: "This clothing set consists of top and palazzos , Peach-Coloured printed top, has a shirt collar, long sleeves , Green solid palazzos, has a drawstring closure",
+    price: "1699",
+    sell_price: "798",
+    rating: "3.8",
+    imageUrl:
+      "https://res.cloudinary.com/ajain8479/image/upload/v1651296748/090f9dc1-781d-43ed-a77b-80eb0675a50f1602890526587-1_hfjipe.webp",
+    categoryName: "Kids",
+    trending: true,
+  },
 ];
