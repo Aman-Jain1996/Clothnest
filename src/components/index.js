@@ -12,3 +12,4 @@ export { ProfileDetails } from "./ProfileDetails/ProfileDetails";
 export { Address } from "./Address/Address";
 export { AddressModal } from "./Address/AddressModal";
 export { AddressCard } from "./Address/AddressCard";
+export { Orders } from "./Orders/Orders";

@@ -45,6 +45,8 @@ export const useWishlistHandler = () => {
   return { toggleWishlist };
 };
 
+// Cart
+
 export const useCartHandler = () => {
   const { token } = useAuth();
   const { dispatch } = useData();
@@ -79,6 +81,29 @@ export const useCartHandler = () => {
 
   return { addToCart };
 };
+
+export const useCartSummary = () => {
+  const { state } = useData();
+
+  const totalCostPrice = () =>
+    state.cart.reduce((acc, cur) => acc + cur.qty * cur.price, 0);
+
+  const totalSellPrice = () =>
+    state.cart.reduce((acc, cur) => acc + cur.qty * cur.sell_price, 0);
+
+  const totalDiscount = () => totalCostPrice() - totalSellPrice();
+
+  const totalAmount = () => totalCostPrice() - totalDiscount();
+
+  return {
+    totalCostPrice,
+    totalSellPrice,
+    totalDiscount,
+    totalAmount,
+  };
+};
+
+// Address
 
 export const useAddressHandler = () => {
   const { token } = useAuth();

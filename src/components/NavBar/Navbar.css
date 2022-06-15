@@ -10,6 +10,11 @@
   z-index: 1;
 }
 
+.brand-logo {
+  width: 5rem;
+  height: 5rem;
+}
+
 .brand-name {
   display: flex;
   align-items: center;

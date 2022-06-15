@@ -16,6 +16,7 @@ export const DataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(DataReducer, initialState);
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [editAddress, setEditAddress] = useState({});
+  const [couponData, setCouponData] = useState({});
   useEffect(() => {
     {
       (async () => {
@@ -52,6 +53,8 @@ export const DataProvider = ({ children }) => {
         setShowAddressModal,
         editAddress,
         setEditAddress,
+        couponData,
+        setCouponData,
       }}
     >
       {children}
