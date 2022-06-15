@@ -92,22 +92,36 @@ export const ProductDetails = () => {
                   </p>
                 </div>
                 <div className="button-container">
-                  <button
-                    className="btn cart"
-                    onClick={() => addToCart(showData)}
-                  >
-                    {state.cart.some((item) => item._id === showData._id)
-                      ? "Go to Cart"
-                      : "Add to Cart"}
-                  </button>
-                  <button
-                    className="btn wishlist"
-                    onClick={() => toggleWishlist(showData)}
-                  >
-                    {state.wishlist.some((item) => item._id === showData._id)
-                      ? "Remove from wishlist"
-                      : "Add to Wishlist"}
-                  </button>
+                  {state.cart.some((item) => item._id === showData._id) ? (
+                    <button
+                      className="btn cart"
+                      onClick={() => navigate("/cart")}
+                    >
+                      Go to Cart
+                    </button>
+                  ) : (
+                    <button
+                      className="btn cart"
+                      onClick={() => addToCart(showData)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                  {state.wishlist.some((item) => item._id === showData._id) ? (
+                    <button
+                      className="btn wishlist"
+                      onClick={() => navigate("/wishlist")}
+                    >
+                      Go to wishlist
+                    </button>
+                  ) : (
+                    <button
+                      className="btn wishlist"
+                      onClick={() => toggleWishlist(showData)}
+                    >
+                      Add to Wishlist
+                    </button>
+                  )}
                 </div>
               </div>
             </section>

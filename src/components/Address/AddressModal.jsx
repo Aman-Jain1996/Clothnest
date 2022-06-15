@@ -5,7 +5,7 @@ import { useData } from "../../contexts";
 
 export const AddressModal = ({ setShowAddressModal }) => {
   const { addAddress, updateAddress } = useAddressHandler();
-  const { editAddress } = useData();
+  const { editAddress, setEditAddress } = useData();
 
   const initialDataState = {
     name: editAddress.name || "",
@@ -195,7 +195,10 @@ export const AddressModal = ({ setShowAddressModal }) => {
               Save Address
             </button>
             <button
-              onClick={() => setShowAddressModal(false)}
+              onClick={() => {
+                setShowAddressModal(false);
+                setEditAddress({});
+              }}
               className="cancel-address-button"
             >
               Cancel
