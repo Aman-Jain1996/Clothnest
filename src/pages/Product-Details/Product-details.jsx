@@ -3,7 +3,7 @@ import "./Product-details.css";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useData, useAuth } from "../../contexts";
+import { useData } from "../../contexts";
 import {
   useCartHandler,
   useWishlistHandler,
@@ -42,7 +42,7 @@ export const ProductDetails = () => {
     return () => {
       clearTimeout(timerId);
     };
-  }, [id]);
+  }, [id, state]);
 
   return (
     <div>
@@ -56,7 +56,7 @@ export const ProductDetails = () => {
       {showData && (
         <>
           <div className="cart-wish-path">
-            <Path path={`/Products/${showData.title}`} />
+            <Path path={`/products/${showData.title}`} />
           </div>
           <main className="product-details-main">
             <section className="product-details">
@@ -81,16 +81,14 @@ export const ProductDetails = () => {
                 <p className="horizontal-rule"></p>
                 <div className="description">
                   <p className="brand">
-                    <span>Brand :</span>
-                    Lorem
+                    <span>Brand :</span> Lorem
                   </p>
                   <p className="brand">
-                    <span>Availability :</span>
-                    In Stock
+                    <span>Availability :</span> In Stock
                   </p>
                   <p className="brand">
                     <span>Description :</span>
-                    <span>{showData.desc}</span>
+                    <p>{showData.desc}</p>
                   </p>
                 </div>
                 <div className="button-container">
@@ -98,13 +96,15 @@ export const ProductDetails = () => {
                     className="btn cart"
                     onClick={() => addToCart(showData)}
                   >
-                    {showData.carted ? "Go to Cart" : "Add to Cart"}
+                    {state.cart.some((item) => item._id === showData._id)
+                      ? "Go to Cart"
+                      : "Add to Cart"}
                   </button>
                   <button
                     className="btn wishlist"
                     onClick={() => toggleWishlist(showData)}
                   >
-                    {showData.wished
+                    {state.wishlist.some((item) => item._id === showData._id)
                       ? "Remove from wishlist"
                       : "Add to Wishlist"}
                   </button>

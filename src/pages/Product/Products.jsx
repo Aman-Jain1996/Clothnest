@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Products.css";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from "../../contexts";
 import useFilterData from "../../customHooks/useFilterData";
-import { actionTypes, filterActionType } from "../../reducers/actionTypes";
+import { actionTypes } from "../../reducers/actionTypes";
 import {
   Authmodal,
   NoItem,
@@ -17,7 +17,6 @@ export const Products = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { state, dispatch, setLoader } = useData();
   let location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [pageNumber, setpageNumber] = useState(0);
   let productsPerPage = 6;
@@ -30,55 +29,12 @@ export const Products = () => {
   ];
 
   useEffect(() => {
-    setLoader(true);
-    if (location.state?.category) {
-      setSearchParams({
-        cat: location.state.category,
-      });
-    } else if (location.state?.arrTrend) {
-      setSearchParams({
-        arrTrend: location.state.arrTrend,
-      });
-    }
-
-    if (searchParams.get("cat")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.CATEGORY,
-          filterSubType: searchParams.get("cat"),
-          filterValue: true,
-        },
-      });
-    } else if (searchParams.get("arrTrend")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.ARR_TREND,
-          filterValue: searchParams.get("arrTrend"),
-        },
-      });
-    } else if (searchParams.get("search")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.SEARCH,
-          filterValue: searchParams.get("search"),
-        },
-      });
-    }
-
-    const id = setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-
     return () => {
       dispatch({
         type: actionTypes.RESET_CHANGE,
       });
-      clearTimeout(id);
     };
-  }, [searchParams]);
+  }, [location]);
 
   const pageChange = ({ selected }) => setpageNumber(selected);
 

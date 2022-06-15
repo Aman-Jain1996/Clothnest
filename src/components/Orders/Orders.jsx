@@ -9,8 +9,6 @@ export const Orders = () => {
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
 
-  console.log(orders);
-
   useEffect(() => {
     const sortedOrders = state?.orders?.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

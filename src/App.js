@@ -20,6 +20,7 @@ import {
   Orders,
   PrivateRoute,
   ProfileDetails,
+  ScrollToTop,
 } from "./components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,6 +29,7 @@ function App() {
   const { loader } = useData();
   return (
     <div>
+      <ScrollToTop />
       {loader && <Loading />}
       <ToastContainer
         position="bottom-right"

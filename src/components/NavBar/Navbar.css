@@ -21,7 +21,7 @@
   font-size: 3rem;
   font-weight: 800;
   color: var(--text-Dark);
-  font-family: "Nunito Sans", sans-serif;
+  font-family: "Dancing Script", sans-serif;
   cursor: pointer;
 }
 
@@ -38,6 +38,16 @@
   border-radius: 8px;
   padding: 1rem;
   background-color: var(--bg-darkWhite);
+}
+
+.searchbar-close {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  height: max-height;
+  cursor: pointer;
+  color: var(--primary-Dark);
 }
 
 .searchbar > .icon {
