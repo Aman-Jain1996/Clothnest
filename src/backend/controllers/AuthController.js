@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { Response } from "miragejs";
 import { formatDate } from "../utils/authUtils";
+import { users } from "../db/users";
 const sign = require("jwt-encode");
 /**
  * All the routes related to Auth are present here.
@@ -38,6 +39,7 @@ export const signupHandler = function (schema, request) {
       cart: [],
       wishlist: [],
       address: [],
+      orders: [],
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign({ _id, email }, process.env.REACT_APP_JWT_SECRET);
@@ -78,7 +80,7 @@ export const loginHandler = function (schema, request) {
       foundUser.password = undefined;
       return new Response(200, {}, { foundUser, encodedToken });
     }
-    new Response(
+    return new Response(
       401,
       {},
       {
@@ -87,6 +89,54 @@ export const loginHandler = function (schema, request) {
         ],
       }
     );
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
+ * This handler handles user password resets.
+ * send POST Request at /api/auth/reset
+ * body contains {email, password}
+ * */
+
+export const resetHandler = function (schema, request) {
+  const { email, password } = JSON.parse(request.requestBody);
+  try {
+    // check if email already exists
+    const foundUser = schema.users.findBy({ email });
+    if (!foundUser) {
+      return new Response(
+        404,
+        {},
+        { errors: ["The email you entered is not Registered. Not Found error"] }
+      );
+    }
+
+    if (foundUser.email === users[0].email) {
+      return new Response(
+        400,
+        {},
+        {
+          errors: [
+            "The admin user password can't be changed. Invalid Request!",
+          ],
+        }
+      );
+    }
+
+    const updatedUser = this.db.users.update(
+      { email: foundUser.email },
+      { password, updatedAt: formatDate() }
+    );
+    updatedUser.password = undefined;
+    return new Response(200, {}, { updatedUser });
   } catch (error) {
     return new Response(
       500,

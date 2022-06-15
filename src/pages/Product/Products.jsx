@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Products.css";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from "../../contexts";
 import useFilterData from "../../customHooks/useFilterData";
-import { actionTypes, filterActionType } from "../../reducers/actionTypes";
+import { actionTypes } from "../../reducers/actionTypes";
 import {
   Authmodal,
   NoItem,
@@ -11,66 +11,32 @@ import {
   Productcard,
   Sidenav,
 } from "../../components";
+import ReactPaginate from "react-paginate";
 
-export const Products = ({ ref }) => {
+export const Products = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { state, dispatch, setLoader } = useData();
   let location = useLocation();
-  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [pageNumber, setpageNumber] = useState(0);
+  let productsPerPage = 6;
+  let pageVisited = pageNumber * productsPerPage;
 
   const products = useFilterData();
+  let productsToShow;
+  productsToShow = [
+    ...products.slice(pageVisited, pageVisited + productsPerPage),
+  ];
 
   useEffect(() => {
-    setLoader(true);
-    if (location.state?.category) {
-      setSearchParams({
-        cat: location.state.category,
-      });
-    } else if (location.state?.arrTrend) {
-      setSearchParams({
-        arrTrend: location.state.arrTrend,
-      });
-    }
-
-    if (searchParams.get("cat")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.CATEGORY,
-          filterSubType: searchParams.get("cat"),
-          filterValue: true,
-        },
-      });
-    } else if (searchParams.get("arrTrend")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.ARR_TREND,
-          filterValue: searchParams.get("arrTrend"),
-        },
-      });
-    } else if (searchParams.get("search")) {
-      dispatch({
-        type: actionTypes.FILTER_CHANGE,
-        payload: {
-          filterType: filterActionType.SEARCH,
-          filterValue: searchParams.get("search"),
-        },
-      });
-    }
-
-    const id = setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-
     return () => {
       dispatch({
         type: actionTypes.RESET_CHANGE,
       });
-      clearTimeout(id);
     };
-  }, [searchParams]);
+  }, [location]);
+
+  const pageChange = ({ selected }) => setpageNumber(selected);
 
   return (
     <div className="products-outer-container">
@@ -81,7 +47,7 @@ export const Products = ({ ref }) => {
           path={location.pathname}
         />
       )}
-      <Sidenav ref={ref} />
+      <Sidenav pageChange={pageChange} />
       <section className="product-menu">
         <div className="page-path-heading">
           <Path path={location.pathname} />
@@ -97,13 +63,31 @@ export const Products = ({ ref }) => {
             textContent={"No product found for such filter"}
           />
         ) : (
-          products.map((prod) => (
-            <Productcard
-              key={prod._id}
-              setShowAuthModal={setShowAuthModal}
-              product={prod}
-            />
-          ))
+          <>
+            {productsToShow.map((prod) => (
+              <Productcard
+                key={prod._id}
+                setShowAuthModal={setShowAuthModal}
+                product={prod}
+              />
+            ))}
+            <div className="pagination-container">
+              <ReactPaginate
+                pageCount={Math.ceil(products.length / productsPerPage)}
+                previousLabel={"<"}
+                nextLabel={">"}
+                onPageChange={pageChange}
+                containerClassName={"paginateClass"}
+                previousLinkClassName={"previousLink"}
+                nextLinkClassName={"nextLink"}
+                activeLinkClassName={"activeLink"}
+                breakLabel={"..."}
+                pageRangeDisplayed={1}
+                marginPagesDisplayed={2}
+                forcePage={pageNumber}
+              />
+            </div>
+          </>
         )}
       </section>
     </div>

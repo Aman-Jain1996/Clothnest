@@ -3,17 +3,15 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Productcard.css";
 import StarOutlinedIcon from "@mui/icons-material/StarOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { useData, useAuth } from "../../contexts";
+import { Link } from "react-router-dom";
 import {
   useCartHandler,
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 
 export const Productcard = ({ product, setShowAuthModal }) => {
-  const navigate = useNavigate();
-  const { token, activeUser } = useAuth();
-  const { dispatch } = useData();
+  const { toggleWishlist } = useWishlistHandler();
+  const { addToCart } = useCartHandler();
 
   return (
     <div className="product-card ecom-card">
@@ -29,9 +27,7 @@ export const Productcard = ({ product, setShowAuthModal }) => {
 
       <span
         className="heart-icon-container"
-        onClick={() =>
-          useWishlistHandler(product, dispatch, activeUser, setShowAuthModal)
-        }
+        onClick={() => toggleWishlist(product, setShowAuthModal)}
       >
         {!product.wished ? (
           <FavoriteBorderOutlinedIcon className="heart-icon" />
@@ -57,7 +53,7 @@ export const Productcard = ({ product, setShowAuthModal }) => {
           {`₹ ${product.sell_price}`}
           <span className="mrp">{`₹ ${product.price}`}</span>
           <span className="discount">{`(${Math.ceil(
-            ((product.price - product.sell_price) * 100) / product.sell_price
+            ((product.price - product.sell_price) * 100) / product.price
           )}% Off)`}</span>
         </p>
       </div>
@@ -66,30 +62,14 @@ export const Productcard = ({ product, setShowAuthModal }) => {
         {!product.carted ? (
           <button
             className="btn btn-primary"
-            onClick={() =>
-              useCartHandler(
-                product,
-                dispatch,
-                activeUser,
-                setShowAuthModal,
-                navigate
-              )
-            }
+            onClick={() => addToCart(product, setShowAuthModal)}
           >
             Add to Cart
           </button>
         ) : (
           <button
             className="btn btn-secondary"
-            onClick={() =>
-              useCartHandler(
-                product,
-                dispatch,
-                activeUser,
-                setShowAuthModal,
-                navigate
-              )
-            }
+            onClick={() => addToCart(product, setShowAuthModal)}
           >
             Go to Cart
           </button>

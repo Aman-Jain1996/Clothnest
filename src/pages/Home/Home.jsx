@@ -1,20 +1,34 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Home.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useData } from "../../contexts";
+import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
 export const Home = () => {
   const navigate = useNavigate();
+  const { dispatch } = useData();
   const categoryClickHandler = (category) => {
-    navigate("/products", { state: { category } });
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.CATEGORY,
+        filterSubType: category,
+        filterValue: true,
+      },
+    });
+    navigate("/products");
   };
 
   const arrTrendClickHandler = (filter) => {
-    navigate("/products", { state: { arrTrend: filter } });
+    dispatch({
+      type: actionTypes.FILTER_CHANGE,
+      payload: {
+        filterType: filterActionType.ARR_TREND,
+        filterValue: filter,
+      },
+    });
+    navigate("/products");
   };
-
-  useEffect(() => {
-    scrollTo(0, 0);
-  });
 
   return (
     <main>

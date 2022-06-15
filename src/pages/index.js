@@ -7,3 +7,5 @@ export { ProductDetails } from "./Product-Details/Product-details";
 export { Profile } from "./Profile/Profile";
 export { Wishlist } from "./Wishlist/Wishlist";
 export { ErrorPage } from "./404Page/ErrorPage";
+export { ResetPassword } from "./ResetPassword/ResetPassword";
+export { Checkout } from "./Checkout/Checkout";

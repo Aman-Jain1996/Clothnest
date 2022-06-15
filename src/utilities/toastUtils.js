@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 
 const properties = {
   position: "bottom-right",
-  autoClose: 2000,
+  autoClose: 1000,
   closeOnClick: true,
   pauseOnHover: true,
   draggable: true,

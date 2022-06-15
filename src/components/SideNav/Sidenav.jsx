@@ -2,11 +2,9 @@ import "./Sidenav.css";
 import React from "react";
 import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
-import { useSearchParams } from "react-router-dom";
 
-export const Sidenav = ({ ref }) => {
+export const Sidenav = ({ pageChange }) => {
   const { state, dispatch } = useData();
-  const [setSearchParams] = useSearchParams();
 
   const maxValue = state.products.reduce(
     (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
@@ -14,10 +12,10 @@ export const Sidenav = ({ ref }) => {
   );
 
   const clearFilterHandler = () => {
-    setSearchParams({});
     dispatch({
       type: actionTypes.RESET_CHANGE,
     });
+    pageChange({ selected: 0 });
   };
 
   const sortChangeHandler = (e) => {
@@ -28,6 +26,7 @@ export const Sidenav = ({ ref }) => {
         filterValue: e.target.value,
       },
     });
+    pageChange({ selected: 0 });
   };
 
   const ratingChangeHandler = (e) => {
@@ -38,6 +37,7 @@ export const Sidenav = ({ ref }) => {
         filterValue: e.target.value,
       },
     });
+    pageChange({ selected: 0 });
   };
 
   const categoryChangeHandler = (e) => {
@@ -49,6 +49,7 @@ export const Sidenav = ({ ref }) => {
         filterValue: !state.filters.categories[e.target.value],
       },
     });
+    pageChange({ selected: 0 });
   };
 
   const priceRangeChangeHandler = (e) => {
@@ -59,6 +60,7 @@ export const Sidenav = ({ ref }) => {
         filterValue: e.target.value,
       },
     });
+    pageChange({ selected: 0 });
   };
 
   return (

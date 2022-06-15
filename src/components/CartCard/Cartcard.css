@@ -3,7 +3,8 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
-  height: 250px;
+  min-height: 250px;
+  height: max-content;
 }
 
 .product-img {
@@ -109,5 +110,4 @@
 
 .btn:hover {
   opacity: 0.8;
-  transform: scale(1.05);
 }
