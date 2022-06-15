@@ -13,12 +13,6 @@ export const Checkout = () => {
   const { displayRazorPay } = usePayment();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (state.cart.length === 0) {
-      navigate("/cart", { replace: true });
-    }
-  });
-
   const placeOrderHandler = () => {
     if (!adderessSelected._id) {
       ToastHandler("error", "Select any Address");
