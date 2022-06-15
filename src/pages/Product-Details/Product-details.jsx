@@ -86,10 +86,10 @@ export const ProductDetails = () => {
                   <p className="brand">
                     <span>Availability :</span> In Stock
                   </p>
-                  <p className="brand">
+                  <div className="brand">
                     <span>Description :</span>
                     <p>{showData.desc}</p>
-                  </p>
+                  </div>
                 </div>
                 <div className="button-container">
                   {state.cart.some((item) => item._id === showData._id) ? (

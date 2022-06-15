@@ -45,7 +45,7 @@ export const usePayment = () => {
       prefill: {
         name: `${deliveryAddress.name}`,
         email: `${deliveryAddress.email}`,
-        contact: deliveryAddress.mobile,
+        contact: `${deliveryAddress.mobile}`,
       },
       theme: {
         color: "#88d7fb",

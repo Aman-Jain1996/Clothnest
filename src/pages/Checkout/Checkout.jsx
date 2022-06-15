@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Checkout.css";
 import { useData } from "../../contexts";
@@ -13,9 +13,11 @@ export const Checkout = () => {
   const { displayRazorPay } = usePayment();
   const navigate = useNavigate();
 
-  if (!state.cart.length) {
-    navigate("/cart");
-  }
+  useEffect(() => {
+    if (state.cart.length === 0) {
+      navigate("/cart", { replace: true });
+    }
+  });
 
   const placeOrderHandler = () => {
     if (!adderessSelected._id) {

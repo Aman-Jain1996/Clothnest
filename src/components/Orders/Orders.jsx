@@ -18,7 +18,6 @@ export const Orders = () => {
 
   return (
     <div className="order-container">
-      <div className="order-heading">My Orders</div>
       <div className="order-placed-container">
         {orders.length ? (
           orders.map((order) => (
