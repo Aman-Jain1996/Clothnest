@@ -7,6 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const Navbar = () => {
   const { state, dispatch } = useData();
@@ -15,6 +16,8 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
   const searchRef = useRef("");
+
+  const totalCartQuantity = state.cart.reduce((acc, cur) => acc + cur.qty, 0);
 
   useEffect(() => {
     setSearchInput("");
@@ -65,9 +68,16 @@ export const Navbar = () => {
   return (
     <>
       <header className="Nav-header">
-        <div className="brand-name">
-          <Link to="/">ClothNest</Link>
-        </div>
+        <Link to="/">
+          <div className="brand-name">
+            ClothNest
+            {/* <img
+              className="brand-logo"
+              src="https://res.cloudinary.com/ajain8479/image/upload/v1654931985/E-com%20Images/hztplzelzuaa4eqjbn75.png"
+              alt="logo"
+            /> */}
+          </div>
+        </Link>
 
         {(location.pathname === "/" || location.pathname === "/products") && (
           <div className="searchbar">
@@ -87,6 +97,23 @@ export const Navbar = () => {
               onChange={(e) => changeHandler(e)}
               onKeyDown={(e) => searchHandler(e)}
             />
+            {searchInput.length !== 0 && (
+              <span
+                className="searchbar-close"
+                onClick={() => {
+                  setSearchInput("");
+                  dispatch({
+                    type: actionTypes.FILTER_CHANGE,
+                    payload: {
+                      filterType: filterActionType.SEARCH,
+                      filterValue: "",
+                    },
+                  });
+                }}
+              >
+                <CloseIcon />
+              </span>
+            )}
           </div>
         )}
 
@@ -110,7 +137,7 @@ export const Navbar = () => {
               <div className="nav-label">
                 <ShoppingCartOutlinedIcon className="mui-icon" />
                 {token ? (
-                  <span className="nav-count">{state.cart.length}</span>
+                  <span className="nav-count">{totalCartQuantity}</span>
                 ) : (
                   <span className="nav-count">0</span>
                 )}

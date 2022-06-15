@@ -12,7 +12,7 @@
 
 .auth-modal {
   background-color: rgb(0, 0, 0);
-  color: rgb(249, 250, 251);
+  color: var(--modal-color);
   display: flex;
   flex-direction: column;
   width: 400px;

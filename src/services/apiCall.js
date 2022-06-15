@@ -73,6 +73,11 @@ export const QuantityChangeService = async (productId, encodedToken, action) =>
     }
   );
 
+export const ClearCartService = async (encodedToken) =>
+  axios.delete("/api/user/cart/clear", {
+    headers: { authorization: encodedToken },
+  });
+
 // Address Services
 
 export const AddAddressServive = async (address, encodedToken) =>
@@ -102,4 +107,24 @@ export const UpdateAddressServive = async (addressId, address, encodedToken) =>
         authorization: encodedToken,
       },
     }
+  );
+
+// Orders service routes
+
+export const getOrdersService = async (encodedToken) =>
+  axios.get(
+    "/api/user/orders",
+    {},
+    {
+      headers: {
+        authorization: encodedToken,
+      },
+    }
+  );
+
+export const AddToOrdersService = async (encodedToken, order) =>
+  axios.post(
+    "/api/user/orders",
+    { order },
+    { headers: { authorization: encodedToken } }
   );

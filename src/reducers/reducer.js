@@ -14,7 +14,19 @@ export const initialState = {
   products: [],
   wishlist: [],
   cart: [],
-  address: [],
+  address: [
+    {
+      _id: 1,
+      name: "Aman Jain",
+      mobile: 8318209487,
+      pincode: 208002,
+      locality: "Nawabganj",
+      state: "U.P",
+      city: "Kanpur",
+      email: "aman@gmail.com",
+    },
+  ],
+  orders: [],
 };
 
 export const DataReducer = (state, action) => {
@@ -74,7 +86,13 @@ export const DataReducer = (state, action) => {
     case actionTypes.SET_ADDRESS:
       return {
         ...state,
-        address: [...action.payload.address],
+        address: [...state.address, ...action.payload.address],
+      };
+
+    case actionTypes.SET_ORDERS:
+      return {
+        ...state,
+        orders: action.payload.orders,
       };
 
     case actionTypes.FILTER_CHANGE:

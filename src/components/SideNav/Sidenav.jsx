@@ -2,11 +2,9 @@ import "./Sidenav.css";
 import React from "react";
 import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
-import { useSearchParams } from "react-router-dom";
 
 export const Sidenav = ({ pageChange }) => {
   const { state, dispatch } = useData();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const maxValue = state.products.reduce(
     (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
@@ -14,7 +12,6 @@ export const Sidenav = ({ pageChange }) => {
   );
 
   const clearFilterHandler = () => {
-    setSearchParams({});
     dispatch({
       type: actionTypes.RESET_CHANGE,
     });
