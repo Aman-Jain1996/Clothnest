@@ -122,10 +122,8 @@ export const Navbar = () => {
             <Link to="/wishlist">
               <div className="nav-label">
                 <FavoriteBorderOutlinedIcon className="mui-icon" />
-                {token ? (
+                {token && (
                   <span className="nav-count">{state.wishlist.length}</span>
-                ) : (
-                  <span className="nav-count">0</span>
                 )}
               </div>
               <label htmlFor="wishlist">Wishlist</label>
@@ -136,10 +134,8 @@ export const Navbar = () => {
             <Link to="/cart">
               <div className="nav-label">
                 <ShoppingCartOutlinedIcon className="mui-icon" />
-                {token ? (
+                {token && (
                   <span className="nav-count">{totalCartQuantity}</span>
-                ) : (
-                  <span className="nav-count">0</span>
                 )}
               </div>
               <label htmlFor="cart">Cart</label>

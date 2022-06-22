@@ -64,9 +64,19 @@ export const ProductDetails = () => {
                 <img src={showData.imageUrl} alt="product-image" />
                 <span
                   className="heart-icon-container"
-                  onClick={() => toggleWishlist(showData)}
+                  onClick={() =>
+                    toggleWishlist(
+                      {
+                        ...showData,
+                        wished: state.wishlist.some(
+                          (item) => item._id === showData._id
+                        ),
+                      },
+                      setShowAuthModal
+                    )
+                  }
                 >
-                  {!showData.wished ? (
+                  {!state.wishlist.some((item) => item._id === showData._id) ? (
                     <FavoriteBorderOutlinedIcon className="heart-icon" />
                   ) : (
                     <FavoriteIcon className="heart-icon favourite-icon" />
@@ -102,7 +112,7 @@ export const ProductDetails = () => {
                   ) : (
                     <button
                       className="btn cart"
-                      onClick={() => addToCart(showData)}
+                      onClick={() => addToCart(showData, setShowAuthModal)}
                     >
                       Add to Cart
                     </button>
@@ -117,7 +127,7 @@ export const ProductDetails = () => {
                   ) : (
                     <button
                       className="btn wishlist"
-                      onClick={() => toggleWishlist(showData)}
+                      onClick={() => toggleWishlist(showData, setShowAuthModal)}
                     >
                       Add to Wishlist
                     </button>

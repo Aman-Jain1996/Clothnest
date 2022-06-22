@@ -3,8 +3,7 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
-  min-height: 250px;
-  height: max-content;
+  height: 260px;
 }
 
 .product-img {
@@ -49,8 +48,7 @@
 
 .discount {
   font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text-grey);
+  color: red;
   margin-bottom: 1.2rem;
 }
 

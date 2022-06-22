@@ -101,17 +101,17 @@ export const Cartcard = ({ cartItem }) => {
           <p className="cost-price">{`₹ ${cartItem.price}`}</p>
         </div>
         <div className="discount">{`(${Math.ceil(
-          ((cartItem.price - cartItem.sell_price) * 100) / cartItem.sell_price
+          ((cartItem.price - cartItem.sell_price) * 100) / cartItem.price
         )}% Off)`}</div>
         <div className="quantity">
           <label>Quantity:</label>
           <div className="quantity-container">
-            <div className="plus" onClick={incrementQtyHandler}>
-              +
-            </div>
-            <div className="qty">{cartItem.qty}</div>
             <div className="minus" onClick={decrementQtyHandler}>
               -
+            </div>
+            <div className="qty">{cartItem.qty}</div>
+            <div className="plus" onClick={incrementQtyHandler}>
+              +
             </div>
           </div>
         </div>

@@ -99,7 +99,7 @@ export const Signup = () => {
           <button className="btn-auth">SignUp</button>
         </form>
         <p className="redirection">
-          Altready have an account
+          Already have an account
           <Link to="/login" className="signUp">
             Login!
           </Link>

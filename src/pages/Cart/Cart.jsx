@@ -53,6 +53,7 @@ export const Cart = () => {
     totalDiscount((discount) => discount - couponData.discount);
     setIsCouponApplied(false);
     ToastHandler("warn", "Coupon Removed Successfully!");
+    setCouponData({});
   };
 
   useEffect(() => {
