@@ -40,7 +40,7 @@ export const Wishlistcard = ({ wishItem }) => {
           {`₹ ${wishItem.sell_price}`}
           <span className="mrp">{`₹ ${wishItem.price}`}</span>
           <span className="discount">{`(${Math.ceil(
-            ((wishItem.price - wishItem.sell_price) * 100) / wishItem.sell_price
+            ((wishItem.price - wishItem.sell_price) * 100) / wishItem.price
           )}% Off)`}</span>
         </p>
       </div>

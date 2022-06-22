@@ -110,7 +110,7 @@ export const Login = () => {
         <p className="redirection">
           Don't have an account Yet?
           <Link to="/signup" className="signUp">
-            SignUp!
+            SignUp here!
           </Link>
         </p>
         <p className="redirection">

@@ -24,6 +24,7 @@ export const AddressModal = ({ setShowAddressModal }) => {
         ? updateAddress(editAddress._id, values)
         : addAddress(values);
       setShowAddressModal(false);
+      setEditAddress({});
     },
     validate: (values) => {
       let errors = {};

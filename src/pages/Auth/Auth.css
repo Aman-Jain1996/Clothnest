@@ -103,6 +103,7 @@ label[for="remember"] {
   color: var(--primary);
   font-size: 1.4rem;
   margin-left: 0.5rem;
+  font-weight: 600;
 }
 
 .auth-container .signup-form {
@@ -141,6 +142,7 @@ label[for="remember"] {
 .guest-credentials {
   display: inline-block;
   margin-top: 2rem;
+  padding: 0 4px;
 }
 
 .auth-field-row {

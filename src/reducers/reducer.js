@@ -86,7 +86,7 @@ export const DataReducer = (state, action) => {
     case actionTypes.SET_ADDRESS:
       return {
         ...state,
-        address: [...state.address, ...action.payload.address],
+        address: [...initialState.address, ...action.payload.address],
       };
 
     case actionTypes.SET_ORDERS:
