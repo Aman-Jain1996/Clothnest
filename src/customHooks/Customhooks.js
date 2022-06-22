@@ -153,12 +153,6 @@ export const useAddressHandler = () => {
           type: actionTypes.SET_ADDRESS,
           payload: { address: addressData.address },
         });
-
-      if (addressStatus === 200 || addressStatus === 201)
-        dispatch({
-          type: actionTypes.SET_ADDRESS,
-          payload: { address: addressData.address },
-        });
       ToastHandler("success", "Address updated Successfully");
     } catch (err) {
       console.error(err);

@@ -25,7 +25,7 @@
 .tab-container .active,
 .tab-container > a:hover {
   background-color: var(--primary-Light);
-  color: var(--bg-darkWhite);
+  color: var(--text-Dark);
 }
 
 .outlet-container {

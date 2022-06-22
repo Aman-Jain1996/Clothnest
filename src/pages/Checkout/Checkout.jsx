@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Checkout.css";
 import { useData } from "../../contexts";
 import { AddressModal } from "../../components/Address/AddressModal";
@@ -11,7 +11,6 @@ export const Checkout = () => {
   const { state, showAddressModal, setShowAddressModal } = useData();
   const [adderessSelected, setIsAddressSelected] = useState(false);
   const { displayRazorPay } = usePayment();
-  const navigate = useNavigate();
 
   const placeOrderHandler = () => {
     if (!adderessSelected._id) {
@@ -61,7 +60,10 @@ export const Checkout = () => {
         )}
         <div
           className="new-address-button checkout-address-button"
-          onClick={() => setShowAddressModal(true)}
+          onClick={() => {
+            setShowAddressModal(true);
+            setIsAddressSelected(false);
+          }}
         >
           + Add New Address
         </div>

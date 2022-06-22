@@ -24,17 +24,35 @@ export const AddressCard = ({ address }) => {
       <div className="address-button-container addressList-button-container">
         <button
           type="submit"
-          className="save-address-button"
+          className={
+            address._id === 1
+              ? "save-address-button btn-disabled"
+              : "save-address-button"
+          }
           onClick={() => {
             setShowAddressModal(true);
             setEditAddress(address);
           }}
+          disabled={address._id === 1}
+          title={
+            address._id === 1 ? "Can't edit default Address" : "Edit Address"
+          }
         >
           <ModeEditIcon /> Edit
         </button>
         <button
           onClick={() => removeAddress(address._id)}
-          className="cancel-address-button"
+          className={
+            address._id === 1
+              ? "cancel-address-button btn-disabled"
+              : "cancel-address-button"
+          }
+          disabled={address._id === 1}
+          title={
+            address._id === 1
+              ? "Can't delete default Address"
+              : "Delete Address"
+          }
         >
           Remove
         </button>
