@@ -96,13 +96,15 @@ export const Cartcard = ({ cartItem }) => {
       </div>
       <div className="product-content">
         <h4 className="product-name">{cartItem.title}</h4>
-        <div className="price">
-          <p className="sell-price">{`₹ ${cartItem.sell_price}`}</p>
-          <p className="cost-price">{`₹ ${cartItem.price}`}</p>
+        <div className="product-pricing">
+          <div className="price">
+            <p className="sell-price">{`₹ ${cartItem.sell_price}`}</p>
+            <p className="cost-price">{`₹ ${cartItem.price}`}</p>
+          </div>
+          <div className="discount">{`(${Math.ceil(
+            ((cartItem.price - cartItem.sell_price) * 100) / cartItem.price
+          )}% Off)`}</div>
         </div>
-        <div className="discount">{`(${Math.ceil(
-          ((cartItem.price - cartItem.sell_price) * 100) / cartItem.price
-        )}% Off)`}</div>
         <div className="quantity">
           <label>Quantity:</label>
           <div className="quantity-container">

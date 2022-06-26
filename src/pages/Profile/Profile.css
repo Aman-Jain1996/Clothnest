@@ -41,10 +41,14 @@
   position: relative;
 }
 
+.profile-details-heading {
+  position: relative;
+  width: max-content;
+}
+
 .account-details-heading {
   font-size: 2.4rem;
   font-family: "Nunito Sans", sans-serif;
-  position: relative;
   margin-bottom: 2.4rem;
 }
 
@@ -54,7 +58,7 @@
   left: -2%;
   content: "";
   height: 2px;
-  width: 42%;
+  width: 100%;
   background-color: var(--text-greyDark);
 }
 
@@ -93,4 +97,43 @@
   font-weight: 600;
   margin-left: auto;
   margin-right: 2.4rem;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 760px) {
+  .outlet-container {
+    width: 80%;
+    padding: 3.6rem 1.2rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .outlet-container {
+    width: 100%;
+  }
+
+  .profile-details {
+    padding: 1.2rem 0;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .tab-container {
+    font-size: 1.2rem;
+  }
+
+  .tab-container > a {
+    min-width: 8rem;
+    font-size: 1.6rem;
+  }
+
+  .outlet-container {
+    width: 100%;
+    padding: 3.6rem 6px;
+  }
+
+  .order-container {
+    width: 100%;
+  }
 }

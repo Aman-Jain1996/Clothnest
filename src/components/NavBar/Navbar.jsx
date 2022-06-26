@@ -70,12 +70,12 @@ export const Navbar = () => {
       <header className="Nav-header">
         <Link to="/">
           <div className="brand-name">
-            ClothNest
-            {/* <img
+            <span>ClothNest</span>
+            <img
               className="brand-logo"
               src="https://res.cloudinary.com/ajain8479/image/upload/v1654931985/E-com%20Images/hztplzelzuaa4eqjbn75.png"
               alt="logo"
-            /> */}
+            />
           </div>
         </Link>
 

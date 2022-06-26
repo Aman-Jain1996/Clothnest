@@ -3,7 +3,7 @@
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.2);
-  height: 260px;
+  height: 25rem;
 }
 
 .product-img {
@@ -14,7 +14,7 @@
 
 .product-content {
   flex: 0 1 60%;
-  padding: 1.2rem 3.6rem;
+  padding: 1.2rem 1.6rem;
   display: flex;
   flex-direction: column;
 }
@@ -30,7 +30,6 @@
   display: flex;
   align-items: center;
   font-size: 1.4rem;
-  margin-bottom: 0.6rem;
 }
 
 .sell-price {
@@ -49,7 +48,6 @@
 .discount {
   font-size: 1.4rem;
   color: red;
-  margin-bottom: 1.2rem;
 }
 
 .quantity {
@@ -58,6 +56,7 @@
   justify-content: space-around;
   align-items: center;
   gap: 1.4rem;
+  padding: 0 1.2rem;
 }
 
 .quantity label {
@@ -108,4 +107,46 @@
 
 .btn:hover {
   opacity: 0.8;
+}
+
+.product-pricing {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 920px) {
+  .product {
+    height: 40rem;
+  }
+
+  .product-img {
+    flex: auto;
+    height: 50%;
+  }
+
+  .product-content {
+    flex: auto;
+    height: 50%;
+  }
+
+  .product-pricing {
+    padding: 0 1.2rem;
+  }
+
+  .btn-container {
+    gap: 1.2rem;
+    padding: 2.4rem 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .btn-container > * {
+    flex: 0 1 50%;
+  }
 }

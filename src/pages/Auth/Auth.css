@@ -13,7 +13,7 @@
 
 .auth-container {
   background-color: var(--bg-white);
-  width: 30%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,6 +57,12 @@
   padding: 1.2rem;
   width: 100%;
   cursor: default;
+  border: 0.5px solid;
+}
+
+.auth-field input:active,
+.auth-field input:focus {
+  outline-color: var(--primary);
 }
 
 .btn-auth {
@@ -154,4 +160,40 @@ label[for="remember"] {
 .auth-field-row > .auth-field {
   flex: 0 0 48%;
   margin-bottom: 0;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 920px) {
+  .auth-container {
+    width: 50%;
+  }
+
+  label[for="remember"] {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .auth-container {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .auth-container {
+    width: 80%;
+    padding: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .auth-container {
+    width: 90%;
+    padding: 2.4rem 1.2rem;
+  }
+
+  .auth-container .login {
+    padding: 0;
+  }
 }
