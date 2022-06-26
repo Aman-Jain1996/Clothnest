@@ -112,6 +112,7 @@
 @media screen and (max-width: 450px) {
   .checkout-container {
     padding: 2.4rem 1.6rem;
+    justify-content: flex-start;
   }
 
   .checkout-address-container {
@@ -125,7 +126,7 @@
 
   .checkout-summary {
     width: 90%;
-    margin: auto;
+    margin: 0 auto;
     margin-bottom: 1.2rem;
   }
 }

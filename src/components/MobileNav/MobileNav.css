@@ -2,9 +2,23 @@
   display: none;
 }
 
+.mobileNav-heading .arrow-icon .mui-icon {
+  font-size: 2.6rem;
+}
+
+.mobileNav-heading {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
 .mobileNav-filter-content {
   width: 90%;
-  transition: all 0.5s ease-in-out;
+  margin-top: 1.2rem;
 }
 
 .mobileNav-filter-header {
@@ -16,6 +30,7 @@
   font-size: 1.4rem;
   font-weight: 500;
   cursor: pointer;
+  margin-bottom: 1.2rem;
 }
 
 .mobileNav-submenu-container {
@@ -64,18 +79,6 @@
   .mobileNav-heading .arrow-icon {
     display: inline-flex;
     align-items: center;
-  }
-
-  .mobileNav-heading .arrow-icon .mui-icon {
-    font-size: 2.6rem;
-  }
-
-  .mobileNav-heading {
-    font-size: 1.8rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 1.4rem;
   }
 }
 

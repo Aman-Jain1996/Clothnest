@@ -216,13 +216,13 @@
     width: 70%;
     transform: translate(-50%, -50%);
   }
+
+  .Nav-header .action-container {
+    margin-right: 10rem;
+  }
 }
 
 @media screen and (max-width: 450px) {
-  .action-container {
-    margin-left: 7em;
-  }
-
   .brand-name span {
     display: none;
   }
