@@ -17,6 +17,10 @@ export const DataProvider = ({ children }) => {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [editAddress, setEditAddress] = useState({});
   const [couponData, setCouponData] = useState({});
+  const [pageNumber, setpageNumber] = useState(0);
+
+  const pageChange = ({ selected }) => setpageNumber(selected);
+
   useEffect(() => {
     {
       (async () => {
@@ -55,6 +59,9 @@ export const DataProvider = ({ children }) => {
         setEditAddress,
         couponData,
         setCouponData,
+        pageNumber,
+        setpageNumber,
+        pageChange,
       }}
     >
       {children}

@@ -13,7 +13,8 @@
 }
 
 .wishlist-card .card-image-container img {
-  height: 219px;
+  min-height: 22rem;
+  max-height: 24rem;
 }
 
 .wishlist-card .product-content-container {
@@ -51,7 +52,6 @@
 
 @media screen and (max-width: 920px) {
   .wishlist-card .card-image-container {
-    height: none;
     cursor: pointer;
   }
 }

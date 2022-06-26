@@ -22,8 +22,11 @@
   font-size: 3rem;
   font-weight: 800;
   color: var(--text-Dark);
-  font-family: "Dancing Script", sans-serif;
   cursor: pointer;
+}
+
+.brand-name span {
+  font-family: "Dancing Script", sans-serif;
 }
 
 .searchbar {

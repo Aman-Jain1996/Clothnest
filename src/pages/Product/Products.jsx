@@ -15,10 +15,10 @@ import ReactPaginate from "react-paginate";
 
 export const Products = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const { state, dispatch, setLoader } = useData();
+  const { state, dispatch, setLoader, pageNumber, setpageNumber, pageChange } =
+    useData();
   let location = useLocation();
   const navigate = useNavigate();
-  const [pageNumber, setpageNumber] = useState(0);
   let productsPerPage = 6;
   let pageVisited = pageNumber * productsPerPage;
 
@@ -36,8 +36,6 @@ export const Products = () => {
     };
   }, [location]);
 
-  const pageChange = ({ selected }) => setpageNumber(selected);
-
   return (
     <div className="products-outer-container">
       {showAuthModal && (
@@ -47,7 +45,7 @@ export const Products = () => {
           path={location.pathname}
         />
       )}
-      <Sidenav pageChange={pageChange} />
+      <Sidenav />
       <section className="product-menu">
         <div className="page-path-heading">
           <Path path={location.pathname} />

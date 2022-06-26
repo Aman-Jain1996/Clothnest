@@ -3,8 +3,8 @@ import React from "react";
 import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
-export const Sidenav = ({ pageChange }) => {
-  const { state, dispatch } = useData();
+export const Sidenav = () => {
+  const { state, dispatch, pageChange } = useData();
 
   const maxValue = state.products.reduce(
     (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
