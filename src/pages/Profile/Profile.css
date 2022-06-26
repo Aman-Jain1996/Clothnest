@@ -130,7 +130,7 @@
 
   .outlet-container {
     width: 100%;
-    padding: 3.6rem 6px;
+    padding: 3.6rem 0;
   }
 
   .order-container {

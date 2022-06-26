@@ -38,6 +38,17 @@ export const Products = () => {
     };
   }, [location]);
 
+  useEffect(() => {
+    setLoader(true);
+    var id = setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(id);
+    };
+  }, []);
+
   return (
     <div className="products-outer-container">
       {showAuthModal && (

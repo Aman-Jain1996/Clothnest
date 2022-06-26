@@ -109,3 +109,9 @@
   padding-left: 1rem;
   padding-bottom: 0.5rem;
 }
+
+@media screen and (max-width: 450px) {
+  .order-placed-container {
+    padding: 1rem 0;
+  }
+}

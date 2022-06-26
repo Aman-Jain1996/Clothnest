@@ -14,7 +14,7 @@ export const usePayment = () => {
       const script = document.createElement("script");
       script.src = src;
 
-      script.onload = () => resolve(true);
+      script.onload = () => resolve({ status: true, script });
       script.onerror = () => reject(false);
 
       document.body.appendChild(script);
@@ -26,7 +26,7 @@ export const usePayment = () => {
       "https://checkout.razorpay.com/v1/checkout.js"
     );
 
-    if (!res) {
+    if (!res.status) {
       ToastHandler("error", "Check your Internet Connection!");
       return;
     }
@@ -56,12 +56,12 @@ export const usePayment = () => {
     };
 
     const paymentObj = new window.Razorpay(options);
+    paymentObj.open();
     paymentObj.on("payment.failed", () => {
       ToastHandler("error", "Pament Failed!");
-      paymentObj.close();
       navigate("/products");
     });
-    paymentObj.open();
+    document.body.removeChild(res.script);
   };
 
   const paymentSuccessful = async (
