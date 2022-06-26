@@ -78,3 +78,18 @@ input[type="range"] {
   align-items: center;
   gap: 1rem;
 }
+
+/* Responsiveness */
+
+@media screen and (max-width: 760px) {
+  .filter-menu {
+    flex: 1 0 15%;
+    padding: 1.2rem 1.6rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .filter-menu {
+    display: none;
+  }
+}

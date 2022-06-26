@@ -14,3 +14,4 @@ export { AddressModal } from "./Address/AddressModal";
 export { AddressCard } from "./Address/AddressCard";
 export { Orders } from "./Orders/Orders";
 export { ScrollToTop } from "./ScrollToTop/ScrollToTop";
+export { MobileNav } from "./MobileNav/MobileNav";

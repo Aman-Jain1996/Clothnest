@@ -10,7 +10,7 @@ import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 import CloseIcon from "@mui/icons-material/Close";
 
 export const Navbar = () => {
-  const { state, dispatch } = useData();
+  const { state, dispatch, pageChange } = useData();
   const { token } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
@@ -52,6 +52,7 @@ export const Navbar = () => {
           filterValue: e.target.value,
         },
       });
+      pageChange({ selected: 0 });
       navigate("/products");
     } else if (e.type === "click") {
       dispatch({
@@ -61,6 +62,7 @@ export const Navbar = () => {
           filterValue: searchRef.current.value,
         },
       });
+      pageChange({ selected: 0 });
       navigate("/products");
     }
   };
@@ -70,12 +72,12 @@ export const Navbar = () => {
       <header className="Nav-header">
         <Link to="/">
           <div className="brand-name">
-            ClothNest
-            {/* <img
+            <span>ClothNest</span>
+            <img
               className="brand-logo"
               src="https://res.cloudinary.com/ajain8479/image/upload/v1654931985/E-com%20Images/hztplzelzuaa4eqjbn75.png"
               alt="logo"
-            /> */}
+            />
           </div>
         </Link>
 

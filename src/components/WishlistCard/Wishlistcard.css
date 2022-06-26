@@ -8,12 +8,17 @@
 }
 
 .wishlist-card .card-image-container {
-  height: 55%;
+  flex: 0 0 50%;
   cursor: pointer;
 }
 
+.wishlist-card .card-image-container img {
+  min-height: 22rem;
+  max-height: 24rem;
+}
+
 .wishlist-card .product-content-container {
-  height: 20%;
+  flex: 0 0 15%;
 }
 
 .card .manufacturer {
@@ -24,11 +29,11 @@
 }
 
 .product-card .action-container {
+  height: max-content;
   display: flex;
   flex-direction: column;
   padding: 0.6rem 1.2rem;
   gap: 1.2rem;
-  margin-bottom: 1.2rem;
 }
 
 .product-card .action-container .btn {
@@ -43,4 +48,10 @@
 
 .btn:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 920px) {
+  .wishlist-card .card-image-container {
+    cursor: pointer;
+  }
 }

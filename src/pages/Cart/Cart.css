@@ -21,7 +21,6 @@
   grid-template-rows: max-content;
   justify-content: space-around;
 }
-
 /* Cart Summary styling */
 
 .cart-summary-outer {
@@ -29,11 +28,12 @@
   position: relative;
   padding: 1.2rem 2.4rem;
   height: max-content;
+  display: flex;
 }
 
 .cart-summary {
   position: fixed;
-  min-width:35rem;
+  min-width: 35rem;
   align-items: center;
   justify-content: center;
   padding: 1.2rem 2.4rem;
@@ -223,4 +223,75 @@
 .apply-coupon-disabled label {
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 1200px) {
+  .cart-section {
+    flex: 0 1 50%;
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary-outer {
+    flex: 0 1 40%;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .cart-section .product {
+    flex-direction: column;
+  }
+
+  .cart-summary {
+    min-width: 30rem;
+  }
+
+  .cart-summary-outer {
+    flex: 0 1 50%;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .cart-main {
+    flex-direction: column;
+    margin: 2.4rem 1.2rem 0;
+  }
+
+  .main-heading {
+    margin-top: 2rem;
+  }
+
+  .cart-section {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.2rem;
+  }
+
+  .cart-summary-outer {
+    order: -1;
+    margin-bottom: 1.6rem;
+  }
+
+  .cart-summary {
+    position: relative;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .cart-section {
+    grid-template-columns: repeat(1, 80%);
+  }
+
+  .coupon-modal {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .cart-section {
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 1.2rem;
+  }
 }

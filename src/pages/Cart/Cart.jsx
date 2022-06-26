@@ -41,6 +41,10 @@ export const Cart = () => {
   ];
 
   const applyCouponHandler = () => {
+    if (!couponData.discount) {
+      ToastHandler("error", "Select any coupon");
+      return;
+    }
     totalAmount(couponData.discount);
     totalDiscount(couponData.discount);
     setIsCouponApplied(true);

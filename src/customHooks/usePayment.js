@@ -89,6 +89,7 @@ export const usePayment = () => {
         payload: { cart: res.data.cart },
       });
       setLoader(false);
+      ToastHandler("success", "Order Placed Successfully!");
       navigate("/profile/orders");
     } catch (err) {
       console.error(err);

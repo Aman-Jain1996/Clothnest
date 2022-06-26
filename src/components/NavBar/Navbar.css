@@ -13,6 +13,7 @@
 .brand-logo {
   width: 5rem;
   height: 5rem;
+  display: none;
 }
 
 .brand-name {
@@ -21,8 +22,11 @@
   font-size: 3rem;
   font-weight: 800;
   color: var(--text-Dark);
-  font-family: "Dancing Script", sans-serif;
   cursor: pointer;
+}
+
+.brand-name span {
+  font-family: "Dancing Script", sans-serif;
 }
 
 .searchbar {
@@ -181,4 +185,57 @@
   font-weight: 500;
   font-size: 1.4rem;
   transition: all 0.3s ease-in-out;
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 920px) {
+  .Nav-header {
+    padding: 1.2rem;
+  }
+
+  .Nav-header .action-container {
+    margin-right: 12rem;
+  }
+
+  .profile-container {
+    right: 2%;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .searchbar {
+    left: 40%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .searchbar {
+    left: 50%;
+    top: 160%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+  }
+
+  .Nav-header .action-container {
+    margin-right: 10rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .brand-name span {
+    display: none;
+  }
+
+  .brand-logo {
+    display: flex;
+    z-index: 10;
+  }
+
+  .searchbar {
+    left: 50%;
+    top: 160%;
+    width: 90%;
+    transform: translate(-50%, -50%);
+  }
 }

@@ -107,7 +107,7 @@ export const Home = () => {
       </section>
 
       <section className="home-section-arrival">
-        <h2 className="section-heading">Shop by New Arrivals / Trending</h2>
+        <h2 className="section-heading">Shop by Arrivals / Trending</h2>
 
         <div className="arrivals">
           <article

@@ -6,7 +6,9 @@ export const ProfileDetails = () => {
 
   return (
     <div className="profile-details-container">
-      <h4 className="account-details-heading">Account Details</h4>
+      <div className="profile-details-heading">
+        <h4 className="account-details-heading">Account Details</h4>
+      </div>
       <div className="profile-details">
         <div className="profile-row">
           <span className="profile-content-field">Name : </span>
