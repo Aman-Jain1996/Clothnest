@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Products.css";
+import "../../components/MobileNav/MobileNav.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useData } from "../../contexts";
 import useFilterData from "../../customHooks/useFilterData";
 import { actionTypes } from "../../reducers/actionTypes";
 import {
   Authmodal,
+  MobileNav,
   NoItem,
   Path,
   Productcard,
@@ -88,6 +90,9 @@ export const Products = () => {
           </>
         )}
       </section>
+      <div className="mobile-nav">
+        <MobileNav />
+      </div>
     </div>
   );
 };
