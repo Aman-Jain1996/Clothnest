@@ -75,7 +75,7 @@ export const Navbar = () => {
             <span>ClothNest</span>
             <img
               className="brand-logo"
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1654931985/E-com%20Images/hztplzelzuaa4eqjbn75.png"
+              src="https://res.cloudinary.com/ajain8479/image/upload/v1656249454/E-com%20Images/cwqrlohltorww22lcaww.webp"
               alt="logo"
             />
           </div>

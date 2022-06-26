@@ -100,6 +100,7 @@ export const Cart = () => {
                     onChange={(e) => setCouponData(coupon)}
                     name="coupon"
                     checked={couponData.id === coupon.id}
+                    disabled={totalAmount() < coupon.minCartValue}
                     id={coupon.id}
                   />
                   <label htmlFor={coupon.id}>{coupon.title}</label>
