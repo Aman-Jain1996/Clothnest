@@ -17,7 +17,7 @@ export const Cart = () => {
   const { totalCostPrice, totalDiscount, totalAmount } = useCartSummary();
   const navigate = useNavigate();
 
-  const totalQuantity = state.cart.reduce((acc, cur) => acc + cur.qty, 0);
+  const totalQuantity = state.cart.reduce((acc, cur) => acc + cur.quantity, 0);
 
   const couponsAvailable = [
     {

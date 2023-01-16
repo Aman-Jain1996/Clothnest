@@ -9,7 +9,7 @@ export function NoItem({
 }) {
   return (
     <div className="no-item">
-      <img className="empty-image" alt="No Item on page" src={imageUrl} />
+      <img className="empty-image" alt="No Item on page" src={imageUrl} loading="lazy"/>
       <span className="empty-content">{textContent}</span>
       {isButtonVisible && (
         <Link to="/products" className="btn-logout">

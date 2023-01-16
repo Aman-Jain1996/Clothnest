@@ -1,26 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Wishlist.css";
 import { useData } from "../../contexts";
 import { useLocation } from "react-router-dom";
 import { NoItem, Path, Wishlistcard } from "../../components";
 
 export const Wishlist = () => {
-  const { state, setLoader } = useData();
+  const { state } = useData();
   const location = useLocation();
   const wishList = state.products.filter((wish) => wish.wished);
 
-  useEffect(() => {
-    setLoader(true);
-    var id = setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-    return () => {
-      clearTimeout(id);
-    };
-  }, []);
-
   return (
-    <div>
+    <>
       <div className="cart-wish-path">
         <Path path={location.pathname} />
       </div>
@@ -46,6 +36,6 @@ export const Wishlist = () => {
           </section>
         </main>
       )}
-    </div>
+    </>
   );
 };

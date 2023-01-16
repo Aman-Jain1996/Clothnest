@@ -9,12 +9,13 @@ export const AddressModal = ({ setShowAddressModal }) => {
 
   const initialDataState = {
     name: editAddress.name || "",
-    mobile: editAddress.mobile || "",
+    phone: editAddress.phone || "",
     pincode: editAddress.pincode || "",
-    locality: editAddress.locality || "",
+    street: editAddress.street || "",
     state: editAddress.state || "",
     city: editAddress.city || "",
     email: editAddress.email || "",
+    isDefault: editAddress.isDefault|| false,
   };
 
   const formik = useFormik({
@@ -33,8 +34,8 @@ export const AddressModal = ({ setShowAddressModal }) => {
       else if (!new RegExp("[A-Za-z]+").test(values.name))
         errors.name = "Name can only contain alphabets";
 
-      if (!values.locality.trim())
-        errors.locality = "Flat / Building No. is a mandatory Field";
+      if (!values.street.trim())
+        errors.street = "Flat / Building No. is a mandatory Field";
 
       if (!values.city.trim()) errors.city = "City is a mandatory Field";
 
@@ -45,10 +46,10 @@ export const AddressModal = ({ setShowAddressModal }) => {
       else if (!new RegExp("^[0-9]{6}$").test(values.pincode))
         errors.pincode = "Pincode must be a 6 digit Number ";
 
-      if (!values.mobile.trim())
-        errors.mobile = "Mobile No. is a mandatory Field";
-      else if (!new RegExp("^[6-9]{1}[0-9]{9}$").test(values.mobile))
-        errors.mobile = "Mobile No must be of 10 digits and starts b/w 6-9 ";
+      if (!values.phone.trim())
+        errors.phone = "Mobile No. is a mandatory Field";
+      else if (!new RegExp("^[6-9]{1}[0-9]{9}$").test(values.phone))
+        errors.phone = "Mobile No must be of 10 digits and starts b/w 6-9 ";
 
       if (!values.email.trim()) errors.email = "Email is a mandatory Field";
       else if (
@@ -88,15 +89,15 @@ export const AddressModal = ({ setShowAddressModal }) => {
               <input
                 className="field-input"
                 type="text"
-                value={formik.values.mobile}
-                name="mobile"
+                value={formik.values.phone}
+                name="phone"
                 placeholder="Mobile No."
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.mobile && formik.errors.mobile && (
+              {formik.touched.phone && formik.errors.phone && (
                 <div className="error-message-container">
-                  {formik.errors.mobile}
+                  {formik.errors.phone}
                 </div>
               )}
             </div>
@@ -142,15 +143,15 @@ export const AddressModal = ({ setShowAddressModal }) => {
               <input
                 className="field-input address-text"
                 type="text"
-                value={formik.values.locality}
-                name="locality"
+                value={formik.values.street}
+                name="street"
                 placeholder="Flat / Building No."
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.locality && formik.errors.locality && (
+              {formik.touched.street && formik.errors.street && (
                 <div className="error-message-container">
-                  {formik.errors.locality}
+                  {formik.errors.street}
                 </div>
               )}
             </div>
@@ -204,6 +205,17 @@ export const AddressModal = ({ setShowAddressModal }) => {
             >
               Cancel
             </button>
+            <div className="input-default-address">
+              <input
+                type="checkbox"
+                name="isDefault"
+                checked={formik.values.isDefault ? "checked" : ""}
+                id="isDefault"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+              <label htmlFor="isDefault">Set as Default Address</label>
+            </div>
           </div>
         </form>
       </div>

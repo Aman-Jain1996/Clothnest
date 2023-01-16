@@ -12,6 +12,7 @@ export function ErrorPage() {
               "https://res.cloudinary.com/ajain8479/image/upload/v1649662035/undraw_under_construction_-46-pa_p5a1tg.svg"
             }
             alt="error-image"
+            loading="lazy"
           />
         </div>
         <div className="error-content-container">

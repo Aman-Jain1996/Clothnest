@@ -9,7 +9,7 @@ import {
   useWishlistHandler,
 } from "../../customHooks/Customhooks";
 import { Authmodal, Path } from "../../components";
-import { FetchProductDetailsService } from "../../services/apiCall";
+import { FetchProductDetailsService } from "../../services";
 import { ToastHandler } from "../../utilities/toastUtils";
 
 export const ProductDetails = () => {
@@ -23,9 +23,9 @@ export const ProductDetails = () => {
   const [showData, setShowData] = useState();
 
   useEffect(() => {
-    setLoader(true);
     (async () => {
       try {
+        setLoader(true);
         const { status, data } = await FetchProductDetailsService(id);
         if (status === 200 || status === 201) {
           setShowData(data.product);
@@ -33,16 +33,11 @@ export const ProductDetails = () => {
       } catch (err) {
         ToastHandler("error", "Error in Fetching Product");
         console.error(err);
+      } finally {
+        setLoader(false);
       }
     })();
-    const timerId = setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [id, state]);
+  }, [id]);
 
   return (
     <div>
@@ -61,7 +56,11 @@ export const ProductDetails = () => {
           <main className="product-details-main">
             <section className="product-details">
               <div className="details-image-container">
-                <img src={showData.imageUrl} alt="product-image" />
+                <img
+                  src={showData.imageUrl}
+                  alt="product-image"
+                  loading="lazy"
+                />
                 <span
                   className="heart-icon-container"
                   onClick={() =>
@@ -86,8 +85,10 @@ export const ProductDetails = () => {
 
               <div className="content">
                 <p className="product-name">{showData.title}</p>
-                <p className="product-reviews">4 reviews</p>
-                <p className="product-price">{`₹ ${showData.sell_price}`} </p>
+                <p className="product-reviews">
+                  {showData.totalRatingsCount} reviews
+                </p>
+                <p className="product-price">{`₹ ${showData.sellPrice}`} </p>
                 <p className="horizontal-rule"></p>
                 <div className="description">
                   <p className="brand">
@@ -98,7 +99,7 @@ export const ProductDetails = () => {
                   </p>
                   <div className="brand">
                     <span>Description :</span>
-                    <p>{showData.desc}</p>
+                    <p>{showData.description}</p>
                   </div>
                 </div>
                 <div className="button-container">

@@ -5,8 +5,9 @@ import { useData } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
 
 export const Home = () => {
+  const { dispatch, state } = useData();
   const navigate = useNavigate();
-  const { dispatch } = useData();
+  
   const categoryClickHandler = (category) => {
     dispatch({
       type: actionTypes.FILTER_CHANGE,
@@ -53,56 +54,22 @@ export const Home = () => {
         <h2 className="section-heading">Shop by Category</h2>
 
         <div className="categories">
-          <article
-            className="category-article"
-            onClick={() => categoryClickHandler("Mens")}
-          >
-            <div className="category-overlay">Men</div>
-            <img
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1648041157/E-com%20Images/men_owedcn.webp"
-              alt="Men's Fashion"
-            />
-          </article>
-          <article
-            className="category-article"
-            onClick={() => categoryClickHandler("Women")}
-          >
-            <div className="category-overlay">Women</div>
-            <img
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1648041156/E-com%20Images/women_tx6z5y.webp"
-              alt="Women's Fashion"
-            />
-          </article>
-          <article
-            className="category-article"
-            onClick={() => categoryClickHandler("Kids")}
-          >
-            <div className="category-overlay">Kids</div>
-            <img
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1648041157/E-com%20Images/kids_hmcxmw.webp"
-              alt="Kid's Fashion"
-            />
-          </article>
-          <article
-            className="category-article"
-            onClick={() => categoryClickHandler("Summer")}
-          >
-            <div className="category-overlay">Summer Collections</div>
-            <img
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1648041157/E-com%20Images/summer_nmogwm.webp"
-              alt="Summer Fashion"
-            />
-          </article>
-          <article
-            className="category-article"
-            onClick={() => categoryClickHandler("Winter")}
-          >
-            <div className="category-overlay">Winter Collections</div>
-            <img
-              src="https://res.cloudinary.com/ajain8479/image/upload/v1648041156/E-com%20Images/winter_vgse7j.webp"
-              alt="Winter Fashion"
-            />
-          </article>
+          {state.categories?.map((category) => {
+            return (
+              <article
+                key={category._id}
+                className="category-article"
+                onClick={() => categoryClickHandler(category.title)}
+              >
+                <div className="category-overlay">{category.title}</div>
+                <img
+                  src={category.imageURL}
+                  alt={category.altText}
+                  loading="lazy"
+                />
+              </article>
+            );
+          })}
         </div>
       </section>
 
@@ -118,6 +85,7 @@ export const Home = () => {
               <img
                 src="https://res.cloudinary.com/ajain8479/image/upload/v1648041156/E-com%20Images/arrival_mqp8rn.webp"
                 alt="New arrivals"
+                loading="lazy"
               />
             </div>
             <div className="arrival-content">
@@ -133,12 +101,13 @@ export const Home = () => {
 
           <article
             className="new-stocks"
-            onClick={() => arrTrendClickHandler("trending")}
+            onClick={() => arrTrendClickHandler("isTrending")}
           >
             <div className="arrival-image">
               <img
                 src="https://res.cloudinary.com/ajain8479/image/upload/v1648041157/E-com%20Images/trending_gpaqfg.webp"
                 alt="Trending"
+                loading="lazy"
               />
             </div>
             <div className="arrival-content">

@@ -4,26 +4,36 @@ import {
   AddToCartService,
   AddToWishlistService,
   DeleteAddressServive,
+  DeleteFromCartService,
   DeleteFromWishlistService,
   UpdateAddressServive,
-} from "../services/apiCall.js";
+} from "../services";
 import { useAuth, useData } from "../contexts";
 import { ToastHandler } from "../utilities/toastUtils";
 import { useNavigate } from "react-router-dom";
 
 export const useWishlistHandler = () => {
   const { token } = useAuth();
-  const { dispatch } = useData();
+  const { dispatch, setLoader } = useData();
 
-  const toggleWishlist = async (product, setShowAuthModal) => {
+  const toggleWishlist = async (
+    product,
+    setShowAuthModal,
+    cartUpdateRequired = false
+  ) => {
     try {
       if (!token) {
         setShowAuthModal(true);
         return;
       }
+      setLoader(true);
       let res = null;
+      let cartRes = null;
       if (!product.wished) {
         res = await AddToWishlistService(product, token);
+        if (cartUpdateRequired) {
+          cartRes = await DeleteFromCartService(product._id, token);
+        }
         ToastHandler("success", "Added to Wishlist");
       } else {
         res = await DeleteFromWishlistService(product._id, token);
@@ -36,9 +46,17 @@ export const useWishlistHandler = () => {
           payload: { wishlist: res.data.wishlist },
         });
       }
+      if (cartUpdateRequired) {
+        dispatch({
+          type: actionTypes.SET_CART,
+          payload: { cart: cartRes.data.cart },
+        });
+      }
     } catch (err) {
       ToastHandler("error", "Error while updating Wishlist");
       console.error(err);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -49,10 +67,14 @@ export const useWishlistHandler = () => {
 
 export const useCartHandler = () => {
   const { token } = useAuth();
-  const { dispatch } = useData();
+  const { dispatch, setLoader } = useData();
   const navigate = useNavigate();
 
-  const addToCart = async (product, setShowAuthModal) => {
+  const addToCart = async (
+    product,
+    setShowAuthModal,
+    wishlistUpdateRequired = false
+  ) => {
     try {
       if (!token) {
         setShowAuthModal(true);
@@ -63,8 +85,8 @@ export const useCartHandler = () => {
         navigate("/cart");
         return;
       }
-
-      let res = await AddToCartService({ ...product, qty: 1 }, token);
+      setLoader(true);
+      let res = await AddToCartService({ ...product, quantity: 1 }, token);
 
       if (res.status === 200 || res.status === 201) {
         ToastHandler("success", "Item added to Cart");
@@ -72,10 +94,23 @@ export const useCartHandler = () => {
           type: actionTypes.SET_CART,
           payload: { cart: res.data.cart },
         });
+
+        if (wishlistUpdateRequired) {
+          let wishlistResponse = await DeleteFromWishlistService(
+            product._id,
+            token
+          );
+          dispatch({
+            type: actionTypes.SET_WISHLIST,
+            payload: { wishlist: wishlistResponse.data.wishlist },
+          });
+        }
       }
     } catch (err) {
       ToastHandler("error", `Error while updating Cart`);
       console.error(err);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -86,10 +121,10 @@ export const useCartSummary = () => {
   const { state } = useData();
 
   const totalCostPrice = () =>
-    state.cart.reduce((acc, cur) => acc + cur.qty * cur.price, 0);
+    state.cart.reduce((acc, cur) => acc + cur.quantity * cur.listPrice, 0);
 
   const totalSellPrice = () =>
-    state.cart.reduce((acc, cur) => acc + cur.qty * cur.sell_price, 0);
+    state.cart.reduce((acc, cur) => acc + cur.quantity * cur.sellPrice, 0);
 
   const totalDiscount = () => totalCostPrice() - totalSellPrice();
 
@@ -107,10 +142,11 @@ export const useCartSummary = () => {
 
 export const useAddressHandler = () => {
   const { token } = useAuth();
-  const { dispatch } = useData();
+  const { dispatch, setLoader } = useData();
 
   const addAddress = async (address) => {
     try {
+      setLoader(true);
       const { status: addressStatus, data: addressData } =
         await AddAddressServive(address, token);
 
@@ -123,11 +159,14 @@ export const useAddressHandler = () => {
     } catch (err) {
       console.error(err);
       ToastHandler("error", "Error while adding Address");
+    } finally {
+      setLoader(false);
     }
   };
 
   const removeAddress = async (addressId) => {
     try {
+      setLoader(true);
       const { status: addressStatus, data: addressData } =
         await DeleteAddressServive(addressId, token);
 
@@ -140,11 +179,14 @@ export const useAddressHandler = () => {
     } catch (err) {
       console.error(err);
       ToastHandler("error", "Error while removing Address");
+    } finally {
+      setLoader(false);
     }
   };
 
   const updateAddress = async (addressId, address) => {
     try {
+      setLoader(true);
       const { status: addressStatus, data: addressData } =
         await UpdateAddressServive(addressId, address, token);
 
@@ -157,6 +199,8 @@ export const useAddressHandler = () => {
     } catch (err) {
       console.error(err);
       ToastHandler("error", "Error while updating Address");
+    } finally {
+      setLoader(false);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./Checkout.css";
 import { useData } from "../../contexts";
@@ -9,8 +9,13 @@ import { usePayment } from "../../customHooks/usePayment";
 export const Checkout = () => {
   const location = useLocation();
   const { state, showAddressModal, setShowAddressModal } = useData();
-  const [adderessSelected, setIsAddressSelected] = useState(false);
+  const isDefaultAddress = state.address.find((add) => add.isDefault);
+  const [adderessSelected, setIsAddressSelected] = useState({});
   const { displayRazorPay } = usePayment();
+
+  useEffect(() => {
+    setIsAddressSelected(isDefaultAddress?._id ? isDefaultAddress : {});
+  }, [isDefaultAddress]);
 
   const placeOrderHandler = () => {
     if (!adderessSelected._id) {
@@ -24,26 +29,32 @@ export const Checkout = () => {
     <div className="checkout-container">
       <div className="checkout-address-container">
         <h2 className="checkout-address-heading">
-          Select from Available Addresses to Deliver :
+          Select Delivery Adress (Default address is selected) :
         </h2>
         {state.address.length !== 0 ? (
           <div className="checkout-address-list">
             {state.address.map((address) => (
-              <div className="checkout-address-list-row" key={address._id}>
+              <div
+                className="checkout-address-list-row"
+                htmlFor={address._id}
+                key={address._id}
+              >
                 <input
                   type="radio"
                   name="address"
                   id={address._id}
-                  checked={address._id === adderessSelected._id}
+                  checked={
+                    address._id === adderessSelected._id || address.isDefault
+                  }
                   onChange={() => setIsAddressSelected(address)}
                 />
                 <label htmlFor={address._id} className="checkout-address-item">
                   <div className="address-item-row">
                     <div className="address-username">{address.name}</div>
-                    <div className="address-mobile">+91 - {address.mobile}</div>
+                    <div className="address-mobile">+91 - {address.phone}</div>
                   </div>
                   <div className="address-item-row address-row">
-                    <div className="address-item">{address.locality}, </div>
+                    <div className="address-item">{address.street}, </div>
                     <div className="address-item">{address.city}, </div>
                     <div className="address-item">{address.state} </div>
                     <div className="address-item">- {address.pincode}</div>

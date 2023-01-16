@@ -12,7 +12,7 @@ import {
   Signup,
   Wishlist,
 } from "./pages";
-import { useData } from "./contexts";
+import { useAuth, useData } from "./contexts";
 import {
   Address,
   Loading,
@@ -27,8 +27,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const { loader } = useData();
+  // const { token } = useAuth();
+  // console.log(token, token?.exp);
+  // JSON.parse(window.atob(JSON.parse(localStorage.getItem('userToken')).token.split('.')[1])).exp
   return (
-    <div>
+    <>
       <ScrollToTop />
       {loader && <Loading />}
       <ToastContainer
@@ -88,7 +91,7 @@ function App() {
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

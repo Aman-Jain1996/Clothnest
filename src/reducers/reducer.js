@@ -14,18 +14,8 @@ export const initialState = {
   products: [],
   wishlist: [],
   cart: [],
-  address: [
-    {
-      _id: 1,
-      name: "Aman Jain",
-      mobile: 8318209487,
-      pincode: 208002,
-      locality: "Nawabganj",
-      state: "U.P",
-      city: "Kanpur",
-      email: "aman@gmail.com",
-    },
-  ],
+  categories: [],
+  address: [],
   orders: [],
 };
 
@@ -33,8 +23,7 @@ export const DataReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.SET_PRODUCTS:
       maxValue = action.payload.products.reduce(
-        (acc, cur) =>
-          acc > Number(cur.sell_price) ? acc : Number(cur.sell_price),
+        (acc, cur) => (acc > cur.sellPrice ? acc : cur.sellPrice),
         0
       );
 
@@ -54,10 +43,11 @@ export const DataReducer = (state, action) => {
     case actionTypes.SET_CATEGORIES:
       return {
         ...state,
+        categories: action.payload.categories,
         filters: {
           ...state.filters,
           categories: action.payload.categories.reduce(
-            (acc, curr) => ({ ...acc, [curr.categoryName]: false }),
+            (acc, curr) => ({ ...acc, [curr.title]: false }),
             {}
           ),
         },
@@ -86,7 +76,7 @@ export const DataReducer = (state, action) => {
     case actionTypes.SET_ADDRESS:
       return {
         ...state,
-        address: [...initialState.address, ...action.payload.address],
+        address: action.payload.address,
       };
 
     case actionTypes.SET_ORDERS:
@@ -123,7 +113,7 @@ export const DataReducer = (state, action) => {
     case actionTypes.RESET_CHANGE:
       maxValue = state.products.reduce(
         (acc, cur) =>
-          acc > Number(cur.sell_price) ? acc : Number(cur.sell_price),
+          acc > Number(cur.sellPrice) ? acc : Number(cur.sellPrice),
         0
       );
 

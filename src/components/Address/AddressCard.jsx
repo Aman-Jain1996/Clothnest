@@ -10,10 +10,10 @@ export const AddressCard = ({ address }) => {
     <div className="address-list-item">
       <div className="address-item-row">
         <div className="address-username">{address.name}</div>
-        <div className="address-mobile">+91 - {address.mobile}</div>
+        <div className="address-mobile">+91 - {address.phone}</div>
       </div>
       <div className="address-item-row address-row">
-        <div className="address-item">{address.locality}, </div>
+        <div className="address-item">{address.street}, </div>
         <div className="address-item">{address.city}, </div>
         <div className="address-item">{address.state} </div>
         <div className="address-item">- {address.pincode}</div>
@@ -24,19 +24,12 @@ export const AddressCard = ({ address }) => {
       <div className="address-button-container addressList-button-container">
         <button
           type="submit"
-          className={
-            address._id === 1
-              ? "save-address-button btn-disabled"
-              : "save-address-button"
-          }
+          className="save-address-button"
           onClick={() => {
             setShowAddressModal(true);
             setEditAddress(address);
           }}
-          disabled={address._id === 1}
-          title={
-            address._id === 1 ? "Can't edit default Address" : "Edit Address"
-          }
+          title="Edit Address"
         >
           <ModeEditIcon /> Edit
         </button>
@@ -47,12 +40,7 @@ export const AddressCard = ({ address }) => {
               ? "cancel-address-button btn-disabled"
               : "cancel-address-button"
           }
-          disabled={address._id === 1}
-          title={
-            address._id === 1
-              ? "Can't delete default Address"
-              : "Delete Address"
-          }
+          title="Delete Address"
         >
           Remove
         </button>

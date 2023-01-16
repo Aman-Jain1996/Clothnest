@@ -3,16 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import { useWishlistHandler } from "../../customHooks/Customhooks";
 import { actionTypes, cartActionTypes } from "../../reducers/actionTypes";
-import {
-  DeleteFromCartService,
-  QuantityChangeService,
-} from "../../services/apiCall";
+import { DeleteFromCartService, QuantityChangeService } from "../../services";
 import { ToastHandler } from "../../utilities/toastUtils";
 import "./Cartcard.css";
 
 export const Cartcard = ({ cartItem }) => {
   const { token } = useAuth();
-  const { state, dispatch } = useData();
+  const { state, dispatch, setLoader } = useData();
   const { toggleWishlist } = useWishlistHandler();
   const navigate = useNavigate();
 
@@ -24,6 +21,7 @@ export const Cartcard = ({ cartItem }) => {
 
   const deleteCartHandler = async () => {
     try {
+      setLoader(true);
       const { data, status } = await DeleteFromCartService(cartItem._id, token);
       ToastHandler("success", "Item removed from Cart");
 
@@ -35,11 +33,14 @@ export const Cartcard = ({ cartItem }) => {
       }
     } catch (err) {
       ToastHandler("error", "Error while updating Cart");
+    } finally {
+      setLoader(false);
     }
   };
 
   const incrementQtyHandler = async () => {
     try {
+      setLoader(true);
       const { status, data } = await QuantityChangeService(
         cartItem._id,
         token,
@@ -57,12 +58,15 @@ export const Cartcard = ({ cartItem }) => {
       }
     } catch (err) {
       ToastHandler("error", "Error while updating Cart");
+    } finally {
+      setLoader(false);
     }
   };
 
   const decrementQtyHandler = async () => {
     try {
-      if (cartItem.qty === 1) {
+      setLoader(true);
+      if (cartItem.quantity === 1) {
         deleteCartHandler();
         return;
       }
@@ -83,6 +87,8 @@ export const Cartcard = ({ cartItem }) => {
       }
     } catch (err) {
       ToastHandler("error", "Error while updating Cart");
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -92,17 +98,18 @@ export const Cartcard = ({ cartItem }) => {
         className="product-img"
         onClick={() => navigate(`/products/${cartItem._id}`)}
       >
-        <img src={cartItem.imageUrl} alt="product image" />
+        <img src={cartItem.imageUrl} alt="product image" loading="lazy" />
       </div>
       <div className="product-content">
         <h4 className="product-name">{cartItem.title}</h4>
         <div className="product-pricing">
           <div className="price">
-            <p className="sell-price">{`₹ ${cartItem.sell_price}`}</p>
-            <p className="cost-price">{`₹ ${cartItem.price}`}</p>
+            <p className="sell-price">{`₹ ${cartItem.sellPrice}`}</p>
+            <p className="cost-price">{`₹ ${cartItem.listPrice}`}</p>
           </div>
           <div className="discount">{`(${Math.ceil(
-            ((cartItem.price - cartItem.sell_price) * 100) / cartItem.price
+            ((cartItem.listPrice - cartItem.sellPrice) * 100) /
+              cartItem.listPrice
           )}% Off)`}</div>
         </div>
         <div className="quantity">
@@ -111,7 +118,7 @@ export const Cartcard = ({ cartItem }) => {
             <div className="minus" onClick={decrementQtyHandler}>
               -
             </div>
-            <div className="qty">{cartItem.qty}</div>
+            <div className="qty">{cartItem.quantity}</div>
             <div className="plus" onClick={incrementQtyHandler}>
               +
             </div>
@@ -126,12 +133,12 @@ export const Cartcard = ({ cartItem }) => {
               <button className="btn btn-tertiary">Go to Wishlist</button>
             </Link>
           ) : (
-            <button
-              className="btn btn-tertiary"
-              onClick={() => toggleWishlist(cartItem)}
-            >
+          <button
+            className="btn btn-tertiary"
+            onClick={() => toggleWishlist(cartItem,null,true)}
+          >
               Move to Wishlist
-            </button>
+          </button>
           )}
         </div>
       </div>

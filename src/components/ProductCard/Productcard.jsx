@@ -17,13 +17,13 @@ export const Productcard = ({ product, setShowAuthModal }) => {
     <div className="product-card ecom-card">
       <div className="card-image-container">
         <Link to={`/products/${product._id}`}>
-          <img src={product.imageUrl} alt="Product Image" />
+          <img src={product.imageUrl} alt="Product Image" loading="lazy" />
         </Link>
       </div>
 
       {product.newArrival && <p className="badge-item">New Arrival</p>}
 
-      {product.trending && <p className="badge-item">Trending</p>}
+      {product.isTrending && <p className="badge-item">Trending</p>}
 
       <span
         className="heart-icon-container"
@@ -50,10 +50,10 @@ export const Productcard = ({ product, setShowAuthModal }) => {
         <p className="item-name">{product.title}</p>
 
         <p className="price">
-          {`₹ ${product.sell_price}`}
-          <span className="mrp">{`₹ ${product.price}`}</span>
+          {`₹ ${product.sellPrice}`}
+          <span className="mrp">{`₹ ${product.listPrice}`}</span>
           <span className="discount">{`(${Math.ceil(
-            ((product.price - product.sell_price) * 100) / product.price
+            ((product.listPrice - product.sellPrice) * 100) / product.listPrice
           )}% Off)`}</span>
         </p>
       </div>

@@ -8,8 +8,8 @@ export const Path = ({ path }) => {
 
   return (
     <div className="page-path">
-      <HomeIcon />
       <Link to="/" className="path-item">
+        <HomeIcon />
         <span>Home</span>
       </Link>
       {arrPath[0] === "products" && !arrPath[1] && (

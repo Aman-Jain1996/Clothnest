@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Auth.css";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth, useData } from "../../contexts";
-import { actionTypes } from "../../reducers/actionTypes";
+import { useAuth } from "../../contexts";
 
 export const Login = () => {
-  const { token, loginHandler, activeUser } = useAuth();
+  const { loginHandler } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [eye, setEye] = useState(true);
-  const { dispatch } = useData();
   const location = useLocation();
 
   const redirectionPath = location.state?.path || "/";
@@ -20,25 +18,6 @@ export const Login = () => {
   const eyeHandler = () => {
     setEye((eye) => !eye);
   };
-
-  useEffect(() => {
-    if (token) {
-      dispatch({
-        type: actionTypes.SET_CART,
-        payload: { cart: activeUser?.cart },
-      });
-
-      dispatch({
-        type: actionTypes.SET_WISHLIST,
-        payload: { wishlist: activeUser?.wishlist },
-      });
-
-      dispatch({
-        type: actionTypes.SET_ADDRESS,
-        payload: { address: activeUser?.address },
-      });
-    }
-  }, [token]);
 
   return (
     <main className="auth-main">
@@ -115,12 +94,12 @@ export const Login = () => {
         </p>
         <p className="redirection">
           <Link
-            to="/login"
+            to=""
             onClick={(e) => {
               e.preventDefault();
               loginHandler(
-                "amanjain@gmail.com",
-                "amanjain1234",
+                process.env.REACT_APP_GUEST_USER,
+                process.env.REACT_APP_GUEST_USER_PASSWORD,
                 true,
                 redirectionPath
               );

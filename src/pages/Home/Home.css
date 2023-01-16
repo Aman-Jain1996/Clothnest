@@ -200,7 +200,7 @@
 }
 
 .arrival-content {
-  padding: 3.6rem 2.4rem;
+  padding: 3.6rem 2.4rem 3.6rem 1.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -217,9 +217,12 @@
   margin-bottom: 1.2rem;
 }
 
+.content-para {
+  height: 4rem;
+}
+
 .arrivals > article:hover {
-  transform: translateY(-1rem);
-  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* Responsiveness */

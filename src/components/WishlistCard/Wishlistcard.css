@@ -10,11 +10,11 @@
 .wishlist-card .card-image-container {
   flex: 0 0 50%;
   cursor: pointer;
+  min-height:68%;
 }
 
 .wishlist-card .card-image-container img {
-  min-height: 22rem;
-  max-height: 24rem;
+  object-fit: fill;
 }
 
 .wishlist-card .product-content-container {
@@ -29,7 +29,6 @@
 }
 
 .product-card .action-container {
-  height: max-content;
   display: flex;
   flex-direction: column;
   padding: 0.6rem 1.2rem;

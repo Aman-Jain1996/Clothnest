@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useData, useAuth } from "../../contexts";
 import { actionTypes, filterActionType } from "../../reducers/actionTypes";
@@ -17,7 +17,7 @@ export const Navbar = () => {
   const [searchInput, setSearchInput] = useState("");
   const searchRef = useRef("");
 
-  const totalCartQuantity = state.cart.reduce((acc, cur) => acc + cur.qty, 0);
+  // const totalCartQuantity = state.cart.reduce((acc, cur) => acc + cur.quantity, 0);
 
   useEffect(() => {
     setSearchInput("");
@@ -77,18 +77,13 @@ export const Navbar = () => {
               className="brand-logo"
               src="https://res.cloudinary.com/ajain8479/image/upload/v1656249454/E-com%20Images/cwqrlohltorww22lcaww.webp"
               alt="logo"
+              loading="lazy"
             />
           </div>
         </Link>
 
         {(location.pathname === "/" || location.pathname === "/products") && (
           <div className="searchbar">
-            <label htmlFor="search" className="icon">
-              <SearchOutlinedIcon
-                className="mui-icon"
-                onClick={(e) => searchHandler(e)}
-              />
-            </label>
             <input
               value={searchInput}
               ref={searchRef}
@@ -116,6 +111,12 @@ export const Navbar = () => {
                 <CloseIcon />
               </span>
             )}
+            <label htmlFor="search" className="icon">
+              <SearchOutlinedIcon
+                className="mui-icon"
+                onClick={(e) => searchHandler(e)}
+              />
+            </label>
           </div>
         )}
 
@@ -124,7 +125,7 @@ export const Navbar = () => {
             <Link to="/wishlist">
               <div className="nav-label">
                 <FavoriteBorderOutlinedIcon className="mui-icon" />
-                {token && (
+                {token && state.wishlist.length > 0 && (
                   <span className="nav-count">{state.wishlist.length}</span>
                 )}
               </div>
@@ -136,8 +137,8 @@ export const Navbar = () => {
             <Link to="/cart">
               <div className="nav-label">
                 <ShoppingCartOutlinedIcon className="mui-icon" />
-                {token && (
-                  <span className="nav-count">{totalCartQuantity}</span>
+                {token && state.cart.length > 0 && (
+                  <span className="nav-count">{state.cart.length}</span>
                 )}
               </div>
               <label htmlFor="cart">Cart</label>
@@ -163,7 +164,7 @@ export const Navbar = () => {
                 title="My Profile"
                 onClick={() => navigate("/profile/details")}
               >
-                <AccountCircleIcon className="icon" />
+                <AccountCircleOutlinedIcon className="mui-icon" />
                 <label htmlFor="profile">My Profile</label>
               </div>
             </>

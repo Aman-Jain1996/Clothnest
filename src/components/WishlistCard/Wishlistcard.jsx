@@ -19,7 +19,7 @@ export const Wishlistcard = ({ wishItem }) => {
         className="card-image-container"
         onClick={() => navigate(`/products/${wishItem._id}`)}
       >
-        <img src={wishItem.imageUrl} alt="Product Image" />
+        <img src={wishItem.imageUrl} alt="Product Image" loading="lazy" />
       </div>
 
       <span
@@ -37,24 +37,18 @@ export const Wishlistcard = ({ wishItem }) => {
         <p className="manufacturer">{wishItem.title}</p>
 
         <p className="price">
-          {`₹ ${wishItem.sell_price}`}
-          <span className="mrp">{`₹ ${wishItem.price}`}</span>
+          {`₹ ${wishItem.sellPrice}`}
+          <span className="mrp">{`₹ ${wishItem.listPrice}`}</span>
           <span className="discount">{`(${Math.ceil(
-            ((wishItem.price - wishItem.sell_price) * 100) / wishItem.price
+            ((wishItem.listPrice - wishItem.sellPrice) * 100) /
+              wishItem.listPrice
           )}% Off)`}</span>
         </p>
       </div>
 
       <div className="action-container">
-        <button className="btn" onClick={() => addToCart(wishItem)}>
-          {!wishItem.carted ? "Move to Cart" : "Go to Cart"}
-        </button>
-
-        <button
-          className="btn btn-tertiary"
-          onClick={() => toggleWishlist(wishItem)}
-        >
-          Remove from Wishlist
+        <button className="btn" onClick={() => addToCart(wishItem, null, true)}>
+        {!wishItem.carted ? "Move to Cart" : "Go to Cart"}
         </button>
       </div>
     </div>

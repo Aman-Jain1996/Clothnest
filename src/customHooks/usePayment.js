@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth, useData } from "../contexts";
 import { actionTypes } from "../reducers/actionTypes";
-import { AddToOrdersService, ClearCartService } from "../services/apiCall";
+import { AddToOrdersService, ClearCartService } from "../services";
 import { ToastHandler } from "../utilities/toastUtils";
 
 export const usePayment = () => {
@@ -38,20 +38,20 @@ export const usePayment = () => {
       name: "ClothNest",
       description: "Thank you for shopping with us",
       image:
-        "https://res.cloudinary.com/ajain8479/image/upload/v1655183630/E-com%20Images/i9scsfrwyl9pb0gpifkc.png",
+        "https://res.cloudinary.com/ajain8479/image/upload/v1656249454/E-com%20Images/cwqrlohltorww22lcaww.webp",
       handler: function (response) {
         paymentSuccessful(response, deliveryAddress, totalAmount);
       },
       prefill: {
         name: `${deliveryAddress.name}`,
         email: `${deliveryAddress.email}`,
-        contact: `${deliveryAddress.mobile}`,
+        contact: `${deliveryAddress.phone}`,
       },
       theme: {
         color: "#88d7fb",
       },
       notes: {
-        address: `${deliveryAddress.name}, ${deliveryAddress.locality}, ${deliveryAddress.city}, ${deliveryAddress.pincode}`,
+        address: `${deliveryAddress.name}, ${deliveryAddress.street}, ${deliveryAddress.city}, ${deliveryAddress.pincode}`,
       },
     };
 
@@ -75,8 +75,9 @@ export const usePayment = () => {
       res = await AddToOrdersService(token, {
         items: state.cart,
         paymentId: razorPayResponse.razorpay_payment_id,
-        totalPrice: totalAmount,
+        amountPaid: totalAmount,
         deliveryAddress,
+        orderDate: new Date().toString(),
       });
       dispatch({
         type: actionTypes.SET_ORDERS,
@@ -88,11 +89,12 @@ export const usePayment = () => {
         type: actionTypes.SET_CART,
         payload: { cart: res.data.cart },
       });
-      setLoader(false);
       ToastHandler("success", "Order Placed Successfully!");
       navigate("/profile/orders");
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoader(false);
     }
   };
 

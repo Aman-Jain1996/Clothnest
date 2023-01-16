@@ -11,7 +11,7 @@ export const Orders = () => {
 
   useEffect(() => {
     const sortedOrders = state?.orders?.sort(
-      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      (a, b) => new Date(b.orderDate) - new Date(a.orderDate)
     );
     setOrders(sortedOrders);
   }, [state]);
@@ -19,46 +19,47 @@ export const Orders = () => {
   return (
     <div className="order-container">
       <div className="order-placed-container">
-        {orders.length ? (
+        {orders?.length ? (
           orders.map((order) => (
-            <div
-              className="order-details-container"
-              key={order.order.paymentId}
-            >
+            <div className="order-details-container" key={order.paymentId}>
               <div className="address-details">
                 <span className="order-confirm-text">Order Confirmed</span>
                 <span className="order-date">
-                  {new Date(order.createdAt).toDateString()}
+                  {new Date(order.orderDate).toLocaleString()}
                 </span>
                 <div className="order-paymentId">
                   <span className="order-sub-heading">PaymentId: </span>{" "}
-                  {order.order.paymentId}
+                  {order.paymentId}
                 </div>
                 <div className="address">
                   <p className="order-sub-heading">Delivered To:</p>
-                  <p>{order.order.deliveryAddress.name}</p>
-                  <p>{order.order.deliveryAddress.locality}</p>
-                  <p>{order.order.deliveryAddress.city}</p>
+                  <p>{order.deliveryAddress.name}</p>
+                  <p>{order.deliveryAddress.street}</p>
+                  <p>{order.deliveryAddress.city}</p>
                   <p>
-                    {order.order.deliveryAddress.state} -
-                    {order.order.deliveryAddress.pincode}
+                    {order.deliveryAddress.state} -
+                    {order.deliveryAddress.pincode}
                   </p>
-                  <p>{`Mobile - ${order.order.deliveryAddress.mobile}`}</p>
+                  <p>{`Mobile - ${order.deliveryAddress.phone}`}</p>
                 </div>
                 <div>
                   <p className="paid-amount">Amount Paid :</p>{" "}
-                  <p className="amount">₹{order.order.totalPrice}</p>
+                  <p className="amount">₹{order.amountPaid}</p>
                 </div>
               </div>
               <div className="items-details-container">
-                {order.order.items.map((item) => (
+                {order.items.map((item) => (
                   <div className="item-details" key={item._id}>
                     <div className="item-imamge">
-                      <img src={item.imageUrl} alt="product image" />
+                      <img
+                        src={item.imageUrl}
+                        alt="product image"
+                        loading="lazy"
+                      />
                     </div>
                     <div className="item-desc">
                       <p className="item-desc-title">{item.title}</p>
-                      <p className="item-desc-qty">Quantity: {item.qty}</p>
+                      <p className="item-desc-qty">Quantity: {item.quantity}</p>
                       <p className="item-desc-price">
                         Price: {item.sell_price}
                       </p>

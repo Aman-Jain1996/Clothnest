@@ -7,7 +7,7 @@ export const Sidenav = () => {
   const { state, dispatch, pageChange } = useData();
 
   const maxValue = state.products.reduce(
-    (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
+    (acc, cur) => (acc > Number(cur.sellPrice) ? acc : Number(cur.sellPrice)),
     0
   );
 
@@ -138,55 +138,21 @@ export const Sidenav = () => {
         <article className="filter-submenu">
           <h3 className="submenu-heading">Rating</h3>
           <div className="submenu-content">
-            <div className="submenu-content">
-              <div className="field">
-                <input
-                  type="radio"
-                  name="Rating"
-                  id="4+"
-                  value="4"
-                  checked={state.filters.rating === "4"}
-                  onChange={(e) => ratingChangeHandler(e)}
-                />
-                <label htmlFor="4+">4 Stars &amp; above</label>
-              </div>
-
-              <div className="field">
-                <input
-                  type="radio"
-                  name="Rating"
-                  id="3+"
-                  value="3"
-                  checked={state.filters.rating === "3"}
-                  onChange={(e) => ratingChangeHandler(e)}
-                />
-                <label htmlFor="3+">3 Stars &amp; above</label>
-              </div>
-
-              <div className="field">
-                <input
-                  type="radio"
-                  name="Rating"
-                  id="2+"
-                  value="2"
-                  checked={state.filters.rating === "2"}
-                  onChange={(e) => ratingChangeHandler(e)}
-                />
-                <label htmlFor="2+">2 Stars &amp; above</label>
-              </div>
-
-              <div className="field">
-                <input
-                  type="radio"
-                  name="Rating"
-                  id="1+"
-                  value="1"
-                  checked={state.filters.rating === "1"}
-                  onChange={(e) => ratingChangeHandler(e)}
-                />
-                <label htmlFor="1+">1 Stars &amp; above</label>
-              </div>
-            </div>
+            {[4, 3, 2].map((item) => {
+              return (
+                <div className="field" key={item}>
+                  <input
+                    type="radio"
+                    name="Rating"
+                    id={`${item}+`}
+                    value={`${item}`}
+                    checked={state.filters.rating === `${item}`}
+                    onChange={(e) => ratingChangeHandler(e)}
+                  />
+                  <label htmlFor={`${item}+`}>{item} Stars &amp; above</label>
+                </div>
+              );
+            })}
           </div>
         </article>
       </section>

@@ -46,8 +46,8 @@
 
 .searchbar-close {
   position: absolute;
-  top: 50%;
-  right: 2%;
+  top: 53%;
+  right: 10%;
   transform: translateY(-50%);
   height: max-height;
   cursor: pointer;
@@ -78,15 +78,13 @@
 .Nav-header .action-container {
   display: flex;
   align-items: center;
-  margin-right: 10rem;
 }
 
 .btn-login {
-  position: absolute;
-  right: 2%;
+  width: 8rem;
   padding: 0.8rem 1.6rem;
   margin: 0 1.2rem;
-  margin-right: 2.4rem;
+  text-align: center;
   background-color: var(--primary);
   border-radius: 5px;
   outline: none;
@@ -108,19 +106,17 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  position: absolute;
-  right: 4%;
   margin: 0 1.2rem;
-  margin-right: 2.4rem;
   border-radius: 5px;
   font-weight: 500;
   font-size: 1.4rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  margin-top: 0.8rem;
 }
 
-.profile-container .icon {
-  font-size: 4rem;
+#profile .mui-icon {
+  font-size: 2.8rem;
 }
 
 .profile-container label {

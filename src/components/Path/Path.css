@@ -10,6 +10,8 @@
 }
 
 .path-item {
+  display: flex;
+  align-items: center;
   margin-left: 0.5rem;
   cursor: pointer;
 }

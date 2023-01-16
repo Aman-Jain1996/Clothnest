@@ -1,32 +1,43 @@
 import axios from "axios";
+const BASE_URL = `https://Clothnest-Backend.amanjain1996.repl.co/`;
 
 // Auth Service
 
 export const LoginService = async ({ email, password }) =>
-  axios.post("/api/auth/login", { email, password });
+  axios.post(`${BASE_URL}auth/login`, { email, password });
 
 export const SignUpService = async ({ firstName, lastName, email, password }) =>
-  axios.post("/api/auth/signup", { firstName, lastName, email, password });
+  axios.post(`${BASE_URL}auth/signup`, {
+    firstName,
+    lastName,
+    email,
+    password,
+  });
 
 export const ResetPasswordService = async ({ email, password }) =>
-  axios.post("/api/auth/reset", { email, password });
+  axios.post(`${BASE_URL}auth/reset`, { email, password });
 
 // Category Service
 
-export const CategoryService = async () => axios.get("/api/categories");
+export const CategoryService = async () => axios.get(`${BASE_URL}category`);
 
 // Products Service
 
-export const ProductService = async () => axios.get("/api/products");
+export const ProductService = async () => axios.get(`${BASE_URL}product`);
 
 export const FetchProductDetailsService = async (id) =>
-  axios.get(`/api/products/${id}`);
+  axios.get(`${BASE_URL}product/${id}`);
 
 // Wishlist Service
 
+export const GetWishlistService = async (encodedToken) =>
+  axios.get(`${BASE_URL}user/wishlist`, {
+    headers: { authorization: encodedToken },
+  });
+
 export const AddToWishlistService = async (product, encodedToken) =>
   axios.post(
-    "/api/user/wishlist",
+    `${BASE_URL}user/wishlist`,
     { product },
     {
       headers: {
@@ -36,7 +47,7 @@ export const AddToWishlistService = async (product, encodedToken) =>
   );
 
 export const DeleteFromWishlistService = async (productId, encodedToken) =>
-  axios.delete(`/api/user/wishlist/${productId}`, {
+  axios.delete(`${BASE_URL}user/wishlist/${productId}`, {
     headers: {
       authorization: encodedToken,
     },
@@ -44,9 +55,14 @@ export const DeleteFromWishlistService = async (productId, encodedToken) =>
 
 // Cart Services
 
+export const GetCartService = async (encodedToken) =>
+  axios.get(`${BASE_URL}user/cart`, {
+    headers: { authorization: encodedToken },
+  });
+
 export const AddToCartService = async (product, encodedToken) =>
   axios.post(
-    "/api/user/cart",
+    `${BASE_URL}user/cart`,
     { product },
     {
       headers: {
@@ -56,7 +72,7 @@ export const AddToCartService = async (product, encodedToken) =>
   );
 
 export const DeleteFromCartService = async (productId, encodedToken) =>
-  axios.delete(`/api/user/cart/${productId}`, {
+  axios.delete(`${BASE_URL}user/cart/${productId}`, {
     headers: {
       authorization: encodedToken,
     },
@@ -64,7 +80,7 @@ export const DeleteFromCartService = async (productId, encodedToken) =>
 
 export const QuantityChangeService = async (productId, encodedToken, action) =>
   axios.post(
-    `/api/user/cart/${productId}`,
+    `${BASE_URL}user/cart/${productId}`,
     { action },
     {
       headers: {
@@ -74,15 +90,20 @@ export const QuantityChangeService = async (productId, encodedToken, action) =>
   );
 
 export const ClearCartService = async (encodedToken) =>
-  axios.delete("/api/user/cart/clear", {
+  axios.delete(`${BASE_URL}user/cart/clear`, {
     headers: { authorization: encodedToken },
   });
 
 // Address Services
 
+export const GetAddressService = async (encodedToken) =>
+  axios.get(`${BASE_URL}user/address`, {
+    headers: { authorization: encodedToken },
+  });
+
 export const AddAddressServive = async (address, encodedToken) =>
   axios.post(
-    "/api/user/address",
+    `${BASE_URL}user/address`,
     { address },
     {
       headers: {
@@ -92,7 +113,7 @@ export const AddAddressServive = async (address, encodedToken) =>
   );
 
 export const DeleteAddressServive = async (addressId, encodedToken) =>
-  axios.delete(`/api/user/address/${addressId}`, {
+  axios.delete(`${BASE_URL}user/address/${addressId}`, {
     headers: {
       authorization: encodedToken,
     },
@@ -100,7 +121,7 @@ export const DeleteAddressServive = async (addressId, encodedToken) =>
 
 export const UpdateAddressServive = async (addressId, address, encodedToken) =>
   axios.post(
-    `/api/user/address/${addressId}`,
+    `${BASE_URL}user/address/${addressId}`,
     { address },
     {
       headers: {
@@ -111,20 +132,16 @@ export const UpdateAddressServive = async (addressId, address, encodedToken) =>
 
 // Orders service routes
 
-export const getOrdersService = async (encodedToken) =>
-  axios.get(
-    "/api/user/orders",
-    {},
-    {
-      headers: {
-        authorization: encodedToken,
-      },
-    }
-  );
+export const GetOrdersService = async (encodedToken) =>
+  axios.get(`${BASE_URL}user/orders`, {
+    headers: {
+      authorization: encodedToken,
+    },
+  });
 
 export const AddToOrdersService = async (encodedToken, order) =>
   axios.post(
-    "/api/user/orders",
+    `${BASE_URL}user/orders`,
     { order },
     { headers: { authorization: encodedToken } }
   );

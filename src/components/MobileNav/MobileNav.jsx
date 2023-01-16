@@ -8,7 +8,7 @@ export const MobileNav = () => {
   const [showNav, setShowNav] = useState(false);
 
   const maxValue = state.products.reduce(
-    (acc, cur) => (acc > Number(cur.sell_price) ? acc : Number(cur.sell_price)),
+    (acc, cur) => (acc > Number(cur.sellPrice) ? acc : Number(cur.sellPrice)),
     0
   );
 

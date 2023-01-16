@@ -11,9 +11,9 @@ export const filterBySearch = (products, filterValue) => {
 export const filterBySort = (products, filterValue) => {
   switch (filterValue) {
     case sortActionType.PRICE_ASCEND:
-      return [...products].sort((a, b) => a.sell_price - b.sell_price);
+      return [...products].sort((a, b) => a.sellPrice - b.sellPrice);
     case sortActionType.PRICE_DECEND:
-      return [...products].sort((a, b) => b.sell_price - a.sell_price);
+      return [...products].sort((a, b) => b.sellPrice - a.sellPrice);
     case sortActionType.RATING_ASCEND:
       return [...products].sort((a, b) => a.rating - b.rating);
     case sortActionType.RATING_DECEND:
@@ -51,7 +51,7 @@ export const filterByCategories = (products, filterValue) => {
 };
 
 export const filterByPriceRange = (products, filterValue) =>
-  products.filter((prod) => prod.sell_price <= Number(filterValue));
+  products.filter((prod) => prod.sellPrice <= Number(filterValue));
 
 export const filterByArrTrend = (products, filterValue) =>
   !filterValue ? products : products.filter((prod) => prod[filterValue]);

@@ -5,7 +5,7 @@
 }
 
 .wishlist-main {
-  margin: 2.4rem 2.4rem 0;
+  margin: 2.4rem 12rem 0;
   min-height: 70vh;
   padding: 2.4rem;
   display: flex;
@@ -14,13 +14,11 @@
 
 .wishlist-product-menu {
   display: grid;
-  grid: 40rem / repeat(4, 1fr);
+  width: 90%;
+  margin: 0 auto;
+  grid: auto / repeat(auto-fill, minmax(20rem, 1fr));
   gap: 3.6rem 2.4rem;
-  place-items: center;
-}
-
-.wishlist-product-menu .product-card {
-  height: auto;
+  place-items: start;
 }
 
 .no-item {

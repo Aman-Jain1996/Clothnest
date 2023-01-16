@@ -1,5 +1,5 @@
 .cart-main {
-  margin: 2.4rem 2.4rem 0;
+  margin: 2.4rem 9.6rem 0;
   min-height: 70vh;
   padding: 1.2rem;
   display: flex;
@@ -13,26 +13,23 @@
 }
 
 .cart-section {
-  flex: 0 1 65%;
-  padding: 1.2rem 2.4rem;
+  flex: 0 1 75%;
+  padding: 1.2rem 4.8rem;
   display: grid;
   row-gap: 4.8rem;
-  grid-template-columns: minmax(30%, 60%);
-  grid-template-rows: max-content;
+  grid: auto / minmax(40%, 60%);
   justify-content: space-around;
 }
 /* Cart Summary styling */
 
 .cart-summary-outer {
-  flex: 0 1 30%;
-  position: relative;
+  flex: 0 1 25%;
   padding: 1.2rem 2.4rem;
   height: max-content;
   display: flex;
 }
 
 .cart-summary {
-  position: fixed;
   min-width: 35rem;
   align-items: center;
   justify-content: center;
@@ -134,7 +131,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.6);
   z-index: 999;
 }
 

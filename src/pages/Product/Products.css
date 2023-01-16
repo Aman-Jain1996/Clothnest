@@ -3,12 +3,17 @@
   position: relative;
 }
 
+.products-container {
+  width: 100%;
+}
+
 .product-menu {
   margin: 1rem 0;
-  flex: 0 1 80%;
+  flex: 0 1 90%;
   padding: 1.2rem 4.8rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-template-rows: auto repeat(2, minmax(15rem, max-content));
   gap: 3.6rem 0;
   place-items: center;
 }
@@ -31,8 +36,7 @@
 }
 
 .pagination-container {
-  grid-column: 1 / -1;
-  height: max-content;
+  margin: 4rem 0 2rem;
 }
 
 .paginateClass {

@@ -7,11 +7,12 @@ import React, {
 } from "react";
 import { actionTypes } from "../reducers/actionTypes";
 import { DataReducer, initialState } from "../reducers/reducer";
-import { CategoryService, ProductService } from "../services/apiCall";
+import { CategoryService, ProductService } from "../services";
 
 const DataContext = createContext(null);
 
 export const DataProvider = ({ children }) => {
+  const orderArray = ["Mens", "Women", "Kids", "Summer", "Winter"];
   const [loader, setLoader] = useState(false);
   const [state, dispatch] = useReducer(DataReducer, initialState);
   const [showAddressModal, setShowAddressModal] = useState(false);
@@ -24,23 +25,34 @@ export const DataProvider = ({ children }) => {
   useEffect(() => {
     {
       (async () => {
-        const { status: prodStatus, data: prodData } = await ProductService();
+        try {
+          setLoader(true);
+          const { status: prodStatus, data: prodData } = await ProductService();
 
-        if (prodStatus === 200 || prodStatus === 201) {
-          dispatch({
-            type: actionTypes.SET_PRODUCTS,
-            payload: { products: prodData?.products },
-          });
-        }
+          if (prodStatus === 200 || prodStatus === 201) {
+            dispatch({
+              type: actionTypes.SET_PRODUCTS,
+              payload: { products: prodData?.products },
+            });
+          }
 
-        const { status: categoryStatus, data: categoryData } =
-          await CategoryService();
+          const { status: categoryStatus, data: categoryData } =
+            await CategoryService();
 
-        if (categoryStatus === 200 || categoryStatus === 201) {
-          dispatch({
-            type: actionTypes.SET_CATEGORIES,
-            payload: { categories: categoryData?.categories },
-          });
+          if (categoryStatus === 200 || categoryStatus === 201) {
+            dispatch({
+              type: actionTypes.SET_CATEGORIES,
+              payload: {
+                categories: categoryData?.categories.sort(
+                  (a, b) =>
+                    orderArray.indexOf(a.title) - orderArray.indexOf(b.title)
+                ),
+              },
+            });
+          }
+        } catch (err) {
+        } finally {
+          setLoader(false);
         }
       })();
     }
