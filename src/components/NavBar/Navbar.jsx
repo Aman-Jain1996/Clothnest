@@ -11,7 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export const Navbar = () => {
   const { state, dispatch, pageChange } = useData();
-  const { token } = useAuth();
+  const { token } = useData();
   const location = useLocation();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");

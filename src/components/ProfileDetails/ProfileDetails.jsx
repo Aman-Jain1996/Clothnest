@@ -1,8 +1,9 @@
 import React from "react";
-import { useAuth } from "../../contexts";
+import { useAuth, useData } from "../../contexts";
 
 export const ProfileDetails = () => {
-  const { activeUser, logoutHandler } = useAuth();
+  const { logoutHandler } = useAuth();
+  const { activeUser } = useData();
 
   return (
     <div className="profile-details-container">

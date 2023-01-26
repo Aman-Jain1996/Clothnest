@@ -8,7 +8,7 @@ import { ToastHandler } from "../../utilities/toastUtils";
 import "./Cartcard.css";
 
 export const Cartcard = ({ cartItem }) => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { state, dispatch, setLoader } = useData();
   const { toggleWishlist } = useWishlistHandler();
   const navigate = useNavigate();
@@ -133,12 +133,12 @@ export const Cartcard = ({ cartItem }) => {
               <button className="btn btn-tertiary">Go to Wishlist</button>
             </Link>
           ) : (
-          <button
-            className="btn btn-tertiary"
-            onClick={() => toggleWishlist(cartItem,null,true)}
-          >
+            <button
+              className="btn btn-tertiary"
+              onClick={() => toggleWishlist(cartItem, null, true)}
+            >
               Move to Wishlist
-          </button>
+            </button>
           )}
         </div>
       </div>

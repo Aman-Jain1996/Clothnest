@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { actionTypes } from "../reducers/actionTypes";
 import {
@@ -10,60 +10,64 @@ import {
   ResetPasswordService,
   SignUpService,
 } from "../services";
+import { decodedToken } from "../utilities/helper";
 import { ToastHandler } from "../utilities/toastUtils";
 import { useData } from "./Data-context";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const browserStoredToken = JSON.parse(localStorage.getItem("userToken"));
-  const browserStoredUser = JSON.parse(localStorage.getItem("userData"));
-  const [activeUser, setActiveUser] = useState(browserStoredUser);
-  const [token, setToken] = useState(browserStoredToken?.token);
   const navigate = useNavigate();
-  const { dispatch, setLoader } = useData();
+  const { dispatch, setLoader, token, setToken, setActiveUser } = useData();
 
   useEffect(async () => {
     try {
       if (token) {
-        setLoader(true);
-        const res = await Promise.allSettled([
-          GetWishlistService(token),
-          GetCartService(token),
-          GetAddressService(token),
-          GetOrdersService(token),
-        ]);
+        if (decodedToken() < Date.now()) {
+          localStorage.clear();
+          navigate("/");
+          setToken();
+          setActiveUser();
+          ToastHandler("success", "Auto Logged out");
+        } else {
+          setLoader(true);
+          const res = await Promise.allSettled([
+            GetWishlistService(token),
+            GetCartService(token),
+            GetAddressService(token),
+            GetOrdersService(token),
+          ]);
 
-        if (res[0].status === "fulfilled")
-          dispatch({
-            type: actionTypes.SET_WISHLIST,
-            payload: { wishlist: res[0].value.data.wishlist },
-          });
-        else throw new Error("Error while fetching wishlist");
+          if (res[0].status === "fulfilled")
+            dispatch({
+              type: actionTypes.SET_WISHLIST,
+              payload: { wishlist: res[0].value.data.wishlist },
+            });
+          else throw new Error("Error while fetching wishlist");
 
-        if (res[1].status === "fulfilled")
-          dispatch({
-            type: actionTypes.SET_CART,
-            payload: { cart: res[1].value.data.cart },
-          });
-        else throw new Error("Error while fetching cart");
+          if (res[1].status === "fulfilled")
+            dispatch({
+              type: actionTypes.SET_CART,
+              payload: { cart: res[1].value.data.cart },
+            });
+          else throw new Error("Error while fetching cart");
 
-        if (res[2].status === "fulfilled")
-          dispatch({
-            type: actionTypes.SET_ADDRESS,
-            payload: { address: res[2].value.data.address },
-          });
-        else throw new Error("Error while fetching address");
+          if (res[2].status === "fulfilled")
+            dispatch({
+              type: actionTypes.SET_ADDRESS,
+              payload: { address: res[2].value.data.address },
+            });
+          else throw new Error("Error while fetching address");
 
-        if (res[3].status === "fulfilled")
-          dispatch({
-            type: actionTypes.SET_ORDERS,
-            payload: { orders: res[3].value.data.orders },
-          });
-        else throw new Error("Error while fetching orders");
+          if (res[3].status === "fulfilled")
+            dispatch({
+              type: actionTypes.SET_ORDERS,
+              payload: { orders: res[3].value.data.orders },
+            });
+          else throw new Error("Error while fetching orders");
+        }
       }
     } catch (err) {
-      ToastHandler("error", err.message);
       console.error(err.message);
     } finally {
       setLoader(false);
@@ -197,10 +201,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        token,
         loginHandler,
-        activeUser,
-        setToken,
         logoutHandler,
         signUpHandler,
         resetPasswordHandler,

@@ -5,6 +5,7 @@ import React, {
   useReducer,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { actionTypes } from "../reducers/actionTypes";
 import { DataReducer, initialState } from "../reducers/reducer";
 import { CategoryService, ProductService } from "../services";
@@ -19,6 +20,11 @@ export const DataProvider = ({ children }) => {
   const [editAddress, setEditAddress] = useState({});
   const [couponData, setCouponData] = useState({});
   const [pageNumber, setpageNumber] = useState(0);
+  const browserStoredToken = JSON.parse(localStorage.getItem("userToken"));
+  const browserStoredUser = JSON.parse(localStorage.getItem("userData"));
+  const [activeUser, setActiveUser] = useState(browserStoredUser);
+  const [token, setToken] = useState(browserStoredToken?.token);
+  const navigate = useNavigate();
 
   const pageChange = ({ selected }) => setpageNumber(selected);
 
@@ -27,14 +33,6 @@ export const DataProvider = ({ children }) => {
       (async () => {
         try {
           setLoader(true);
-          const { status: prodStatus, data: prodData } = await ProductService();
-
-          if (prodStatus === 200 || prodStatus === 201) {
-            dispatch({
-              type: actionTypes.SET_PRODUCTS,
-              payload: { products: prodData?.products },
-            });
-          }
 
           const { status: categoryStatus, data: categoryData } =
             await CategoryService();
@@ -50,7 +48,17 @@ export const DataProvider = ({ children }) => {
               },
             });
           }
+
+          const { status: prodStatus, data: prodData } = await ProductService();
+
+          if (prodStatus === 200 || prodStatus === 201) {
+            dispatch({
+              type: actionTypes.SET_PRODUCTS,
+              payload: { products: prodData?.products },
+            });
+          }
         } catch (err) {
+          console.error(err.message);
         } finally {
           setLoader(false);
         }
@@ -74,6 +82,10 @@ export const DataProvider = ({ children }) => {
         pageNumber,
         setpageNumber,
         pageChange,
+        activeUser,
+        setActiveUser,
+        token,
+        setToken,
       }}
     >
       {children}

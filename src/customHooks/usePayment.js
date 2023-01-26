@@ -5,7 +5,7 @@ import { AddToOrdersService, ClearCartService } from "../services";
 import { ToastHandler } from "../utilities/toastUtils";
 
 export const usePayment = () => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { state, setLoader, dispatch, setCouponData } = useData();
   const navigate = useNavigate();
 

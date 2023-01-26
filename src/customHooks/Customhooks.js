@@ -13,7 +13,7 @@ import { ToastHandler } from "../utilities/toastUtils";
 import { useNavigate } from "react-router-dom";
 
 export const useWishlistHandler = () => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { dispatch, setLoader } = useData();
 
   const toggleWishlist = async (
