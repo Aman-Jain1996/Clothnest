@@ -1,10 +1,10 @@
 import axios from "axios";
-const BASE_URL = 'https://Clothnest-Backend.amanjain1996.repl.co/';
+const BASE_URL = "https://clothnest-server.cyclic.app/";
 
 // Auth Service
 
-export const LoginService = async ({ email, password }) =>
-  axios.post(`${BASE_URL}auth/login`, { email, password });
+export const LoginService = async ({ email, password, rememberMe }) =>
+  axios.post(`${BASE_URL}auth/login`, { email, password, rememberMe });
 
 export const SignUpService = async ({ firstName, lastName, email, password }) =>
   axios.post(`${BASE_URL}auth/signup`, {

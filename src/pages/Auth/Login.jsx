@@ -100,7 +100,7 @@ export const Login = () => {
               loginHandler(
                 process.env.REACT_APP_GUEST_USER,
                 process.env.REACT_APP_GUEST_USER_PASSWORD,
-                true,
+                false,
                 redirectionPath
               );
             }}

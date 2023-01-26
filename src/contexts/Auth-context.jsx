@@ -19,7 +19,6 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const { dispatch, setLoader, token, setToken, setActiveUser } = useData();
-
   useEffect(async () => {
     try {
       if (token) {
@@ -80,7 +79,7 @@ export const AuthProvider = ({ children }) => {
       const {
         data: { user: foundUser },
         status,
-      } = await LoginService({ email, password });
+      } = await LoginService({ email, password, rememberMe });
       if (status === 200 || status === 201) {
         ToastHandler("success", "Logged in Successfully....");
         localStorage.setItem(
