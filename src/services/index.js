@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://clothnest-server.cyclic.app/";
+const BASE_URL = "https://Clothnest-Backend.amanjain1996.repl.co/";
 
 // Auth Service
 

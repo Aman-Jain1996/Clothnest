@@ -44,9 +44,10 @@ export const Checkout = () => {
                   name="address"
                   id={address._id}
                   checked={
-                    address._id === adderessSelected._id || address.isDefault
+                    address._id === adderessSelected._id ||
+                    (address.isDefault && !adderessSelected._id)
                   }
-                  onChange={() => setIsAddressSelected(address)}
+                  onChange={() => setIsAddressSelected(() => address)}
                 />
                 <label htmlFor={address._id} className="checkout-address-item">
                   <div className="address-item-row">

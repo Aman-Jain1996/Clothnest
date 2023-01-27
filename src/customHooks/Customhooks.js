@@ -66,7 +66,7 @@ export const useWishlistHandler = () => {
 // Cart
 
 export const useCartHandler = () => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { dispatch, setLoader } = useData();
   const navigate = useNavigate();
 
@@ -141,7 +141,7 @@ export const useCartSummary = () => {
 // Address
 
 export const useAddressHandler = () => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { dispatch, setLoader } = useData();
 
   const addAddress = async (address) => {
