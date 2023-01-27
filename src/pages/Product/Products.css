@@ -93,6 +93,15 @@
   .product-menu {
     flex: 0 1 85%;
   }
+
+  .product-menu {
+    padding: 1.2rem 2.4rem;
+    grid-template-columns: 1fr;
+  }
+
+  .product-card {
+    width: 75%;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -102,12 +111,24 @@
     gap: 3.6rem 1rem;
   }
 
+  .Sidenav {
+    flex: 0 0 5%;
+  }
+
+  .product-counter {
+    font-size: 1.8rem;
+  }
+
   .products-outer-container {
     margin: 6rem 0;
   }
 }
 
 @media screen and (max-width: 450px) {
+  .Sidenav {
+    flex: 0;
+  }
+
   .product-menu {
     grid-template-columns: repeat(1, 1fr);
   }

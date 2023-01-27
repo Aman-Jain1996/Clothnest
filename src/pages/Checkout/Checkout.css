@@ -70,6 +70,12 @@
   width: 100%;
 }
 
+@media screen and (max-width: 1200px) {
+  .checkout-address-list {
+    padding: 1.2rem 0;
+  }
+}
+
 @media screen and (max-width: 920px) {
   .checkout-address-container {
     flex: 0 1 60%;
@@ -77,7 +83,7 @@
   }
 
   .checkout-summary {
-    flex: 0 1 40%;
+    flex: 0 1 35%;
   }
 
   .checkout-address-list {
@@ -88,6 +94,7 @@
 @media screen and (max-width: 760px) {
   .checkout-container {
     flex-direction: column;
+    min-height: max-content;
   }
 
   .checkout-address-container {
@@ -98,7 +105,7 @@
   .checkout-summary {
     width: 60%;
     margin: auto;
-    margin-bottom: 1.2rem;
+    margin-top: 1.2rem;
   }
 }
 
@@ -107,6 +114,10 @@
     width: 80%;
     margin: auto;
     margin-bottom: 1.2rem;
+  }
+
+  .address-item-row {
+    flex-wrap: wrap;
   }
 }
 
@@ -123,11 +134,15 @@
 
   .checkout-address-list {
     padding: 1.2rem 0;
-  }
+}
 
   .checkout-summary {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 1.2rem;
+  }
+
+  .address-item-row {
+    gap: 0;
   }
 }

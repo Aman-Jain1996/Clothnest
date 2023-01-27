@@ -194,14 +194,14 @@
     margin-right: 12rem;
   }
 
-  .profile-container {
-    right: 2%;
+  .Nav-header .action-container {
+    margin-right: 2rem;
   }
 }
 
 @media screen and (max-width: 760px) {
   .searchbar {
-    left: 40%;
+    left: 50%;
   }
 }
 
@@ -214,7 +214,7 @@
   }
 
   .Nav-header .action-container {
-    margin-right: 10rem;
+    margin-right: 0;
   }
 }
 

@@ -129,9 +129,9 @@ export const Cartcard = ({ cartItem }) => {
             Remove from Cart
           </button>
           {cartItem.wished ? (
-            <Link to="/wishlist">
-              <button className="btn btn-tertiary">Go to Wishlist</button>
-            </Link>
+            <button className="btn btn-tertiary">
+              <Link to="/wishlist">Go to Wishlist</Link>
+            </button>
           ) : (
             <button
               className="btn btn-tertiary"

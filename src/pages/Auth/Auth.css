@@ -163,6 +163,11 @@ label[for="remember"] {
 }
 
 /* Responsiveness */
+@media screen and (min-width: 1200px) {
+  .auth-container {
+    width: 60rem;
+  }
+}
 
 @media screen and (max-width: 920px) {
   .auth-container {
@@ -184,6 +189,10 @@ label[for="remember"] {
   .auth-container {
     width: 80%;
     padding: 1.2rem;
+  }
+
+  .auth-container .login{
+    padding: 1.2rem 0;
   }
 }
 

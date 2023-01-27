@@ -131,6 +131,7 @@
   .product-img {
     flex: auto;
     height: 50%;
+    border-right: none;
   }
 
   .product-content {
@@ -139,7 +140,7 @@
   }
 
   .product-pricing {
-    padding: 0 1.2rem;
+    padding: 0;
   }
 
   .btn-container {
@@ -148,6 +149,12 @@
     display: flex;
     flex-direction: row;
     gap: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .product-content {
+    padding: 1.2rem 0.6rem;
   }
 }
 

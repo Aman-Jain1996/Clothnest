@@ -86,4 +86,8 @@
   .mobileNav-filter-content {
     width: 100%;
   }
+
+  .mobileNav-filter-select {
+    width: 80%;
+  }
 }
