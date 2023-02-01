@@ -19,6 +19,10 @@ export const DataProvider = ({ children }) => {
   const [editAddress, setEditAddress] = useState({});
   const [couponData, setCouponData] = useState({});
   const [pageNumber, setpageNumber] = useState(0);
+  const browserStoredToken = JSON.parse(localStorage.getItem("userToken"));
+  const browserStoredUser = JSON.parse(localStorage.getItem("userData"));
+  const [activeUser, setActiveUser] = useState(browserStoredUser);
+  const [token, setToken] = useState(browserStoredToken?.token);
 
   const pageChange = ({ selected }) => setpageNumber(selected);
 
@@ -27,6 +31,7 @@ export const DataProvider = ({ children }) => {
       (async () => {
         try {
           setLoader(true);
+
           const { status: prodStatus, data: prodData } = await ProductService();
 
           if (prodStatus === 200 || prodStatus === 201) {
@@ -51,6 +56,7 @@ export const DataProvider = ({ children }) => {
             });
           }
         } catch (err) {
+          console.error(err.message);
         } finally {
           setLoader(false);
         }
@@ -74,6 +80,10 @@ export const DataProvider = ({ children }) => {
         pageNumber,
         setpageNumber,
         pageChange,
+        activeUser,
+        setActiveUser,
+        token,
+        setToken,
       }}
     >
       {children}

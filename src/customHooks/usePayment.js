@@ -5,7 +5,7 @@ import { AddToOrdersService, ClearCartService } from "../services";
 import { ToastHandler } from "../utilities/toastUtils";
 
 export const usePayment = () => {
-  const { token } = useAuth();
+  const { token } = useData();
   const { state, setLoader, dispatch, setCouponData } = useData();
   const navigate = useNavigate();
 
@@ -53,12 +53,16 @@ export const usePayment = () => {
       notes: {
         address: `${deliveryAddress.name}, ${deliveryAddress.street}, ${deliveryAddress.city}, ${deliveryAddress.pincode}`,
       },
+      modal: {
+        ondismiss: function () {
+          ToastHandler("error", "Pament Failed!");
+        },
+      },
     };
 
     const paymentObj = new window.Razorpay(options);
     paymentObj.open();
     paymentObj.on("payment.failed", () => {
-      ToastHandler("error", "Pament Failed!");
       navigate("/products");
     });
     document.body.removeChild(res.script);

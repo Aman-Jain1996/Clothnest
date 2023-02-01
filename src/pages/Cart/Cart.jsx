@@ -60,17 +60,6 @@ export const Cart = () => {
     setCouponData({});
   };
 
-  useEffect(() => {
-    setLoader(true);
-    var id = setTimeout(() => {
-      setLoader(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(id);
-    };
-  }, []);
-
   return (
     <div className="cart-outer-container">
       {isCouponModalOpen && (

@@ -18,7 +18,7 @@ export function ErrorPage() {
         <div className="error-content-container">
           <div className="error-heading">404 Not Found</div>
           <div className="error-sub-heading">
-            Looks like you have followed a broken / invalid link
+            Looks like you have followed a broken link
           </div>
           <Link className="error-redirect" to="/products">
             Explore Products

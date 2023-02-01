@@ -225,14 +225,23 @@
 
 /* Responsiveness */
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1500px) {
   .cart-section {
-    flex: 0 1 50%;
+    grid: auto / minmax(70%, 80%);
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .cart-main {
+    margin: 2.4rem 4rem 0;
+  }
+  .cart-section {
+    flex: 0 1 70%;
     grid-template-columns: 1fr;
   }
 
   .cart-summary-outer {
-    flex: 0 1 40%;
+    flex: 0 1 30%;
   }
 }
 
@@ -246,7 +255,7 @@
   }
 
   .cart-summary-outer {
-    flex: 0 1 50%;
+    flex: 0 1 30%;
     justify-content: center;
   }
 }
@@ -263,7 +272,8 @@
 
   .cart-section {
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 1.2rem;
+    column-gap: 2.4rem;
+    padding: 1.2rem 2.4rem;
   }
 
   .cart-summary-outer {
@@ -284,6 +294,7 @@
   .coupon-modal {
     width: 90%;
     margin: auto;
+    min-width: unset;
   }
 }
 

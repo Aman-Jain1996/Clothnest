@@ -215,3 +215,9 @@
     width: 95%;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .address-mobile {
+    margin-left: 1.2rem;
+  }
+}
