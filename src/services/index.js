@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://Clothnest-Backend.amanjain1996.repl.co/";
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // Auth Service
 
